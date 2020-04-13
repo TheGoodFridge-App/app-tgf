@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8BFE33DA9FBBA4E41C66C96F /* Pods_TheGoodFridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E099A004748D462021CBD616 /* Pods_TheGoodFridge.framework */; };
+		EB14DD9E24450A2400CA2E0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */; };
 		EB56EC632442E34C001D48BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC622442E34C001D48BE /* AppDelegate.swift */; };
 		EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC642442E34C001D48BE /* SceneDelegate.swift */; };
 		EB56EC672442E34C001D48BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC662442E34C001D48BE /* ViewController.swift */; };
@@ -16,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181B138ADEA94360307CADDB /* Pods-TheGoodFridge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.debug.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.debug.xcconfig"; sourceTree = "<group>"; };
+		3788E55C5127869D87335AAE /* Pods-TheGoodFridge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.release.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.release.xcconfig"; sourceTree = "<group>"; };
+		E099A004748D462021CBD616 /* Pods_TheGoodFridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheGoodFridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB56EC5F2442E34C001D48BE /* TheGoodFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheGoodFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB56EC622442E34C001D48BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB56EC642442E34C001D48BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +37,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BFE33DA9FBBA4E41C66C96F /* Pods_TheGoodFridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40B8AA94A768E67939D9DC5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E099A004748D462021CBD616 /* Pods_TheGoodFridge.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C8B035B8A0AF34FE146EAC99 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				181B138ADEA94360307CADDB /* Pods-TheGoodFridge.debug.xcconfig */,
+				3788E55C5127869D87335AAE /* Pods-TheGoodFridge.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		EB56EC562442E34C001D48BE = {
 			isa = PBXGroup;
 			children = (
 				EB56EC612442E34C001D48BE /* TheGoodFridge */,
 				EB56EC602442E34C001D48BE /* Products */,
+				C8B035B8A0AF34FE146EAC99 /* Pods */,
+				40B8AA94A768E67939D9DC5C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +90,7 @@
 				EB56EC6B2442E34E001D48BE /* Assets.xcassets */,
 				EB56EC6D2442E34E001D48BE /* LaunchScreen.storyboard */,
 				EB56EC702442E34E001D48BE /* Info.plist */,
+				EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */,
 			);
 			path = TheGoodFridge;
 			sourceTree = "<group>";
@@ -74,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB56EC732442E34E001D48BE /* Build configuration list for PBXNativeTarget "TheGoodFridge" */;
 			buildPhases = (
+				DFB75621B57697A6722C3094 /* [CP] Check Pods Manifest.lock */,
 				EB56EC5B2442E34C001D48BE /* Sources */,
 				EB56EC5C2442E34C001D48BE /* Frameworks */,
 				EB56EC5D2442E34C001D48BE /* Resources */,
+				26F0E2D7D8C35EE13324D132 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,12 +156,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB56EC6F2442E34E001D48BE /* LaunchScreen.storyboard in Resources */,
+				EB14DD9E24450A2400CA2E0A /* GoogleService-Info.plist in Resources */,
 				EB56EC6C2442E34E001D48BE /* Assets.xcassets in Resources */,
 				EB56EC6A2442E34C001D48BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		26F0E2D7D8C35EE13324D132 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFB75621B57697A6722C3094 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TheGoodFridge-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB56EC5B2442E34C001D48BE /* Sources */ = {
@@ -282,6 +355,7 @@
 		};
 		EB56EC742442E34E001D48BE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 181B138ADEA94360307CADDB /* Pods-TheGoodFridge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -299,6 +373,7 @@
 		};
 		EB56EC752442E34E001D48BE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3788E55C5127869D87335AAE /* Pods-TheGoodFridge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

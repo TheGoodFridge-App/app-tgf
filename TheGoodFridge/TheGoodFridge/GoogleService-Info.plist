@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>892903011031-142aa3a0tsv97balgarchoc6eddl67cn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.892903011031-142aa3a0tsv97balgarchoc6eddl67cn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDy_PzHtEVMTzZ8Rh3rW2_Y03E5FGOBXlg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>892903011031</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.euglo.TheGoodFridge</string>
+	<key>PROJECT_ID</key>
+	<string>thegoodfridge-74422</string>
+	<key>STORAGE_BUCKET</key>
+	<string>thegoodfridge-74422.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:892903011031:ios:8f609802a9539899127692</string>
+	<key>DATABASE_URL</key>
+	<string>https://thegoodfridge-74422.firebaseio.com</string>
+</dict>
+</plist>
