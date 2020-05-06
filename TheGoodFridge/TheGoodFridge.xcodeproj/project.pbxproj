@@ -3,33 +3,78 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8BFE33DA9FBBA4E41C66C96F /* Pods_TheGoodFridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E099A004748D462021CBD616 /* Pods_TheGoodFridge.framework */; };
+		EB0B6981245E5A550069697F /* Pods_TheGoodFridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB0B6980245E5A550069697F /* Pods_TheGoodFridge.framework */; };
+		EB0B6982245E5A550069697F /* Pods_TheGoodFridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB0B6980245E5A550069697F /* Pods_TheGoodFridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB14DD9E24450A2400CA2E0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */; };
+		EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D77092462978F003E1A84 /* ValuesView.swift */; };
+		EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */; };
+		EB355574245E4DBD00FF23CB /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB355573245E4DBD00FF23CB /* credentials.plist */; };
 		EB56EC632442E34C001D48BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC622442E34C001D48BE /* AppDelegate.swift */; };
 		EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC642442E34C001D48BE /* SceneDelegate.swift */; };
-		EB56EC672442E34C001D48BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC662442E34C001D48BE /* ViewController.swift */; };
-		EB56EC6A2442E34C001D48BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB56EC682442E34C001D48BE /* Main.storyboard */; };
+		EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC662442E34C001D48BE /* WelcomeViewController.swift */; };
 		EB56EC6C2442E34E001D48BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB56EC6B2442E34E001D48BE /* Assets.xcassets */; };
 		EB56EC6F2442E34E001D48BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB56EC6D2442E34E001D48BE /* LaunchScreen.storyboard */; };
+		EB5B9AC82460CFA900494754 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B9AC72460CFA900494754 /* User.swift */; };
+		EB5B9ACA2460E75200494754 /* SignupErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B9AC92460E75200494754 /* SignupErrorView.swift */; };
+		EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7E4C282462252100A6E8FA /* SetupViewController.swift */; };
+		EB8C9BBC245F4DB800E51E7C /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C9BBB245F4DB800E51E7C /* DividerView.swift */; };
+		EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C9BBD245F56CA00E51E7C /* LoginViewController.swift */; };
+		EB8C9BC0245F5D4200E51E7C /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C9BBF245F5D4200E51E7C /* IntroViewController.swift */; };
+		EBA42CF2244CE4C800185F94 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA42CF1244CE4C800185F94 /* LoginManager.swift */; };
+		EBBEA0D8245D51AD0038F403 /* Amiko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBBEA0D6245D518B0038F403 /* Amiko-Bold.ttf */; };
+		EBBEA0D9245D51B00038F403 /* Amiko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBBEA0D4245D51880038F403 /* Amiko-Regular.ttf */; };
+		EBBEA0DA245D51B20038F403 /* Amiko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBBEA0D5245D51890038F403 /* Amiko-SemiBold.ttf */; };
+		EBBEA0DC245D526A0038F403 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBEA0DB245D526A0038F403 /* InputFieldView.swift */; };
+		EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */; };
+		EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF520922456156100EC0B03 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EB0B6983245E5A560069697F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EB0B6982245E5A550069697F /* Pods_TheGoodFridge.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		181B138ADEA94360307CADDB /* Pods-TheGoodFridge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.debug.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.debug.xcconfig"; sourceTree = "<group>"; };
 		3788E55C5127869D87335AAE /* Pods-TheGoodFridge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.release.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.release.xcconfig"; sourceTree = "<group>"; };
-		E099A004748D462021CBD616 /* Pods_TheGoodFridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheGoodFridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0B6980245E5A550069697F /* Pods_TheGoodFridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_TheGoodFridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EB1D77092462978F003E1A84 /* ValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuesView.swift; sourceTree = "<group>"; };
+		EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGoalButton.swift; sourceTree = "<group>"; };
+		EB355573245E4DBD00FF23CB /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 		EB56EC5F2442E34C001D48BE /* TheGoodFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheGoodFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB56EC622442E34C001D48BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB56EC642442E34C001D48BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EB56EC662442E34C001D48BE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EB56EC692442E34C001D48BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EB56EC662442E34C001D48BE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		EB56EC6B2442E34E001D48BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB56EC6E2442E34E001D48BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EB56EC702442E34E001D48BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB5B9AC72460CFA900494754 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EB5B9AC92460E75200494754 /* SignupErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupErrorView.swift; sourceTree = "<group>"; };
+		EB7E4C282462252100A6E8FA /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		EB8C9BBB245F4DB800E51E7C /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		EB8C9BBD245F56CA00E51E7C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EB8C9BBF245F5D4200E51E7C /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		EBA42CF1244CE4C800185F94 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		EBBEA0D4245D51880038F403 /* Amiko-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Regular.ttf"; sourceTree = "<group>"; };
+		EBBEA0D5245D51890038F403 /* Amiko-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-SemiBold.ttf"; sourceTree = "<group>"; };
+		EBBEA0D6245D518B0038F403 /* Amiko-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Bold.ttf"; sourceTree = "<group>"; };
+		EBBEA0DB245D526A0038F403 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
+		EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
+		EBF5208C2456137800EC0B03 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBF520922456156100EC0B03 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BFE33DA9FBBA4E41C66C96F /* Pods_TheGoodFridge.framework in Frameworks */,
+				EB0B6981245E5A550069697F /* Pods_TheGoodFridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +92,7 @@
 		40B8AA94A768E67939D9DC5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E099A004748D462021CBD616 /* Pods_TheGoodFridge.framework */,
+				EB0B6980245E5A550069697F /* Pods_TheGoodFridge.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -58,7 +103,6 @@
 				181B138ADEA94360307CADDB /* Pods-TheGoodFridge.debug.xcconfig */,
 				3788E55C5127869D87335AAE /* Pods-TheGoodFridge.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -66,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				EB56EC612442E34C001D48BE /* TheGoodFridge */,
+				EBBEA0D7245D51910038F403 /* Fonts */,
 				EB56EC602442E34C001D48BE /* Products */,
 				C8B035B8A0AF34FE146EAC99 /* Pods */,
 				40B8AA94A768E67939D9DC5C /* Frameworks */,
@@ -85,14 +130,60 @@
 			children = (
 				EB56EC622442E34C001D48BE /* AppDelegate.swift */,
 				EB56EC642442E34C001D48BE /* SceneDelegate.swift */,
-				EB56EC662442E34C001D48BE /* ViewController.swift */,
-				EB56EC682442E34C001D48BE /* Main.storyboard */,
+				EBA42CF0244CE49900185F94 /* Controllers */,
+				EBA42CF4244CE4E900185F94 /* Views */,
 				EB56EC6B2442E34E001D48BE /* Assets.xcassets */,
 				EB56EC6D2442E34E001D48BE /* LaunchScreen.storyboard */,
-				EB56EC702442E34E001D48BE /* Info.plist */,
+				EBF5208C2456137800EC0B03 /* Info.plist */,
 				EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */,
+				EB355573245E4DBD00FF23CB /* credentials.plist */,
+				EBA42CF3244CE4CB00185F94 /* Models */,
 			);
 			path = TheGoodFridge;
+			sourceTree = "<group>";
+		};
+		EBA42CF0244CE49900185F94 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB56EC662442E34C001D48BE /* WelcomeViewController.swift */,
+				EBF520922456156100EC0B03 /* RegisterViewController.swift */,
+				EB8C9BBD245F56CA00E51E7C /* LoginViewController.swift */,
+				EB8C9BBF245F5D4200E51E7C /* IntroViewController.swift */,
+				EB7E4C282462252100A6E8FA /* SetupViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EBA42CF3244CE4CB00185F94 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EBA42CF1244CE4C800185F94 /* LoginManager.swift */,
+				EB5B9AC72460CFA900494754 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EBA42CF4244CE4E900185F94 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EBBEA0DB245D526A0038F403 /* InputFieldView.swift */,
+				EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */,
+				EB8C9BBB245F4DB800E51E7C /* DividerView.swift */,
+				EB5B9AC92460E75200494754 /* SignupErrorView.swift */,
+				EB1D77092462978F003E1A84 /* ValuesView.swift */,
+				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EBBEA0D7245D51910038F403 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EBBEA0D6245D518B0038F403 /* Amiko-Bold.ttf */,
+				EBBEA0D4245D51880038F403 /* Amiko-Regular.ttf */,
+				EBBEA0D5245D51890038F403 /* Amiko-SemiBold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +198,8 @@
 				EB56EC5C2442E34C001D48BE /* Frameworks */,
 				EB56EC5D2442E34C001D48BE /* Resources */,
 				26F0E2D7D8C35EE13324D132 /* [CP] Embed Pods Frameworks */,
+				EB0B6983245E5A560069697F /* Embed Frameworks */,
+				DFE83D13AC2680A8B8D1C0C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -155,10 +248,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBBEA0D9245D51B00038F403 /* Amiko-Regular.ttf in Resources */,
 				EB56EC6F2442E34E001D48BE /* LaunchScreen.storyboard in Resources */,
+				EBBEA0D8245D51AD0038F403 /* Amiko-Bold.ttf in Resources */,
+				EBBEA0DA245D51B20038F403 /* Amiko-SemiBold.ttf in Resources */,
 				EB14DD9E24450A2400CA2E0A /* GoogleService-Info.plist in Resources */,
+				EB355574245E4DBD00FF23CB /* credentials.plist in Resources */,
 				EB56EC6C2442E34E001D48BE /* Assets.xcassets in Resources */,
-				EB56EC6A2442E34C001D48BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +300,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DFE83D13AC2680A8B8D1C0C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -211,23 +324,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB56EC672442E34C001D48BE /* ViewController.swift in Sources */,
+				EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */,
+				EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */,
+				EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */,
+				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,
+				EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */,
+				EB8C9BC0245F5D4200E51E7C /* IntroViewController.swift in Sources */,
+				EBBEA0DC245D526A0038F403 /* InputFieldView.swift in Sources */,
+				EBA42CF2244CE4C800185F94 /* LoginManager.swift in Sources */,
+				EB5B9ACA2460E75200494754 /* SignupErrorView.swift in Sources */,
 				EB56EC632442E34C001D48BE /* AppDelegate.swift in Sources */,
+				EB8C9BBC245F4DB800E51E7C /* DividerView.swift in Sources */,
+				EB5B9AC82460CFA900494754 /* User.swift in Sources */,
+				EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */,
 				EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */,
+				EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EB56EC682442E34C001D48BE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EB56EC692442E34C001D48BE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EB56EC6D2442E34E001D48BE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -359,10 +476,51 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5QDYL7YJ95;
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = TheGoodFridge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"z\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleDataTransportCCTSupport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"nanopb\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.euglo.TheGoodFridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -377,10 +535,51 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5QDYL7YJ95;
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = TheGoodFridge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"z\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleDataTransportCCTSupport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"nanopb\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.euglo.TheGoodFridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";

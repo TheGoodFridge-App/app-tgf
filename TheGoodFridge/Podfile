@@ -7,5 +7,6 @@ target 'TheGoodFridge' do
 
   # Pods for TheGoodFridge
   pod 'Firebase/Auth'
-  pod 'Firebase/Firestore'
+  pod 'GoogleSignIn'
+  pod 'Alamofire','~> 5.1'
 end
