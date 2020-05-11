@@ -30,6 +30,8 @@
 		EBBEA0DA245D51B20038F403 /* Amiko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBBEA0D5245D51890038F403 /* Amiko-SemiBold.ttf */; };
 		EBBEA0DC245D526A0038F403 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBEA0DB245D526A0038F403 /* InputFieldView.swift */; };
 		EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */; };
+		EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE9A0E2468885900B0266E /* SetupData.swift */; };
+		EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE9A1024688A4B00B0266E /* IssuesView.swift */; };
 		EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF520922456156100EC0B03 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,8 @@
 		EBBEA0D6245D518B0038F403 /* Amiko-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Bold.ttf"; sourceTree = "<group>"; };
 		EBBEA0DB245D526A0038F403 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
+		EBCE9A0E2468885900B0266E /* SetupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupData.swift; sourceTree = "<group>"; };
+		EBCE9A1024688A4B00B0266E /* IssuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesView.swift; sourceTree = "<group>"; };
 		EBF5208C2456137800EC0B03 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBF520922456156100EC0B03 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +163,7 @@
 			children = (
 				EBA42CF1244CE4C800185F94 /* LoginManager.swift */,
 				EB5B9AC72460CFA900494754 /* User.swift */,
+				EBCE9A0E2468885900B0266E /* SetupData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,8 +175,9 @@
 				EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */,
 				EB8C9BBB245F4DB800E51E7C /* DividerView.swift */,
 				EB5B9AC92460E75200494754 /* SignupErrorView.swift */,
-				EB1D77092462978F003E1A84 /* ValuesView.swift */,
 				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
+				EB1D77092462978F003E1A84 /* ValuesView.swift */,
+				EBCE9A1024688A4B00B0266E /* IssuesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -328,7 +334,9 @@
 				EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */,
 				EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */,
 				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,
+				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
 				EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */,
+				EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */,
 				EB8C9BC0245F5D4200E51E7C /* IntroViewController.swift in Sources */,
 				EBBEA0DC245D526A0038F403 /* InputFieldView.swift in Sources */,
 				EBA42CF2244CE4C800185F94 /* LoginManager.swift in Sources */,

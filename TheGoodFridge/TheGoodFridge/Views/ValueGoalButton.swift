@@ -8,19 +8,12 @@
 
 import UIKit
 
-enum TypeButton {
-    case value
-    case goal
-}
-
 class ValueGoalButton: UIButton {
 
     static let selectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
     static let unselectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
-    var typeButton: TypeButton
     
-    required init(text: String, type: TypeButton) {
-        self.typeButton = type
+    required init(text: String) {
         super.init(frame: .zero)
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +21,8 @@ class ValueGoalButton: UIButton {
         backgroundColor = ValueGoalButton.unselectedColor
         setTitle(text, for: .normal)
         setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont(name: "Amiko-Bold", size: 20)
+        titleLabel?.font = UIFont(name: "Amiko-Bold", size: 18)
+        titleLabel?.lineBreakMode = .byWordWrapping
     }
     
     required init?(coder: NSCoder) {
@@ -38,23 +32,7 @@ class ValueGoalButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        var buttonWidth: CGFloat
-        var buttonHeight: CGFloat
-        
-        if typeButton == .value {
-            buttonWidth = 130
-            buttonHeight = 130
-        } else {
-            buttonWidth = 135
-            buttonHeight = 115
-        }
-        
-        let constraints = [
-            widthAnchor.constraint(equalToConstant: buttonWidth),
-            heightAnchor.constraint(equalToConstant: buttonHeight)
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+        layer.cornerRadius = frame.size.height / 5
     }
     
 }
