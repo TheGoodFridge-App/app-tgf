@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SlideDelegate {
-    func updateData(values: [ValueType]?)
+    func setValues(values: Set<Int>)
     func tappedNextButton()
     func tappedBackButton()
 }
@@ -17,10 +17,9 @@ protocol SlideDelegate {
 
 class SetupViewController: UIViewController {
 
-    let valueView = ValuesView()
-    let issuesView = IssuesView()
-    lazy var slides = [valueView, issuesView]
+    var slides = [UIView]()
     var setupData = SetupData()
+    var pageCount: Int = 0
     
     let scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -46,24 +45,27 @@ class SetupViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        valueView.delegate = self
+        let valuesView = ValuesView()
+        //slides.append(valuesView)
+        valuesView.delegate = self
+        //pageCount = slides.count
         
-        setupScrollView()
+        pageControl.currentPage = 0
+        view.bringSubviewToFront(pageControl)
+        
+        updateContent(with: valuesView)
         
         view.addSubview(pageControl)
         view.addSubview(scrollView)
         
         setupLayout()
     }
-    
-    private func setupScrollView() {
-        let pageCount = slides.count
+
+    private func updateContent(with slide: UIView) {
+        slides.append(slide)
+        pageCount = slides.count
         pageControl.numberOfPages = pageCount
-        pageControl.currentPage = 0
-        view.bringSubviewToFront(pageControl)
-        
-        //scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
+        scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(pageCount), height: view.frame.height)
         
         //scrollView.delegate = self
         for i in 0..<pageCount {
@@ -74,8 +76,6 @@ class SetupViewController: UIViewController {
     
     private func setupLayout() {
         let pageControlOffset: CGFloat = 90
-        
-        print(slides[0].frame, slides[1].frame)
         
         let constraints = [
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -98,12 +98,31 @@ class SetupViewController: UIViewController {
 // MARK: - SlideDelegate
 extension SetupViewController: SlideDelegate {
     
-    func updateData(values: [ValueType]?) {
-        if let values = values {
-            setupData.values = values
-            issuesView.values = values
-            print(values)
+    func setValues(values: Set<Int>) {
+        let valuesArr = Array(values).sorted()
+        for value in valuesArr {
+            let type: ValueType
+            switch value {
+            case 0:
+                type = .environment
+                setupData.setEnvironment()
+            case 1:
+                type = .animal
+                setupData.setAnimal()
+            case 2:
+                type = .human
+                setupData.setHuman()
+            default:
+                type = .error
+                debugPrint("Invalid integer for values")
+                break
+            }
+            
+            let issuesView = IssuesView(type: type)
+            updateContent(with: issuesView)
         }
+        
+        // TODO: add finish view here
     }
     
     func tappedNextButton() {

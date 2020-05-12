@@ -10,16 +10,15 @@ import UIKit
 
 class ValueGoalButton: UIButton {
 
-    static let selectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-    static let unselectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+    var selectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+    var unselectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
     
-    required init(text: String) {
+    required init() {
         super.init(frame: .zero)
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        backgroundColor = ValueGoalButton.unselectedColor
-        setTitle(text, for: .normal)
+        backgroundColor = unselectedColor
         setTitleColor(.white, for: .normal)
         titleLabel?.font = UIFont(name: "Amiko-Bold", size: 18)
         titleLabel?.lineBreakMode = .byWordWrapping
@@ -27,6 +26,19 @@ class ValueGoalButton: UIButton {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setColors(selected: UIColor, unselected: UIColor) {
+        selectedColor = selected
+        unselectedColor = unselected
+    }
+    
+    func isSelected() -> Bool {
+        return backgroundColor == selectedColor
+    }
+    
+    func toggle() {
+        backgroundColor = isSelected() ? unselectedColor : selectedColor
     }
     
     override func layoutSubviews() {

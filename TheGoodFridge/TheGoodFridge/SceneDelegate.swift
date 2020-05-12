@@ -18,12 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            //startVC = IntroViewController()
-            if Auth.auth().currentUser != nil {
-                startVC = WelcomeViewController()
-            } else {
-                startVC = WelcomeViewController()
-            }
+            startVC = IntroViewController()
+//            if Auth.auth().currentUser != nil {
+//                startVC = WelcomeViewController()
+//            } else {
+//                startVC = WelcomeViewController()
+//            }
             window.rootViewController = UINavigationController(rootViewController: startVC)
             self.window = window
             window.makeKeyAndVisible()

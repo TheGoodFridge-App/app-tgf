@@ -9,5 +9,19 @@
 import Foundation
 
 struct SetupData {
-    var values: [ValueType]?
+    var environment = false
+    var human = false
+    var animal = false
+    
+    mutating func setEnvironment() {
+        environment = true
+    }
+    
+    mutating func setHuman() {
+        human = true
+    }
+    
+    mutating func setAnimal() {
+        animal = true
+    }
 }

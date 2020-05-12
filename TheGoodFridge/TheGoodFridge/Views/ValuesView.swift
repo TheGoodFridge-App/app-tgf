@@ -33,16 +33,7 @@ class ValuesView: UIView {
         return sv
     }()
     
-    let nextButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Next", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Amiko-SemiBold", size: 18)
-        button.backgroundColor = .black
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(tappedNextButton), for: .touchUpInside)
-        return button
-    }()
+    let nextButton = NextBackButton(type: .next)
     
     let introTextView: UITextView = {
         let textView = UITextView()
@@ -72,7 +63,8 @@ class ValuesView: UIView {
         //translatesAutoresizingMaskIntoConstraints = false
         
         for (i, value) in values.enumerated() {
-            let button = ValueGoalButton(text: value)
+            let button = ValueGoalButton()
+            button.setTitle(value, for: .normal)
             button.addTarget(self, action: #selector(tappedValueButton), for: .touchUpInside)
             button.tag = i
             valueButtons.append(button)
@@ -94,6 +86,7 @@ class ValuesView: UIView {
         
         nextButton.isEnabled = false
         nextButton.alpha = 0.0
+        nextButton.addTarget(self, action: #selector(tappedNextButton), for: .touchUpInside)
 
         addSubview(fullStackView)
         addSubview(nextButton)
@@ -148,14 +141,14 @@ class ValuesView: UIView {
         nextButton.layer.cornerRadius = nextButton.frame.size.height / 2
     }
     
-    @objc func tappedValueButton(sender: UIButton) {
-        if sender.backgroundColor == ValueGoalButton.selectedColor {
+    @objc func tappedValueButton(sender: ValueGoalButton) {
+        if sender.isSelected() {
             if selectedValues.count > 1 {
-                sender.backgroundColor = ValueGoalButton.unselectedColor
+                sender.toggle()
                 selectedValues = selectedValues.filter({$0 != sender.tag})
             }
         } else {
-            sender.backgroundColor = ValueGoalButton.selectedColor
+            sender.toggle()
             selectedValues.insert(sender.tag)
         }
         
@@ -168,19 +161,7 @@ class ValuesView: UIView {
     }
     
     @objc func tappedNextButton() {
-        let values = selectedValues.map { num -> ValueType in
-            switch num {
-            case 0:
-                return .environment
-            case 1:
-                return .animal
-            case 2:
-                return .human
-            default:
-                return .error
-            }
-        }
-        delegate?.updateData(values: values)
+        delegate?.setValues(values: selectedValues)
         delegate?.tappedNextButton()
     }
     
