@@ -40,14 +40,10 @@ class IssueCell: UICollectionViewCell {
         goalButton.setTitle(text, for: .normal)
     }
     
-    func setColor(type: ValueType) {
-        if type == .environment {
-            goalButton.setColors(selected: envSelectedColor, unselected: envUnselectedColor)
-        } else if type == .animal {
-            goalButton.setColors(selected: animalSelectedColor, unselected: animalUnselectedColor)
-        } else {
-            goalButton.setColors(selected: humanSelectedColor, unselected: humanSelectedColor)
-        }
+    func setImages() {
+        let selectedImage = UIImage(named: "IssueButtonHighlighted")
+        let unselectedImage = UIImage(named: "IssueButtonNormal")
+        goalButton.setImages(selected: selectedImage, unselected: unselectedImage)
     }
     
     private func setupLayout() {

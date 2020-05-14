@@ -18,16 +18,18 @@ class InputFieldView: UIView {
         self.placeholder = placeholder
         super.init(frame: .zero)
         
+        textField.textColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
+        textField.font = UIFont(name: "Amiko-Regular", size: 15)
+        
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 0.5), NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 15)!])
         textField.spellCheckingType = .no
         textField.autocorrectionType = .no
         if !isAutocorrected {
             textField.autocapitalizationType = .none
         }
         
-        textField.placeholder = placeholder
         textField.translatesAutoresizingMaskIntoConstraints = false
-        stroke.layer.borderWidth = 1
-        stroke.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        stroke.backgroundColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         stroke.translatesAutoresizingMaskIntoConstraints = false
         
         translatesAutoresizingMaskIntoConstraints = false

@@ -12,14 +12,22 @@ class IntroViewController: UIViewController {
 
     let firstName = User.shared.getFirstName() ?? ""
     
+    let introBackground: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "IntroBackgroundImage"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     lazy var introTextView: UITextView = {
         let textView = UITextView()
+        textView.backgroundColor = .clear
         var bigText = NSMutableAttributedString(
-            string: "Hello \(firstName),\nText Text Text Text Text Text Text Text\n\n",
+            string: "Hello \(firstName),\nWelcome to The Good Fridge.\n\n",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-SemiBold", size: 24)!]
         )
         let smallText = NSAttributedString(
-            string: "text text text text text text text text text text text text text text text text text text text text",
+            string: "Before we start, we would like to ask you some questions to personalize your experience.",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-SemiBold", size: 15)!]
         )
         bigText.append(smallText)
@@ -33,10 +41,11 @@ class IntroViewController: UIViewController {
     let startButton: UIButton = {
         let button = UIButton()
         button.setTitle("I'm Ready!", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Amiko-SemiBold", size: 18)
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+//        button.layer.borderWidth = 1
+//        button.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        button.setBackgroundImage(UIImage(named: "ReadyButtonImage"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedStartButton), for: .touchUpInside)
         return button
@@ -47,8 +56,12 @@ class IntroViewController: UIViewController {
 
         view.backgroundColor = .white
         
+        
         view.addSubview(startButton)
         view.addSubview(introTextView)
+        view.addSubview(introBackground)
+        
+        view.sendSubviewToBack(introBackground)
         
         setupLayout()
     }
@@ -56,10 +69,14 @@ class IntroViewController: UIViewController {
     private func setupLayout() {
         let textMargin: CGFloat = 80
         let buttonMargin: CGFloat = 70
-        let buttonHeight: CGFloat = 70
+        let buttonHeight: CGFloat = 75
         let spacing: CGFloat = 25
         
         let constraints = [
+            introBackground.topAnchor.constraint(equalTo: view.topAnchor),
+            introBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            introBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            introBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             startButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: buttonMargin),

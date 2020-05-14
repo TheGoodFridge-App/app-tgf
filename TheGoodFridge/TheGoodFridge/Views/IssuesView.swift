@@ -20,6 +20,13 @@ class IssuesView: UIView {
     let type: ValueType
     let valueStr: String
     
+    let setupBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "SetupBackground2")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     lazy var introTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
@@ -72,6 +79,9 @@ class IssuesView: UIView {
         
         addSubview(introTextView)
         addSubview(collectionView)
+        addSubview(setupBackground)
+        
+        sendSubviewToBack(setupBackground)
         
         setupLayout()
     }
@@ -85,6 +95,10 @@ class IssuesView: UIView {
         let spacing: CGFloat = 45
         
         let constraints = [
+            setupBackground.topAnchor.constraint(equalTo: topAnchor),
+            setupBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
+            setupBackground.bottomAnchor.constraint(equalTo: bottomAnchor),
+            setupBackground.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 2 * buttonHeight + 2 * buttonSpacing),
             collectionView.centerXAnchor.constraint(equalTo: centerXAnchor),
             collectionView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -117,7 +131,7 @@ extension IssuesView: UICollectionViewDataSource {
         //let (text, type) = issues[indexPath.item] ?? ("", .error)
         let text = issues[indexPath.item]
         cell.setText(to: text)
-        cell.setColor(type: type)
+        cell.setImages()
         cell.goalButton.addTarget(self, action: #selector(tappedGoalButton), for: .touchUpInside)
         return cell
     }

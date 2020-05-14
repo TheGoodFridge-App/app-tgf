@@ -13,7 +13,7 @@ class PasswordFieldView: InputFieldView {
     let passwordEye: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "PasswordEye"), for: .normal)
-        button.contentMode = .scaleAspectFit
+        button.contentMode = .scaleAspectFill
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

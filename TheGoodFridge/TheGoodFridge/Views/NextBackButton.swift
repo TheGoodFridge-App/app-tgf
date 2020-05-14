@@ -17,14 +17,12 @@ class NextBackButton: UIButton {
     required init(type: ButtonDirection) {
         
         super.init(frame: .zero)
-        
-        setTitle("Next", for: .normal)
-        setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont(name: "Amiko-SemiBold", size: 18)
+
         if type == .next {
-            backgroundColor = .black
+            setBackgroundImage(UIImage(named: "NextButtonEnabled"), for: .normal)
+            setBackgroundImage(UIImage(named: "NextButtonDisabled"), for: .disabled)
         } else {
-            backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+            setBackgroundImage(UIImage(named: "BackButtonEnabled"), for: .normal)
         }
         
         translatesAutoresizingMaskIntoConstraints = false

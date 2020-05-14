@@ -13,11 +13,10 @@ class WelcomeViewController: UIViewController {
     
     let signupButton: UIButton = {
         let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "LoginButtonEnabled"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
         button.setTitle("Sign Up", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Amiko-SemiBold", size: 15)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -26,10 +25,9 @@ class WelcomeViewController: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        button.setTitleColor(UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1), for: .normal)
+        button.setBackgroundImage(UIImage(named: "LoginButtonDisabled"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
         button.titleLabel?.font = UIFont(name: "Amiko-SemiBold", size: 15)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -38,6 +36,7 @@ class WelcomeViewController: UIViewController {
     let brandLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Amiko-SemiBold", size: 25)
+        label.textColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         label.text = "The Good Fridge."
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -46,6 +45,10 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
         
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
@@ -92,11 +95,17 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc func tappedSignupButton() {
-        navigationController?.pushViewController(RegisterViewController(), animated: true)
+        let registerVC = RegisterViewController()
+        //registerVC.modalPresentationStyle = .fullScreen
+        //self.present(registerVC, animated: true, completion: nil)
+        navigationController?.pushViewController(registerVC, animated: true)
     }
     
     @objc func tappedLoginButton() {
-        navigationController?.pushViewController(LoginViewController(), animated: true)
+        let loginVC = LoginViewController()
+        //loginVC.modalPresentationStyle = .fullScreen
+        //self.present(loginVC, animated: true, completion: nil)
+        navigationController?.pushViewController(loginVC, animated: true)
     }
     
 }

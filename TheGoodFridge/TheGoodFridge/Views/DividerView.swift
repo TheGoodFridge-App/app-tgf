@@ -12,17 +12,18 @@ class DividerView: UIView {
 
     let leftDivider: UIView = {
         let divider = UIView()
-        divider.layer.borderWidth = 1
-        divider.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        divider.backgroundColor = .black
+        //divider.layer.borderWidth = 1
+        //divider.layer.borderColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
+        divider.backgroundColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         divider.translatesAutoresizingMaskIntoConstraints = false
         return divider
     }()
     
     let rightDivider: UIView = {
         let divider = UIView()
-        divider.layer.borderWidth = 1
-        divider.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        //divider.layer.borderWidth = 1
+        //divider.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        divider.backgroundColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         divider.translatesAutoresizingMaskIntoConstraints = false
         return divider
     }()
@@ -31,6 +32,7 @@ class DividerView: UIView {
         let label = UILabel()
         label.text = "or"
         label.font = UIFont(name: "Amiko-Regular", size: 15)
+        label.textColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -21,6 +21,13 @@ class ValuesView: UIView {
     var valueButtons = [ValueGoalButton]()
     var selectedValues = Set<Int>()
     
+    let setupBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "SetupBackground1")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let fullStackView: UIStackView = {
         let sv = UIStackView()
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -85,12 +92,15 @@ class ValuesView: UIView {
         fullStackView.addArrangedSubview(bottomStackView)
         
         nextButton.isEnabled = false
-        nextButton.alpha = 0.0
+        //nextButton.alpha = 0.0
         nextButton.addTarget(self, action: #selector(tappedNextButton), for: .touchUpInside)
 
         addSubview(fullStackView)
         addSubview(nextButton)
         addSubview(introTextView)
+        addSubview(setupBackground)
+        
+        sendSubviewToBack(setupBackground)
         
         setupLayout()
     }
@@ -114,6 +124,10 @@ class ValuesView: UIView {
         }
         
         let constraints = [
+            setupBackground.topAnchor.constraint(equalTo: topAnchor),
+            setupBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
+            setupBackground.bottomAnchor.constraint(equalTo: bottomAnchor),
+            setupBackground.trailingAnchor.constraint(equalTo: trailingAnchor),
             fullStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             fullStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             fullStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -155,7 +169,6 @@ class ValuesView: UIView {
         if !nextButton.isEnabled  {
             UIView.animate(withDuration: 0.3) {
                 self.nextButton.isEnabled = true
-                self.nextButton.alpha = 1.0
             }
         }
     }

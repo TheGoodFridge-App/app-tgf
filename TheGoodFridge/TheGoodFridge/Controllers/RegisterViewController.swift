@@ -14,6 +14,13 @@ class RegisterViewController: UIViewController {
     
     let spacing: CGFloat = 40
     
+    let signUpBackgroundImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "SignUpBackgroundImage")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let firstNameTextField = InputFieldView("First Name", isAutocorrected: true)
     let lastNameTextField = InputFieldView("Last Name", isAutocorrected: true)
     let emailTextField = InputFieldView("Email", isAutocorrected: false)
@@ -30,17 +37,22 @@ class RegisterViewController: UIViewController {
     let createButton: UIButton = {
         let button = UIButton()
         button.setTitle("Create Account", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1), for: .normal)
         button.titleLabel?.font = UIFont(name: "Amiko-SemiBold", size: 15)
-        button.backgroundColor = .white
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        button.setBackgroundImage(UIImage(named: "LoginButtonDisabled"), for: .disabled)
+        button.setBackgroundImage(UIImage(named: "LoginButtonEnabled"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    let googleSignInButton: GIDSignInButton = {
-        let button = GIDSignInButton()
+    let googleSignInButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "GoogleSignInImage"), for: .normal)
+        button.setTitle("Sign in with Google", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Amiko-Regular", size: 15)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.addTarget(self, action: #selector(tappedGoogleButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -49,6 +61,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.text = "The Good Fridge."
         label.font = UIFont(name: "Amiko-Regular", size: 12)
+        label.textColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -84,15 +97,24 @@ class RegisterViewController: UIViewController {
         return stackView
     }()
     
+    let backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "XImage"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .white
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         //GIDSignIn.sharedInstance().signIn()
-        
-        view.backgroundColor = .white
         
         createButton.isEnabled = false
         
@@ -118,16 +140,27 @@ class RegisterViewController: UIViewController {
         fullStackView.addArrangedSubview(brandLabel)
         
         view.addSubview(fullStackView)
+        view.addSubview(signUpBackgroundImage)
+//        view.addSubview(backButton)
+        
+        view.sendSubviewToBack(signUpBackgroundImage)
         
         setupLayout()
     }
     
     private func setupLayout() {
+        let buttonWidth: CGFloat = 264
         let fieldHeight: CGFloat = 200
-        let buttonHeight: CGFloat = 50
+        let buttonHeight: CGFloat = 60
         let margin: CGFloat = 15
+//        let backButtonSize: CGFloat = 20
+//        let backButtonMargin: CGFloat = 20
         
         let constraints = [
+            signUpBackgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            signUpBackgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            signUpBackgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            signUpBackgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             fullStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fullStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fullStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
@@ -144,8 +177,12 @@ class RegisterViewController: UIViewController {
             createButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             dividerView.leadingAnchor.constraint(equalTo: fullStackView.leadingAnchor),
             dividerView.trailingAnchor.constraint(equalTo: fullStackView.trailingAnchor),
-            googleSignInButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
-            googleSignInButton.heightAnchor.constraint(equalToConstant: buttonHeight)
+            googleSignInButton.widthAnchor.constraint(equalToConstant: buttonWidth),
+            googleSignInButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+//            backButton.widthAnchor.constraint(equalToConstant: backButtonSize),
+//            backButton.heightAnchor.constraint(equalToConstant: backButtonSize),
+//            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: backButtonMargin),
+//            backButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -backButtonMargin)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -187,14 +224,20 @@ class RegisterViewController: UIViewController {
             let email = emailTextField.text(), !email.isEmpty,
             let password = passwordTextField.text(), !password.isEmpty else {
                 createButton.isEnabled = false
-                createButton.setTitleColor(.black, for: .normal)
-                createButton.backgroundColor = .white
+                createButton.setTitleColor(UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1), for: .normal)
                 return
         }
         
         createButton.isEnabled = true
         createButton.setTitleColor(.white, for: .normal)
-        createButton.backgroundColor = .black
+    }
+    
+    @objc func tappedGoogleButton() {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    @objc func tappedBackButton() {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
