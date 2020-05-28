@@ -98,9 +98,7 @@ class ValuesView: UIView {
         addSubview(fullStackView)
         addSubview(nextButton)
         addSubview(introTextView)
-        addSubview(setupBackground)
-        
-        sendSubviewToBack(setupBackground)
+
         
         setupLayout()
     }
@@ -114,7 +112,7 @@ class ValuesView: UIView {
         let valueButtonWidth: CGFloat = 130
         let nextButtonHeight: CGFloat = 50
         let nextButtonWidth: CGFloat = 130
-        let buttonSpacing: CGFloat = 70
+        let buttonSpacing: CGFloat = 140
         let textSpacing: CGFloat = 50
         let textMargin: CGFloat = 90
         
@@ -124,10 +122,6 @@ class ValuesView: UIView {
         }
         
         let constraints = [
-            setupBackground.topAnchor.constraint(equalTo: topAnchor),
-            setupBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
-            setupBackground.bottomAnchor.constraint(equalTo: bottomAnchor),
-            setupBackground.trailingAnchor.constraint(equalTo: trailingAnchor),
             fullStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             fullStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             fullStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -135,7 +129,7 @@ class ValuesView: UIView {
             nextButton.heightAnchor.constraint(equalToConstant: nextButtonHeight),
             nextButton.widthAnchor.constraint(equalToConstant: nextButtonWidth),
             nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            nextButton.topAnchor.constraint(equalTo: fullStackView.bottomAnchor, constant: buttonSpacing),
+            nextButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -buttonSpacing),
             introTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
             introTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: textMargin),
             introTextView.bottomAnchor.constraint(equalTo: fullStackView.topAnchor, constant: -textSpacing),
@@ -166,11 +160,7 @@ class ValuesView: UIView {
             selectedValues.insert(sender.tag)
         }
         
-        if !nextButton.isEnabled  {
-            UIView.animate(withDuration: 0.3) {
-                self.nextButton.isEnabled = true
-            }
-        }
+        self.nextButton.isEnabled = true
     }
     
     @objc func tappedNextButton() {

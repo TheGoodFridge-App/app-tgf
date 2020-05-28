@@ -19,16 +19,21 @@ class IssuesView: UIView {
     let issues: [String]
     let type: ValueType
     let valueStr: String
+    var selectedIssues = [Int]()
     
-    let setupBackground: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "SetupBackground2")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    // Delegate
+    var delegate: SlideDelegate?
+    
+//    let setupBackground: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "SetupBackground2")
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        return imageView
+//    }()
     
     lazy var introTextView: UITextView = {
         let textView = UITextView()
+        textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,11 +46,24 @@ class IssuesView: UIView {
         return textView
     }()
     
+    let nextButton: NextBackButton = {
+        let button = NextBackButton(type: .next)
+        button.addTarget(self, action: #selector(tappedNextButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let backButton: NextBackButton = {
+        let button = NextBackButton(type: .back)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
+        return button
+    }()
+    
     let collectionView: UICollectionView
     
     required init(type: ValueType) {
         self.type = type
-        //self.values = values
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: buttonSpacing - scrollMargin, bottom: buttonSpacing, right: buttonSpacing - scrollMargin)
@@ -64,10 +82,7 @@ class IssuesView: UIView {
         
         //issues = IssueData.getAllIssues(values: values)
         super.init(frame: .zero)
-        
-        //generateValueString()
-        
-        //translatesAutoresizingMaskIntoConstraints = false
+
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(IssueCell.self, forCellWithReuseIdentifier: K.issueCellID)
@@ -79,9 +94,11 @@ class IssuesView: UIView {
         
         addSubview(introTextView)
         addSubview(collectionView)
-        addSubview(setupBackground)
+        addSubview(nextButton)
+        addSubview(backButton)
+//        addSubview(setupBackground)
         
-        sendSubviewToBack(setupBackground)
+//        sendSubviewToBack(setupBackground)
         
         setupLayout()
     }
@@ -93,12 +110,16 @@ class IssuesView: UIView {
     private func setupLayout() {
         let textMargin: CGFloat = 70
         let spacing: CGFloat = 45
+        let navButtonWidth: CGFloat = 130
+        let navButtonHeight: CGFloat = 50
+        let navButtonSpacing: CGFloat = 140
+        let navButtonMargin: CGFloat = 50
         
         let constraints = [
-            setupBackground.topAnchor.constraint(equalTo: topAnchor),
-            setupBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
-            setupBackground.bottomAnchor.constraint(equalTo: bottomAnchor),
-            setupBackground.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            setupBackground.topAnchor.constraint(equalTo: topAnchor),
+//            setupBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            setupBackground.bottomAnchor.constraint(equalTo: bottomAnchor),
+//            setupBackground.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 2 * buttonHeight + 2 * buttonSpacing),
             collectionView.centerXAnchor.constraint(equalTo: centerXAnchor),
             collectionView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -107,14 +128,44 @@ class IssuesView: UIView {
             introTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
             introTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: textMargin),
             introTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -textMargin),
-            introTextView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -spacing)
+            introTextView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -spacing),
+            backButton.heightAnchor.constraint(equalToConstant: navButtonHeight),
+            backButton.widthAnchor.constraint(equalToConstant: navButtonWidth),
+            backButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -navButtonSpacing),
+            backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: navButtonMargin),
+            nextButton.heightAnchor.constraint(equalToConstant: navButtonHeight),
+            nextButton.widthAnchor.constraint(equalToConstant: navButtonWidth),
+            nextButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -navButtonSpacing),
+            nextButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -navButtonMargin)
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
     
     @objc func tappedGoalButton(sender: ValueGoalButton) {
+        if sender.isSelected() {
+            selectedIssues = selectedIssues.filter({$0 != sender.tag})
+        } else {
+            selectedIssues.append(sender.tag)
+        }
+        print(selectedIssues)
         sender.toggle()
+    }
+    
+    @objc func tappedNextButton() {
+        delegate?.setIssues(type: type, issues: Set(selectedIssues))
+        delegate?.tappedNextButton()
+    }
+    
+    @objc func tappedBackButton() {
+        delegate?.tappedBackButton()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        nextButton.layer.cornerRadius = nextButton.frame.size.height / 2
+        backButton.layer.cornerRadius = backButton.frame.size.height / 2
     }
     
 }
@@ -132,6 +183,7 @@ extension IssuesView: UICollectionViewDataSource {
         let text = issues[indexPath.item]
         cell.setText(to: text)
         cell.setImages()
+        cell.goalButton.tag = indexPath.item
         cell.goalButton.addTarget(self, action: #selector(tappedGoalButton), for: .touchUpInside)
         return cell
     }

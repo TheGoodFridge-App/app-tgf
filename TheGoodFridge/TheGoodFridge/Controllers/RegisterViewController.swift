@@ -266,8 +266,10 @@ extension RegisterViewController: GIDSignInDelegate {
                 return
             }
             // User is signed in, move to setup
+            let email = user.profile.email
             let firstName = user.profile.givenName
             let lastName = user.profile.familyName
+            User.shared.setEmail(to: email)
             User.shared.setFirstName(to: firstName)
             User.shared.setLastName(to: lastName)
             self.presentSetup()

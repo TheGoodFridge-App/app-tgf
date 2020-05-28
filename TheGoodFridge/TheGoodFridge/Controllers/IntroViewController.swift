@@ -45,7 +45,7 @@ class IntroViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "Amiko-SemiBold", size: 18)
 //        button.layer.borderWidth = 1
 //        button.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        button.setBackgroundImage(UIImage(named: "ReadyButtonImage"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "GreenButtonImage"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedStartButton), for: .touchUpInside)
         return button

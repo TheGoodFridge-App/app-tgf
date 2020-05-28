@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import Firebase
+import Alamofire
+
+protocol UserDelegate: class {
+    func didGetUserData()
+}
 
 class User {
     static let shared = User()
@@ -14,10 +20,20 @@ class User {
     private var firstName: String?
     private var lastName: String?
     private var email: String?
+    private var userData: UserData?
+    weak var delegate: UserDelegate?
+    
+    func updateData() {
+        if let userData = userData {
+            firstName = userData.first_name
+            lastName = userData.last_name
+            email = Auth.auth().currentUser?.email
+        }
+    }
     
     func getFirstName() -> String? {
         if firstName == nil {
-            // MARK: - TODO: Get name from server
+            fetchData()
         }
         
         return firstName
@@ -25,7 +41,7 @@ class User {
     
     func getLastName() -> String? {
         if lastName == nil {
-            // MARK: - TODO: Get name from server
+            fetchData()
         }
         
         return lastName
@@ -33,7 +49,7 @@ class User {
     
     func getEmail() -> String? {
         if email == nil {
-            // MARK: - TODO: Get name from server
+            email = Auth.auth().currentUser?.email
         }
         
         return email
@@ -50,4 +66,35 @@ class User {
     func setEmail(to email: String?) {
         self.email = email
     }
+    
+    func fetchData() {
+        if let email = getEmail() {
+            let urlString = "\(K.serverURL)/data"
+            
+            let parameters: [String: String] = [
+                "email": email
+            ]
+            
+            AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
+                .response { response in
+                    if let responseData = response.data {
+                        self.userData = self.parseJSON(data: responseData)
+                        self.updateData()
+                        self.delegate?.didGetUserData()
+                    }
+            }
+        }
+    }
+    
+    private func parseJSON(data: Data) -> UserData? {
+        do {
+            let decoder = JSONDecoder()
+            return try decoder.decode(UserData.self, from: data)
+        }
+        catch {
+            debugPrint("Could not decode data")
+            return nil
+        }
+    }
+    
 }

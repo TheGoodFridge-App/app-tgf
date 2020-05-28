@@ -183,7 +183,9 @@ class LoginViewController: UIViewController {
                     self.signupErrorView.label.text = e.localizedDescription
                     print(e.localizedDescription)
                 } else {
-                    // MARK: - TODO: Profile Segue
+                    let tabBarVC = TabBarController()
+                    tabBarVC.modalPresentationStyle = .fullScreen
+                    self.present(tabBarVC, animated: true, completion: nil)
                 }
             }
         }

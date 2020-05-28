@@ -19,12 +19,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             //startVC = IntroViewController()
+            
             if Auth.auth().currentUser != nil {
-                startVC = WelcomeViewController()
+                User.shared.fetchData()
+                startVC = TabBarController()
             } else {
                 startVC = WelcomeViewController()
             }
-            window.rootViewController = UINavigationController(rootViewController: startVC)
+            let navigationVC = UINavigationController(rootViewController: startVC)
+            navigationVC.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            navigationVC.navigationBar.shadowImage = UIImage()
+            navigationVC.navigationBar.isTranslucent = true
+            navigationVC.view.backgroundColor = UIColor.clear
+            
+            window.rootViewController = navigationVC
             self.window = window
             window.makeKeyAndVisible()
         }

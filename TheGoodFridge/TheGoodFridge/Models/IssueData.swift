@@ -54,6 +54,19 @@ struct IssueData {
         return humanIssues
     }
     
+    static func getSelected(type: ValueType, issues: [Int]) -> [String] {
+        var selectedIssues: [String]
+        if type == .environment {
+            selectedIssues = issues.map({ environmentIssues[$0] })
+        } else if type == .animal {
+            selectedIssues = issues.map({ animalIssues[$0] })
+        } else {
+            selectedIssues = issues.map({ humanIssues[$0] })
+        }
+        
+        return selectedIssues
+    }
+    
     static func getAllIssues(values: [Int]) -> [Int: (String, ValueType)] {
         var issuesMap = [Int: (String, ValueType)]()
         var index = 0
