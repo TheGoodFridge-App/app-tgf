@@ -14,7 +14,7 @@
 		EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */; };
 		EB2EB193246A727C00C7F523 /* IssueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2EB192246A727C00C7F523 /* IssueData.swift */; };
 		EB355574245E4DBD00FF23CB /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB355573245E4DBD00FF23CB /* credentials.plist */; };
-		EB514D9B247AF3EF00450E60 /* GroceryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB514D9A247AF3EF00450E60 /* GroceryListView.swift */; };
+		EB514D9B247AF3EF00450E60 /* GroceryListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */; };
 		EB514D9D247AFCE100450E60 /* GroceryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB514D9C247AFCE100450E60 /* GroceryListCell.swift */; };
 		EB514D9F247B1ED700450E60 /* GroceryDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */; };
 		EB5244C02471D50500C45C6B /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5244BF2471D50500C45C6B /* StartView.swift */; };
@@ -29,6 +29,8 @@
 		EB8292022478A917008D96FA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8292012478A917008D96FA /* SearchViewController.swift */; };
 		EB8292042478A91F008D96FA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8292032478A91F008D96FA /* ProfileViewController.swift */; };
 		EB8292082478BA4C008D96FA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8292072478BA4C008D96FA /* UserData.swift */; };
+		EB8C6398248380A900983BE9 /* GroceryListFinalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C6397248380A900983BE9 /* GroceryListFinalView.swift */; };
+		EB8C639A2483816500983BE9 /* GroceryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C63992483816500983BE9 /* GroceryData.swift */; };
 		EB8C9BBC245F4DB800E51E7C /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C9BBB245F4DB800E51E7C /* DividerView.swift */; };
 		EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C9BBD245F56CA00E51E7C /* LoginViewController.swift */; };
 		EB8C9BC0245F5D4200E51E7C /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C9BBF245F5D4200E51E7C /* IntroViewController.swift */; };
@@ -71,7 +73,7 @@
 		EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGoalButton.swift; sourceTree = "<group>"; };
 		EB2EB192246A727C00C7F523 /* IssueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueData.swift; sourceTree = "<group>"; };
 		EB355573245E4DBD00FF23CB /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
-		EB514D9A247AF3EF00450E60 /* GroceryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListView.swift; sourceTree = "<group>"; };
+		EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListEditView.swift; sourceTree = "<group>"; };
 		EB514D9C247AFCE100450E60 /* GroceryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListCell.swift; sourceTree = "<group>"; };
 		EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryDoneView.swift; sourceTree = "<group>"; };
 		EB5244BF2471D50500C45C6B /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,8 @@
 		EB8292012478A917008D96FA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EB8292032478A91F008D96FA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EB8292072478BA4C008D96FA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		EB8C6397248380A900983BE9 /* GroceryListFinalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListFinalView.swift; sourceTree = "<group>"; };
+		EB8C63992483816500983BE9 /* GroceryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryData.swift; sourceTree = "<group>"; };
 		EB8C9BBB245F4DB800E51E7C /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		EB8C9BBD245F56CA00E51E7C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB8C9BBF245F5D4200E51E7C /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				EBCE9A0E2468885900B0266E /* SetupData.swift */,
 				EB5B9AC72460CFA900494754 /* User.swift */,
 				EB8292072478BA4C008D96FA /* UserData.swift */,
+				EB8C63992483816500983BE9 /* GroceryData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,7 +220,8 @@
 				EB1D77092462978F003E1A84 /* ValuesView.swift */,
 				EB5244BF2471D50500C45C6B /* StartView.swift */,
 				EB514D9C247AFCE100450E60 /* GroceryListCell.swift */,
-				EB514D9A247AF3EF00450E60 /* GroceryListView.swift */,
+				EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */,
+				EB8C6397248380A900983BE9 /* GroceryListFinalView.swift */,
 				EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */,
 			);
 			path = Views;
@@ -370,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */,
+				EB8C639A2483816500983BE9 /* GroceryData.swift in Sources */,
 				EB5244C02471D50500C45C6B /* StartView.swift in Sources */,
 				EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */,
 				EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */,
@@ -379,7 +386,8 @@
 				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
 				EBBEF3812477B923005B085E /* GroceryViewController.swift in Sources */,
 				EBC13140246A6CCD0047CD2C /* NextBackButton.swift in Sources */,
-				EB514D9B247AF3EF00450E60 /* GroceryListView.swift in Sources */,
+				EB8C6398248380A900983BE9 /* GroceryListFinalView.swift in Sources */,
+				EB514D9B247AF3EF00450E60 /* GroceryListEditView.swift in Sources */,
 				EB8292042478A91F008D96FA /* ProfileViewController.swift in Sources */,
 				EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */,
 				EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 
 protocol GroceryDelegate {
     func startedEditing()
+    func didGetGroceryItems(data: GroceryData)
 }
 
 class GroceryViewController: UIViewController {
@@ -52,7 +53,7 @@ class GroceryViewController: UIViewController {
         return label
     }()
     
-    let groceryListView = GroceryListView()
+    let groceryListView = GroceryListEditView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,6 +133,10 @@ extension GroceryViewController: GroceryDelegate {
     
     func startedEditing() {
         view.bringSubviewToFront(groceryListView)
+    }
+    
+    func didGetGroceryItems(data: GroceryData) {
+        // Load GroceryListFinalView
     }
     
 }

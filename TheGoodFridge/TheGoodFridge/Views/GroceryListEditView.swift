@@ -8,16 +8,15 @@
 
 import UIKit
 
-class GroceryListView: UIView {
+class GroceryListEditView: UIView {
     
     let tableView: UITableView
     var rows = [GroceryListCell()]
+    var groceryItems = [String]()
     var startCell: GroceryListCell?
     var returnTapped = false
-    var emptyCount = 0
     let groceryDoneView = GroceryDoneView()
     var delegate: GroceryDelegate?
-    var unfilledFields = Set<UITextField>()
     
     let placeholderLabel: UILabel = {
         let label = UILabel()
@@ -60,6 +59,9 @@ class GroceryListView: UIView {
         tableView.tableFooterView = UIView()
         tableView.separatorColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        groceryDoneView.errorLabel.isHidden = true
+        groceryDoneView.doneButton.addTarget(self, action: #selector(tappedDoneButton), for: .touchUpInside)
         
         addSubview(tableView)
         addSubview(groceryDoneView)
@@ -110,9 +112,28 @@ class GroceryListView: UIView {
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
     }
     
+    @objc func tappedDoneButton() {
+        for cell in rows {
+            if let text = cell.inputField.text, text.isEmpty {
+                groceryDoneView.errorLabel.isHidden = false
+                return
+            }
+        }
+        
+        groceryDoneView.errorLabel.isHidden = true
+        
+        groceryItems = rows.map({ $0.inputField.text ?? "" })
+        print(groceryItems)
+        
+        // TODO: Add API call here
+        var groceryData = GroceryData(items: groceryItems)
+        groceryData.delegate = delegate
+        groceryData.getRecommendations()
+        delegate?.didGetGroceryItems(data: groceryData)
+    }
 }
 
-extension GroceryListView: UITableViewDataSource {
+extension GroceryListEditView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return rows.count
@@ -122,7 +143,7 @@ extension GroceryListView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.groceryCellID, for: indexPath) as! GroceryListCell
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         cell.inputField.delegate = self
-        cell.inputField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        //cell.inputField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         
         if startCell == nil {
             startCell = cell
@@ -134,19 +155,18 @@ extension GroceryListView: UITableViewDataSource {
         
         if returnTapped {
             cell.inputField.becomeFirstResponder()
-            groceryDoneView.errorLabel.isHidden = false
             returnTapped = false
         }
         return cell
     }
     
-    @objc func editingChanged(_ sender: UITextField) {
-        if let text = sender.text, text.isEmpty {
-            groceryDoneView.errorLabel.isHidden = false
-        } else {
-            groceryDoneView.errorLabel.isHidden = true
-        }
-    }
+//    @objc func editingChanged(_ sender: UITextField) {
+//        if let text = sender.text, text.isEmpty {
+//            groceryDoneView.errorLabel.isHidden = false
+//        } else {
+//            groceryDoneView.errorLabel.isHidden = true
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if rows.count > 1 && editingStyle == UITableViewCell.EditingStyle.delete {
@@ -158,9 +178,13 @@ extension GroceryListView: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        groceryItems.append(rows[indexPath.row].inputField.text ?? "")
+    }
+    
 }
 
-extension GroceryListView: UITableViewDelegate {
+extension GroceryListEditView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -168,13 +192,13 @@ extension GroceryListView: UITableViewDelegate {
     
 }
 
-extension GroceryListView: UITextFieldDelegate {
+extension GroceryListEditView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        emptyCount += 1
+        print(rows.map({ $0.inputField }))
         tableView.beginUpdates()
         let index = rows.firstIndex(where: { $0.inputField == textField }) ?? 0
-        rows.insert(GroceryListCell(), at: index)
+        rows.insert(GroceryListCell(), at: index + 1)
         tableView.insertRows(at: [IndexPath(row: index + 1, section: 0)], with: .automatic)
         returnTapped = true
         tableView.endUpdates()
@@ -186,7 +210,6 @@ extension GroceryListView: UITextFieldDelegate {
             startCell.buttonImageView.image = startCell.unselectedButtonImage
             placeholderLabel.isHidden = true
             groceryDoneView.isHidden = false
-            unfilledFields.insert(textField)
             delegate?.startedEditing()
         }
     }
