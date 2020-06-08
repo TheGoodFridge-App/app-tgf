@@ -48,6 +48,8 @@
 		EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE9A0E2468885900B0266E /* SetupData.swift */; };
 		EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE9A1024688A4B00B0266E /* IssuesView.swift */; };
 		EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF520922456156100EC0B03 /* RegisterViewController.swift */; };
+		EBF7A740248453BE0083C634 /* GroceryListFinalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */; };
+		EBF7A742248469A50083C634 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A741248469A50083C634 /* AddButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -109,6 +111,8 @@
 		EBCE9A1024688A4B00B0266E /* IssuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesView.swift; sourceTree = "<group>"; };
 		EBF5208C2456137800EC0B03 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBF520922456156100EC0B03 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListFinalCell.swift; sourceTree = "<group>"; };
+		EBF7A741248469A50083C634 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 		EBA42CF4244CE4E900185F94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EBF7A741248469A50083C634 /* AddButton.swift */,
 				EB8C9BBB245F4DB800E51E7C /* DividerView.swift */,
 				EBBEA0DB245D526A0038F403 /* InputFieldView.swift */,
 				EBC13141246A6E640047CD2C /* IssueCell.swift */,
@@ -221,6 +226,7 @@
 				EB5244BF2471D50500C45C6B /* StartView.swift */,
 				EB514D9C247AFCE100450E60 /* GroceryListCell.swift */,
 				EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */,
+				EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */,
 				EB8C6397248380A900983BE9 /* GroceryListFinalView.swift */,
 				EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */,
 			);
@@ -397,12 +403,14 @@
 				EB8292022478A917008D96FA /* SearchViewController.swift in Sources */,
 				EB514D9D247AFCE100450E60 /* GroceryListCell.swift in Sources */,
 				EBA42CF2244CE4C800185F94 /* LoginManager.swift in Sources */,
+				EBF7A740248453BE0083C634 /* GroceryListFinalCell.swift in Sources */,
 				EB5B9ACA2460E75200494754 /* SignupErrorView.swift in Sources */,
 				EB56EC632442E34C001D48BE /* AppDelegate.swift in Sources */,
 				EB514D9F247B1ED700450E60 /* GroceryDoneView.swift in Sources */,
 				EB8C9BBC245F4DB800E51E7C /* DividerView.swift in Sources */,
 				EB8292082478BA4C008D96FA /* UserData.swift in Sources */,
 				EBC13144246A6E900047CD2C /* Constants.swift in Sources */,
+				EBF7A742248469A50083C634 /* AddButton.swift in Sources */,
 				EB5B9AC82460CFA900494754 /* User.swift in Sources */,
 				EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */,
 				EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */,

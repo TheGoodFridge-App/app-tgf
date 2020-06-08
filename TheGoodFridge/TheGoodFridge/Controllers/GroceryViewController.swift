@@ -10,11 +10,14 @@ import UIKit
 
 protocol GroceryDelegate {
     func startedEditing()
-    func didGetGroceryItems(data: GroceryData)
+    func didGetGroceryItems(rec: [String], other: [String])
+    func returnToEdit()
 }
 
 class GroceryViewController: UIViewController {
 
+    let viewMargin: CGFloat = 30
+    
     let groceryBackground: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "GroceryBackground")
@@ -53,13 +56,15 @@ class GroceryViewController: UIViewController {
         return label
     }()
     
-    let groceryListView = GroceryListEditView()
+    var groceryListEditView = GroceryListEditView(rows: [GroceryListCell()], isEditing: false)
+    var groceryListFinalView = GroceryListFinalView(rec: [String](), other: [String]())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         User.shared.delegate = self
-        groceryListView.delegate = self
+        groceryListEditView.delegate = self
+        groceryListFinalView.delegate = self
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -74,11 +79,11 @@ class GroceryViewController: UIViewController {
         
         view.addSubview(dateLabel)
         view.addSubview(nameLabel)
-        view.addSubview(groceryListView)
+        view.addSubview(groceryListEditView)
         view.addSubview(tomatoImageView)
         view.addSubview(groceryBackground)
         view.sendSubviewToBack(groceryBackground)
-        view.bringSubviewToFront(groceryListView.groceryDoneView)
+        view.bringSubviewToFront(groceryListEditView.groceryDoneView)
         
         setupLayout()
     }
@@ -87,7 +92,7 @@ class GroceryViewController: UIViewController {
         let titleLeadingMargin: CGFloat = 40
         let titleTopMargin: CGFloat = 60
         let intertextSpacing: CGFloat = 5
-        let viewMargin: CGFloat = 30
+        
         let tomatoSize: CGFloat = 250
         let offset: CGFloat = 50
         
@@ -104,10 +109,10 @@ class GroceryViewController: UIViewController {
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: titleLeadingMargin),
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: titleLeadingMargin),
             nameLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: intertextSpacing),
-            groceryListView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: viewMargin),
-            groceryListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewMargin),
-            groceryListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewMargin),
-            groceryListView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            groceryListEditView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: viewMargin),
+            groceryListEditView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewMargin),
+            groceryListEditView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewMargin),
+            groceryListEditView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -132,11 +137,55 @@ extension GroceryViewController: UserDelegate {
 extension GroceryViewController: GroceryDelegate {
     
     func startedEditing() {
-        view.bringSubviewToFront(groceryListView)
+        view.bringSubviewToFront(groceryListEditView)
     }
     
-    func didGetGroceryItems(data: GroceryData) {
+    func didGetGroceryItems(rec: [String], other: [String]) {
         // Load GroceryListFinalView
+        print(rec, other)
+        groceryListEditView.removeFromSuperview()
+        
+        groceryListFinalView = GroceryListFinalView(rec: rec, other: other)
+        groceryListFinalView.delegate = self
+        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListFinalView) }, completion: nil)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
+        let constraints = [
+            groceryListFinalView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: viewMargin),
+            groceryListFinalView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            groceryListFinalView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            groceryListFinalView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    func returnToEdit() {
+        groceryListFinalView.removeFromSuperview()
+        
+        let rowStrings = groceryListFinalView.recommended + groceryListFinalView.other
+        let rows: [GroceryListCell] = rowStrings.map { str in
+            let groceryCell = GroceryListCell()
+            groceryCell.inputField.text = str
+            return groceryCell
+        }
+        
+        groceryListEditView = GroceryListEditView(rows: rows, isEditing: true)
+        groceryListEditView.delegate = self
+        
+        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListEditView) }, completion: nil)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
+        let constraints = [
+            groceryListEditView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: viewMargin),
+            groceryListEditView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewMargin),
+            groceryListEditView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewMargin),
+            groceryListEditView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
 }

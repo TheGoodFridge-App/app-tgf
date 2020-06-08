@@ -17,6 +17,7 @@ class GroceryListEditView: UIView {
     var returnTapped = false
     let groceryDoneView = GroceryDoneView()
     var delegate: GroceryDelegate?
+    let isEditing: Bool
     
     let placeholderLabel: UILabel = {
         let label = UILabel()
@@ -45,10 +46,11 @@ class GroceryListEditView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
+    required init(rows: [GroceryListCell], isEditing: Bool) {
         tableView = UITableView(frame: .zero)
-        
-        super.init(frame: frame)
+        self.rows = rows
+        self.isEditing = isEditing
+        super.init(frame: .zero)
         
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .white
@@ -67,10 +69,14 @@ class GroceryListEditView: UIView {
         addSubview(groceryDoneView)
         addSubview(placeholderLabel)
         
-        bringSubviewToFront(groceryDoneView)
+        if isEditing {
+            placeholderLabel.isHidden = true
+            groceryDoneView.isHidden = false
+        } else {
+            groceryDoneView.isHidden = true
+        }
         
-        // Initially hide the done view
-        groceryDoneView.isHidden = true
+        bringSubviewToFront(groceryDoneView)
         
         setupLayout()
     }
@@ -125,11 +131,9 @@ class GroceryListEditView: UIView {
         groceryItems = rows.map({ $0.inputField.text ?? "" })
         print(groceryItems)
         
-        // TODO: Add API call here
-        var groceryData = GroceryData(items: groceryItems)
+        let groceryData = GroceryData(items: groceryItems)
         groceryData.delegate = delegate
         groceryData.getRecommendations()
-        delegate?.didGetGroceryItems(data: groceryData)
     }
 }
 
@@ -142,10 +146,11 @@ extension GroceryListEditView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.groceryCellID, for: indexPath) as! GroceryListCell
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        cell.inputField.text = rows[indexPath.row].inputField.text
         cell.inputField.delegate = self
         //cell.inputField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         
-        if startCell == nil {
+        if startCell == nil && !isEditing {
             startCell = cell
             cell.inputField.placeholder = "insert grocery item"
             cell.buttonImageView.image = UIImage(named: "GroceryCellPlaceholder")
