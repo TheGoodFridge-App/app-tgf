@@ -37,13 +37,15 @@ class IssueCell: UICollectionViewCell {
     }
     
     func setText(to text: String) {
-        goalButton.setTitle(text, for: .normal)
+        goalButton.valueGoalView.label.font = UIFont(name: "Amiko-Bold", size: 12)
+        goalButton.setText(to: text)
     }
     
-    func setImages() {
+    func setImages(to icon: UIImage?) {
         let selectedImage = UIImage(named: "IssueButtonHighlighted")
         let unselectedImage = UIImage(named: "IssueButtonNormal")
         goalButton.setImages(selected: selectedImage, unselected: unselectedImage)
+        goalButton.setImage(to: icon)
     }
     
     private func setupLayout() {

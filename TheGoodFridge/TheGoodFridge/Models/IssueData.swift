@@ -20,6 +20,17 @@ struct IssueData {
         "Pollution Reduction"
     ]
     
+    static private let environmentIcons = [
+        "EnvironmentRegenerationIcon",
+        "ReducedEmissionsIcon",
+        "ConservationIcon",
+        "BiodiversityIcon",
+        "WasteManagementIcon",
+        "WaterManagementIcon",
+        "AirQualityIcon",
+        "PollutionReductionIcon"
+    ]
+    
     static private let animalIssues = [
         "Appropriate Breeding",
         "Appropriate Transportation",
@@ -31,7 +42,59 @@ struct IssueData {
         "Access to Outdoors"
     ]
     
+    static private let animalIcons = [
+        "AppropriateBreedingIcon",
+        "AppropriateTransportationIcon",
+        "HumaneSlaughterIcon",
+        "LivingConditionIcon",
+        "HandlingIcon",
+        "ProperNutritionIcon",
+        "HealthManagementIcon",
+        "OutdoorAccessIcon"
+    ]
+    
     static private let humanIssues = [
+        "Sustainable Wages",
+        "Gender Equity/Equality",
+        "No Child Labor",
+        "No Forced Labor",
+        "Small-scale Workers",
+        "Working Conditions",
+        "Cultural Identity",
+        "Community Empowerment"
+    ]
+    
+    static private let humanIcons = [
+        "SustainableWagesIcon",
+        "GenderEquityIcon",
+        "NoChildLaborIcon",
+        "NoForcedLaborIcon",
+        "SmallScaleWorkerIcon",
+        "SafeWorkingConditionsIcon",
+        "CulturalIdentityIcon",
+        "CommunityEmpowermentIcon",
+    ]
+    
+    static private let images = [
+        // environment
+        "Environment Regeneration",
+        "Reduced Emissions",
+        "Conservation",
+        "Biodiversity",
+        "Waste Management",
+        "Water Management",
+        "Air Quality",
+        "Pollution Reduction",
+        // animal
+        "Appropriate Breeding",
+        "Appropriate Transportation",
+        "Humane Slaughter",
+        "Living Conditions",
+        "Handling",
+        "Proper Nutrition",
+        "Health Management",
+        "Access to Outdoors",
+        // human
         "Sustainable Wages",
         "Gender Equity/Equality",
         "No Child Labor",
@@ -42,29 +105,35 @@ struct IssueData {
         "Environmental Stewardship"
     ]
     
-    static func getEnvironmentIssues() -> [String] {
-        return environmentIssues
+    static func getEnvironmentIssues() -> ([String], [String]) {
+        return (environmentIssues, environmentIcons)
     }
     
-    static func getAnimalIssues() -> [String] {
-        return animalIssues
+    static func getAnimalIssues() -> ([String], [String]) {
+        return (animalIssues, animalIcons)
     }
     
-    static func getHumanIssues() -> [String] {
-        return humanIssues
+    static func getHumanIssues() -> ([String], [String]) {
+        return (humanIssues, humanIcons)
     }
     
-    static func getSelected(type: ValueType, issues: [Int]) -> [String] {
+    static func getSelected(type: ValueType, issues: [Int]) -> ([String], [String]) {
         var selectedIssues: [String]
+        var selectedIcons: [String]
+        
         if type == .environment {
             selectedIssues = issues.map({ environmentIssues[$0] })
+            selectedIcons = issues.map({ environmentIcons[$0] })
         } else if type == .animal {
             selectedIssues = issues.map({ animalIssues[$0] })
+            selectedIcons = issues.map({ animalIcons[$0] })
         } else {
             selectedIssues = issues.map({ humanIssues[$0] })
+            selectedIcons = issues.map({ humanIcons[$0] })
         }
         
-        return selectedIssues
+        print(selectedIssues, selectedIcons)
+        return (selectedIssues, selectedIcons)
     }
     
     static func getAllIssues(values: [Int]) -> [Int: (String, ValueType)] {

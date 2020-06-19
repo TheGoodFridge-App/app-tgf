@@ -18,6 +18,10 @@ struct SetupData {
     var humanIssues = [String]()
     var animalIssues = [String]()
     
+    var environmentIcons = [String]()
+    var humanIcons = [String]()
+    var animalIcons = [String]()
+    
     mutating func setEnvironment() {
         environment = true
     }
@@ -44,11 +48,11 @@ struct SetupData {
     
     mutating func setIssues(type: ValueType, issues: [Int]) {
         if type == .environment {
-            environmentIssues = IssueData.getSelected(type: type, issues: issues)
+            (environmentIssues, environmentIcons) = IssueData.getSelected(type: type, issues: issues)
         } else if type == .animal {
-            animalIssues = IssueData.getSelected(type: type, issues: issues)
+            (animalIssues, animalIcons) = IssueData.getSelected(type: type, issues: issues)
         } else {
-            humanIssues = IssueData.getSelected(type: type, issues: issues)
+            (humanIssues, humanIcons) = IssueData.getSelected(type: type, issues: issues)
         }
         
         print(environmentIssues)

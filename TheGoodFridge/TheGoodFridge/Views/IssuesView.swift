@@ -10,13 +10,14 @@ import UIKit
 
 class IssuesView: UIView {
     // Constants
-    let buttonWidth: CGFloat = 140
-    let buttonHeight: CGFloat = 120
+    let buttonWidth: CGFloat = 150
+    let buttonHeight: CGFloat = 150
     let buttonSpacing: CGFloat = 25
     let scrollMargin: CGFloat = 5
 
     // Properties
-    let issues: [String]
+    var issues = [String]()
+    var icons = [String]()
     let type: ValueType
     let valueStr: String
     var selectedIssues = [Int]()
@@ -71,13 +72,10 @@ class IssuesView: UIView {
         
         if type == .environment {
             valueStr = "environment"
-            issues = IssueData.getEnvironmentIssues()
         } else if type == .animal {
             valueStr = "animal rights"
-            issues = IssueData.getAnimalIssues()
         } else {
             valueStr = "human rights"
-            issues = IssueData.getHumanIssues()
         }
         
         //issues = IssueData.getAllIssues(values: values)
@@ -182,7 +180,7 @@ extension IssuesView: UICollectionViewDataSource {
         //let (text, type) = issues[indexPath.item] ?? ("", .error)
         let text = issues[indexPath.item]
         cell.setText(to: text)
-        cell.setImages()
+        cell.setImages(to: UIImage(named: icons[indexPath.item]))
         cell.goalButton.tag = indexPath.item
         cell.goalButton.addTarget(self, action: #selector(tappedGoalButton), for: .touchUpInside)
         return cell

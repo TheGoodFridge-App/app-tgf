@@ -17,6 +17,13 @@ class LoginViewController: UIViewController {
     let emailTextField = InputFieldView("Email", isAutocorrected: false)
     let passwordTextField = PasswordFieldView("Password", isAutocorrected: false)
     
+    let loginBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "LoginBackground")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let signupLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Amiko-Regular", size: 20)
@@ -39,7 +46,7 @@ class LoginViewController: UIViewController {
     let googleSignInButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "GoogleSignInImage"), for: .normal)
-        button.setTitle("Sign in with Google", for: .normal)
+        button.setTitle("Log in with Google", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Amiko-Regular", size: 15)
         button.imageView?.contentMode = .scaleAspectFill
@@ -129,6 +136,8 @@ class LoginViewController: UIViewController {
         fullStackView.addArrangedSubview(brandLabel)
         
         view.addSubview(fullStackView)
+        view.addSubview(loginBackground)
+        view.sendSubviewToBack(loginBackground)
 //        view.addSubview(backButton)
         
         setupLayout()
@@ -143,6 +152,10 @@ class LoginViewController: UIViewController {
 //        let backButtonMargin: CGFloat = 20
         
         let constraints = [
+            loginBackground.topAnchor.constraint(equalTo: view.topAnchor),
+            loginBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loginBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            loginBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             fullStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fullStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fullStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
@@ -234,7 +247,9 @@ extension LoginViewController: GIDSignInDelegate {
                 return
             }
             // User is signed in
-            print("cool")
+            let tabBarVC = TabBarController()
+            tabBarVC.modalPresentationStyle = .fullScreen
+            self.present(tabBarVC, animated: true, completion: nil)
         }
         
     }

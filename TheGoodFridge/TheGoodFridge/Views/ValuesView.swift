@@ -17,7 +17,8 @@ enum ValueType {
 
 class ValuesView: UIView {
 
-    let values = ["Environment", "Animal\nRights", "Human\nRights"]
+    let values = ["Environment", "Animal Rights", "Human Rights"]
+    let imageNames = ["EnvironmentValueIcon", "AnimalValueIcon", "HumanValueIcon"]
     var valueButtons = [ValueGoalButton]()
     var selectedValues = Set<Int>()
     
@@ -71,7 +72,8 @@ class ValuesView: UIView {
         
         for (i, value) in values.enumerated() {
             let button = ValueGoalButton()
-            button.setTitle(value, for: .normal)
+            button.setText(to: value)
+            button.setImage(to: UIImage(named: imageNames[i]))
             button.addTarget(self, action: #selector(tappedValueButton), for: .touchUpInside)
             button.tag = i
             valueButtons.append(button)
@@ -108,8 +110,8 @@ class ValuesView: UIView {
     }
     
     private func setupLayout() {
-        let valueButtonHeight: CGFloat = 130
-        let valueButtonWidth: CGFloat = 130
+        let valueButtonHeight: CGFloat = 150
+        let valueButtonWidth: CGFloat = 150
         let nextButtonHeight: CGFloat = 50
         let nextButtonWidth: CGFloat = 130
         let buttonSpacing: CGFloat = 140

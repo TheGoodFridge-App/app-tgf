@@ -11,6 +11,7 @@ import Alamofire
 import Firebase
 
 struct LoginManager {
+    
     let urlString = "localhost:3000"
     static var googleCredential: AuthCredential?
     

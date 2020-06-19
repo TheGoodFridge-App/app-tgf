@@ -11,6 +11,13 @@ import GoogleSignIn
 
 class WelcomeViewController: UIViewController {
     
+    let welcomeBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "WelcomeBackground")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let signupButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "LoginButtonEnabled"), for: .normal)
@@ -59,6 +66,8 @@ class WelcomeViewController: UIViewController {
         view.addSubview(signupButton)
         view.addSubview(loginButton)
         view.addSubview(brandLabel)
+        view.addSubview(welcomeBackground)
+        view.sendSubviewToBack(welcomeBackground)
         
         setupLayout()
         
@@ -69,6 +78,10 @@ class WelcomeViewController: UIViewController {
         let spacing: CGFloat = 50
         
         let constraints = [
+            welcomeBackground.topAnchor.constraint(equalTo: view.topAnchor),
+            welcomeBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            welcomeBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            welcomeBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             signupButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             signupButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),

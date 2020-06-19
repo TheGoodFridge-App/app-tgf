@@ -141,15 +141,21 @@ extension SetupViewController: SlideDelegate {
             let valuesArr = Array(values).sorted()
             for value in valuesArr {
                 let type: ValueType
+                var issues = [String]()
+                var icons = [String]()
+                
                 switch value {
                 case 0:
                     type = .environment
+                    (issues, icons) = IssueData.getEnvironmentIssues()
                     setupData.setEnvironment()
                 case 1:
                     type = .animal
+                    (issues, icons) = IssueData.getAnimalIssues()
                     setupData.setAnimal()
                 case 2:
                     type = .human
+                    (issues, icons) = IssueData.getHumanIssues()
                     setupData.setHuman()
                 default:
                     type = .error
@@ -158,6 +164,8 @@ extension SetupViewController: SlideDelegate {
                 }
                 
                 let issuesView = IssuesView(type: type)
+                issuesView.issues = issues
+                issuesView.icons = icons
                 issuesView.delegate = self
                 updateContent(with: issuesView)
             }
