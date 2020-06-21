@@ -49,7 +49,6 @@ class AddButton: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        print(frame.size.height)
         layer.cornerRadius = frame.size.height / 2
         layer.shadowColor = UIColor(red: 0.878, green: 0.878, blue: 0.878, alpha: 1).cgColor
             //UIColor.black.cgColor

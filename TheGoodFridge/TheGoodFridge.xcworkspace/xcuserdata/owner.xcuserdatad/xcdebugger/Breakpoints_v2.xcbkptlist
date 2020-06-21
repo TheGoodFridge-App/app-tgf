@@ -20,5 +20,117 @@
             landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "47F81D33-103E-4E0A-8352-CBF7CCE2B1CF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TheGoodFridge/Models/GroceryData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getRecommendations()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7448DA18-AFE5-42C2-AD33-AD4BDDEAD219"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TheGoodFridge/Models/GroceryData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "getRecommendations()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8BE00F57-425F-4132-BBF1-CF919A672B96"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TheGoodFridge/Models/GroceryData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "getGroceryList()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F96AA1D-2F06-4184-AA3D-294D08440ED1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TheGoodFridge/Controllers/GroceryViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "didGetGroceryItems(rec:other:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D5912474-C886-49EB-9B09-1CB24CBDB554"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TheGoodFridge/Controllers/GroceryViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "didGetGroceryItems(rec:other:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D5912474-C886-49EB-9B09-1CB24CBDB554 - 9005e33ab1b9707"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TheGoodFridge.GroceryViewController.didGetGroceryItems(rec: Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Swift.String&gt;&gt;, other: Swift.Array&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "TheGoodFridge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/owner/Desktop/TheGoodFridge/app-tgf/TheGoodFridge/TheGoodFridge/Controllers/GroceryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "184">
+               </Location>
+               <Location
+                  uuid = "D5912474-C886-49EB-9B09-1CB24CBDB554 - f1891dbf3f2655fd"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in TheGoodFridge.GroceryViewController.didGetGroceryItems(rec: Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Swift.String&gt;&gt;, other: Swift.Array&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "TheGoodFridge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/owner/Desktop/TheGoodFridge/app-tgf/TheGoodFridge/TheGoodFridge/Controllers/GroceryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "173">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

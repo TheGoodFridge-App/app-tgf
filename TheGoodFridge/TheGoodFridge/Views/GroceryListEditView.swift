@@ -129,7 +129,6 @@ class GroceryListEditView: UIView {
         groceryDoneView.errorLabel.isHidden = true
         
         groceryItems = rows.map({ $0.inputField.text ?? "" })
-        print(groceryItems)
         
         let groceryData = GroceryData(items: groceryItems)
         groceryData.delegate = delegate
@@ -175,10 +174,8 @@ extension GroceryListEditView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if rows.count > 1 && editingStyle == UITableViewCell.EditingStyle.delete {
-            print(rows.count)
             rows[indexPath.row].inputField.text = ""
             rows.remove(at: indexPath.row)
-            print(rows.count)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
     }
@@ -200,7 +197,6 @@ extension GroceryListEditView: UITableViewDelegate {
 extension GroceryListEditView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(rows.map({ $0.inputField }))
         tableView.beginUpdates()
         let index = rows.firstIndex(where: { $0.inputField == textField }) ?? 0
         rows.insert(GroceryListCell(), at: index + 1)

@@ -15,12 +15,12 @@ class GroceryListFinalView: UIView {
     let addButton = AddButton()
     
     let tableView: UITableView
-    let recommended: [String]
+    let recommended: [String: [String]]
     let other: [String]
     
     var delegate: GroceryDelegate?
     
-    required init(rec: [String], other: [String]) {
+    required init(rec: [String: [String]], other: [String]) {
         self.recommended = rec
         self.other = other
         tableView = UITableView(frame: .zero)
@@ -99,8 +99,9 @@ extension GroceryListFinalView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.groceryCellFinalID, for: indexPath) as! GroceryListFinalCell
         //cell.layoutSubviews()
+        let rec = Array(recommended.keys)
         if indexPath.section == 0 {
-            cell.setText(to: recommended[indexPath.row])
+            cell.setText(to: rec[indexPath.row])
             //cell.setRecommended()
             cell.isRecommended = true
         } else {
@@ -123,7 +124,11 @@ extension GroceryListFinalView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
-        label.text = section == 0 ? "Recommendations" : "Your Groceries"
+        if section == 0 {
+            label.text = "Recommendations"
+        } else if other.count != 0 {
+            label.text = "Your Groceries"
+        }
         label.font = UIFont(name: "Amiko-SemiBold", size: 18)
         return label
     }

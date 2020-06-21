@@ -18,10 +18,6 @@ struct SetupData {
     var humanIssues = [String]()
     var animalIssues = [String]()
     
-    var environmentIcons = [String]()
-    var humanIcons = [String]()
-    var animalIcons = [String]()
-    
     mutating func setEnvironment() {
         environment = true
     }
@@ -48,15 +44,13 @@ struct SetupData {
     
     mutating func setIssues(type: ValueType, issues: [Int]) {
         if type == .environment {
-            (environmentIssues, environmentIcons) = IssueData.getSelected(type: type, issues: issues)
+            (environmentIssues, _) = IssueData.getSelected(type: type, issues: issues)
         } else if type == .animal {
-            (animalIssues, animalIcons) = IssueData.getSelected(type: type, issues: issues)
+            (animalIssues, _) = IssueData.getSelected(type: type, issues: issues)
         } else {
-            (humanIssues, humanIcons) = IssueData.getSelected(type: type, issues: issues)
+            (humanIssues, _) = IssueData.getSelected(type: type, issues: issues)
         }
         
-        print(environmentIssues)
-        print(animalIssues)
     }
     
     func postSetupData() {
@@ -78,7 +72,6 @@ struct SetupData {
         ]
         
         let urlString = "\(K.serverURL)/api/values"
-        print(urlString)
         
         AF.request(urlString, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
             .response { response in

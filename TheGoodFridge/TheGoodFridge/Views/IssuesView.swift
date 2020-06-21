@@ -39,9 +39,14 @@ class IssuesView: UIView {
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         let bigText = NSMutableAttributedString(
-            string: "You picked \(valueStr)!\n\nWhat are some specific issues important to you?",
+            string: "You picked \(valueStr).\nWhat are some issues that you care about?",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-SemiBold", size: 20)!]
         )
+        let smallText = NSAttributedString(
+            string: "\n\nPlease feel free to select multiple options.",
+            attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!]
+        )
+        bigText.append(smallText)
         textView.attributedText = bigText
         textView.textAlignment = .center
         return textView
@@ -107,7 +112,7 @@ class IssuesView: UIView {
     
     private func setupLayout() {
         let textMargin: CGFloat = 70
-        let spacing: CGFloat = 45
+        let spacing: CGFloat = 15
         let navButtonWidth: CGFloat = 130
         let navButtonHeight: CGFloat = 50
         let navButtonSpacing: CGFloat = 140
@@ -146,7 +151,6 @@ class IssuesView: UIView {
         } else {
             selectedIssues.append(sender.tag)
         }
-        print(selectedIssues)
         sender.toggle()
     }
     

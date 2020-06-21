@@ -46,14 +46,14 @@ class ValuesView: UIView {
     let introTextView: UITextView = {
         let textView = UITextView()
         var bigText = NSMutableAttributedString(
-            string: "What values are important to you?",
+            string: "What are your most important values?",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-SemiBold", size: 20)!]
         )
-//        let smallText = NSAttributedString(
-//            string: "text text text text text text text",
-//            attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!]
-//        )
-//        bigText.append(smallText)
+        let smallText = NSAttributedString(
+            string: "\n\nPlease choose all that apply.",
+            attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!]
+        )
+        bigText.append(smallText)
         textView.attributedText = bigText
         textView.isEditable = false
         textView.isScrollEnabled = false
@@ -115,7 +115,7 @@ class ValuesView: UIView {
         let nextButtonHeight: CGFloat = 50
         let nextButtonWidth: CGFloat = 130
         let buttonSpacing: CGFloat = 140
-        let textSpacing: CGFloat = 50
+        let textSpacing: CGFloat = 15
         let textMargin: CGFloat = 90
         
         for button in valueButtons {

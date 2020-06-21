@@ -23,6 +23,7 @@ class SetupViewController: UIViewController {
     var setupData = SetupData()
     var pageCount: Int = 0
     var selectedValues = Set<Int>()
+    var selectedIssues = [ValueType: Set<Int>]()
     
     let setupBackground: UIImageView = {
         let imageView = UIImageView()
@@ -120,7 +121,6 @@ class SetupViewController: UIViewController {
 extension SetupViewController: SlideDelegate {
     
     func setValues(values: Set<Int>) {
-        print(selectedValues, values)
         if selectedValues != values {
             selectedValues = values
             let subviews = scrollView.subviews
@@ -181,6 +181,9 @@ extension SetupViewController: SlideDelegate {
         let sortedIssues = Array(issues).sorted()
         
         setupData.setIssues(type: type, issues: sortedIssues)
+        
+        // Create challenge views
+        
     }
     
     func tappedNextButton() {
@@ -200,7 +203,6 @@ extension SetupViewController: SlideDelegate {
     }
     
     func tappedStartButton() {
-        print(setupData)
         setupData.postSetupData()
     }
     

@@ -132,7 +132,6 @@ struct IssueData {
             selectedIcons = issues.map({ humanIcons[$0] })
         }
         
-        print(selectedIssues, selectedIcons)
         return (selectedIssues, selectedIcons)
     }
     

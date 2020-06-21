@@ -10,7 +10,8 @@ import UIKit
 
 protocol GroceryDelegate {
     func startedEditing()
-    func didGetGroceryItems(rec: [String], other: [String])
+    func checkedPrevItems(items: [String])
+    func didGetGroceryItems(rec: [String: [String]], other: [String])
     func returnToEdit()
 }
 
@@ -57,7 +58,8 @@ class GroceryViewController: UIViewController {
     }()
     
     var groceryListEditView = GroceryListEditView(rows: [GroceryListCell()], isEditing: false)
-    var groceryListFinalView = GroceryListFinalView(rec: [String](), other: [String]())
+    var groceryListFinalView = GroceryListFinalView(rec: [String: [String]](), other: [String]())
+    let groceryData = GroceryData(items: [String]())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +67,7 @@ class GroceryViewController: UIViewController {
         User.shared.delegate = self
         groceryListEditView.delegate = self
         groceryListFinalView.delegate = self
+        groceryData.delegate = self
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -76,6 +79,9 @@ class GroceryViewController: UIViewController {
         if let firstName = User.shared.getFirstName() {
             nameLabel.text = "\(firstName)'s Grocery List"
         }
+        
+        // Check if grocery data already exists
+        groceryData.getGroceryList()
         
         view.addSubview(dateLabel)
         view.addSubview(nameLabel)
@@ -140,31 +146,37 @@ extension GroceryViewController: GroceryDelegate {
         view.bringSubviewToFront(groceryListEditView)
     }
     
-    func didGetGroceryItems(rec: [String], other: [String]) {
+    func checkedPrevItems(items: [String]) {
+        groceryData.getRecommendations()
+    }
+    
+    func didGetGroceryItems(rec: [String: [String]], other: [String]) {
         // Load GroceryListFinalView
-        print(rec, other)
-        groceryListEditView.removeFromSuperview()
-        
-        groceryListFinalView = GroceryListFinalView(rec: rec, other: other)
-        groceryListFinalView.delegate = self
-        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListFinalView) }, completion: nil)
-        
-        let safeArea = view.safeAreaLayoutGuide
-        
-        let constraints = [
-            groceryListFinalView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: viewMargin),
-            groceryListFinalView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            groceryListFinalView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            groceryListFinalView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+        DispatchQueue.main.async {
+            print(rec, other)
+            self.groceryListEditView.removeFromSuperview()
+            
+            self.groceryListFinalView = GroceryListFinalView(rec: rec, other: other)
+            self.groceryListFinalView.delegate = self
+            UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListFinalView) }, completion: nil)
+            
+            let safeArea = self.view.safeAreaLayoutGuide
+            
+            let constraints = [
+                self.groceryListFinalView.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: self.viewMargin),
+                self.groceryListFinalView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.groceryListFinalView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                self.groceryListFinalView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            ]
+            
+            NSLayoutConstraint.activate(constraints)
+        }
     }
     
     func returnToEdit() {
         groceryListFinalView.removeFromSuperview()
         
-        let rowStrings = groceryListFinalView.recommended + groceryListFinalView.other
+        let rowStrings = Array(groceryListFinalView.recommended.keys) + groceryListFinalView.other
         let rows: [GroceryListCell] = rowStrings.map { str in
             let groceryCell = GroceryListCell()
             groceryCell.inputField.text = str
@@ -175,8 +187,6 @@ extension GroceryViewController: GroceryDelegate {
         groceryListEditView.delegate = self
         
         UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListEditView) }, completion: nil)
-        
-        let safeArea = view.safeAreaLayoutGuide
         
         let constraints = [
             groceryListEditView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: viewMargin),

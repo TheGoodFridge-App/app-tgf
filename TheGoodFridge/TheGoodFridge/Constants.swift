@@ -12,5 +12,6 @@ struct K {
     static let issueCellID = "issueCellID"
     static let groceryCellID = "groceryCellID"
     static let groceryCellFinalID = "groceryCellFinalID"
-    static let serverURL = "http://127.0.0.1:5000"
+    //static let serverURL = "http://127.0.0.1:5000"
+    static let serverURL = "https://the-good-fridge.herokuapp.com"
 }
