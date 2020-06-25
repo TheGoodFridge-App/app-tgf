@@ -34,6 +34,7 @@ class User {
     func getFirstName() -> String? {
         if firstName == nil {
             fetchData()
+            return nil
         }
         
         return firstName
@@ -42,6 +43,9 @@ class User {
     func getLastName() -> String? {
         if lastName == nil {
             fetchData()
+            return nil
+        } else {
+            delegate?.didGetUserData()
         }
         
         return lastName

@@ -33,7 +33,7 @@ struct IssueData {
     
     static private let animalIssues = [
         "Appropriate Breeding",
-        "Appropriate Transportation",
+        "Transportation",
         "Humane Slaughter",
         "Living Conditions",
         "Handling",

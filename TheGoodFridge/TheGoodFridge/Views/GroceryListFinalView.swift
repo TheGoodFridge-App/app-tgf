@@ -34,6 +34,7 @@ class GroceryListFinalView: UIView {
         tableView.delegate = self
         tableView.register(GroceryListFinalCell.self, forCellReuseIdentifier: K.groceryCellFinalID)
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         addButton.button.addTarget(self, action: #selector(tappedAddButton), for: .touchUpInside)
@@ -98,12 +99,14 @@ extension GroceryListFinalView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.groceryCellFinalID, for: indexPath) as! GroceryListFinalCell
-        //cell.layoutSubviews()
+        cell.delegate = delegate
         let rec = Array(recommended.keys)
         if indexPath.section == 0 {
             cell.setText(to: rec[indexPath.row])
             //cell.setRecommended()
             cell.isRecommended = true
+            cell.item = rec[indexPath.row]
+            cell.recommended = recommended[rec[indexPath.row]] ?? [String]()
         } else {
             cell.setText(to: other[indexPath.row])
         }

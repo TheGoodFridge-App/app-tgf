@@ -152,6 +152,7 @@ class IssuesView: UIView {
             selectedIssues.append(sender.tag)
         }
         sender.toggle()
+        print(selectedIssues)
     }
     
     @objc func tappedNextButton() {
@@ -185,6 +186,9 @@ extension IssuesView: UICollectionViewDataSource {
         let text = issues[indexPath.item]
         cell.setText(to: text)
         cell.setImages(to: UIImage(named: icons[indexPath.item]))
+        if selectedIssues.contains(indexPath.item) {
+            cell.goalButton.setSelected()
+        }
         cell.goalButton.tag = indexPath.item
         cell.goalButton.addTarget(self, action: #selector(tappedGoalButton), for: .touchUpInside)
         return cell

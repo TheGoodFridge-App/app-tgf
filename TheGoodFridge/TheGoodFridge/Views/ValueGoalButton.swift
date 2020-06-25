@@ -46,6 +46,10 @@ class ValueGoalButton: UIButton {
         setBackgroundImage(backgroundImage, for: .normal)
     }
     
+    func setSelected() {
+        setBackgroundImage(selectedImage, for: .normal)
+    }
+    
     func setText(to value: String) {
         let str = value.count > 20 ? value.replacingOccurrences(of: " ", with: "\n") : value
         valueGoalView.label.text = str

@@ -18,6 +18,8 @@ struct SetupData {
     var humanIssues = [String]()
     var animalIssues = [String]()
     
+    var delegate: SetupDelegate?
+    
     mutating func setEnvironment() {
         environment = true
     }
@@ -76,6 +78,7 @@ struct SetupData {
         AF.request(urlString, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
             .response { response in
                 debugPrint(response)
+                self.delegate?.postedSetupData()
         }
     }
     

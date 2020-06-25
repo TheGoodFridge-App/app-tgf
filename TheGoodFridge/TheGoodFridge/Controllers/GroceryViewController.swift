@@ -13,12 +13,12 @@ protocol GroceryDelegate {
     func checkedPrevItems(items: [String])
     func didGetGroceryItems(rec: [String: [String]], other: [String])
     func returnToEdit()
+    func showRecommendations(item: String, products: [String])
 }
 
 class GroceryViewController: UIViewController {
 
     let viewMargin: CGFloat = 30
-    
     let groceryBackground: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "GroceryBackground")
@@ -48,9 +48,6 @@ class GroceryViewController: UIViewController {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        if let firstName = User.shared.getFirstName() {
-            label.text = "\(firstName)'s Grocery List"
-        }
         label.font = UIFont(name: "Amiko-SemiBold", size: 15)
         label.textColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -69,8 +66,10 @@ class GroceryViewController: UIViewController {
         groceryListFinalView.delegate = self
         groceryData.delegate = self
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        if let firstName = User.shared.getFirstName() {
+            nameLabel.text = "\(firstName)'s Grocery List"
+            setupViews()
+        }
         
         view.backgroundColor = .white 
     }
@@ -152,25 +151,24 @@ extension GroceryViewController: GroceryDelegate {
     
     func didGetGroceryItems(rec: [String: [String]], other: [String]) {
         // Load GroceryListFinalView
-        DispatchQueue.main.async {
-            print(rec, other)
-            self.groceryListEditView.removeFromSuperview()
-            
-            self.groceryListFinalView = GroceryListFinalView(rec: rec, other: other)
-            self.groceryListFinalView.delegate = self
-            UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListFinalView) }, completion: nil)
-            
-            let safeArea = self.view.safeAreaLayoutGuide
-            
-            let constraints = [
-                self.groceryListFinalView.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: self.viewMargin),
-                self.groceryListFinalView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.groceryListFinalView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-                self.groceryListFinalView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
-            ]
-            
-            NSLayoutConstraint.activate(constraints)
-        }
+        print(rec, other)
+        self.groceryListEditView.removeFromSuperview()
+        
+        self.groceryListFinalView = GroceryListFinalView(rec: rec, other: other)
+        self.groceryListFinalView.delegate = self
+        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListFinalView) }, completion: nil)
+        self.view.bringSubviewToFront(self.groceryListFinalView)
+        
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        let constraints = [
+            self.groceryListFinalView.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: self.viewMargin),
+            self.groceryListFinalView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.groceryListFinalView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.groceryListFinalView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     func returnToEdit() {
@@ -196,6 +194,18 @@ extension GroceryViewController: GroceryDelegate {
         ]
         
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func showRecommendations(item: String, products: [String]) {
+        let recommendVC = RecommendViewController()
+        recommendVC.item = item
+        recommendVC.products = products
+        recommendVC.modalPresentationStyle = .fullScreen
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            recommendVC.backingImage = self.tabBarController?.view.asImage()
+            self.present(recommendVC, animated: false, completion: nil)
+        })
     }
     
 }

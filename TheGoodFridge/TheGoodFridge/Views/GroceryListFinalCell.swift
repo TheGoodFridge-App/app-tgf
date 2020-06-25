@@ -14,6 +14,9 @@ class GroceryListFinalCell: UITableViewCell {
     let interRowSpacing: CGFloat = 12
     var cornerRadius: CGFloat = 15
     var isRecommended = false
+    var recommended = [String]()
+    var item = ""
+    var delegate: GroceryDelegate?
     
     lazy var dotImageView: UIImageView = {
         let imageView = UIImageView()
@@ -25,6 +28,7 @@ class GroceryListFinalCell: UITableViewCell {
     
     let containerView: UIView = {
         let cv = UIView()
+        cv.isUserInteractionEnabled = true
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
@@ -43,6 +47,8 @@ class GroceryListFinalCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        itemButton.isEnabled = false
+        itemButton.addTarget(self, action: #selector(tappedItemButton), for: .touchDown)
         containerView.addSubview(itemButton)
         addSubview(dotImageView)
         addSubview(containerView)
@@ -65,12 +71,18 @@ class GroceryListFinalCell: UITableViewCell {
     }
     
     func setRecommended() {
+        itemButton.isEnabled = true
+        
         // Add drop shadow to button
         containerView.layer.shadowColor = UIColor(red: 0.929, green: 0.929, blue: 0.929, alpha: 1).cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = CGSize(width: 2, height: 3)
         containerView.layer.shadowRadius = 3
         containerView.layer.shadowPath = UIBezierPath(roundedRect: itemButton.bounds, cornerRadius: cornerRadius).cgPath
+    }
+    
+    @objc func tappedItemButton() {
+        delegate?.showRecommendations(item: item, products: recommended)
     }
     
     private func setupLayout() {

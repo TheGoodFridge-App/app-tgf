@@ -9,4 +9,5 @@ target 'TheGoodFridge' do
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
   pod 'Alamofire','~> 5.1'
+  pod 'IQKeyboardManagerSwift'
 end

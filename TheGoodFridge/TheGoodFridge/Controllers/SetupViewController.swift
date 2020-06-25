@@ -16,6 +16,9 @@ protocol SlideDelegate {
     func tappedStartButton()
 }
 
+protocol SetupDelegate {
+    func postedSetupData()
+}
 
 class SetupViewController: UIViewController {
 
@@ -56,6 +59,7 @@ class SetupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupData.delegate = self
         view.backgroundColor = .white
         
         //slides.append(valuesView)
@@ -204,6 +208,24 @@ extension SetupViewController: SlideDelegate {
     
     func tappedStartButton() {
         setupData.postSetupData()
+    }
+    
+}
+
+extension SetupViewController: SetupDelegate {
+    
+    func postedSetupData() {
+        
+        let navigationVC = UINavigationController(rootViewController: TabBarController())
+        navigationVC.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationVC.navigationBar.shadowImage = UIImage()
+        navigationVC.navigationBar.isTranslucent = true
+        navigationVC.view.backgroundColor = UIColor.clear
+        navigationVC.modalPresentationStyle = .fullScreen
+        
+        DispatchQueue.main.async {
+            self.present(navigationVC, animated: true, completion: nil)
+        }
     }
     
 }
