@@ -18,13 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-//            startVC = WelcomeViewController()
+            startVC = WelcomeViewController()
             
-            if Auth.auth().currentUser != nil {
-                startVC = TabBarController()
-            } else {
-                startVC = WelcomeViewController()
-            }
+//            if Auth.auth().currentUser != nil {
+//                startVC = TabBarController()
+//            } else {
+//                startVC = WelcomeViewController()
+//            }
             let navigationVC = UINavigationController(rootViewController: startVC)
             navigationVC.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             navigationVC.navigationBar.shadowImage = UIImage()

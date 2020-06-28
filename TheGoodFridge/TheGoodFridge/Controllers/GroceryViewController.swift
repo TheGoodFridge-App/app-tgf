@@ -13,7 +13,7 @@ protocol GroceryDelegate {
     func checkedPrevItems(items: [String])
     func didGetGroceryItems(rec: [String: [String]], other: [String])
     func returnToEdit()
-    func showRecommendations(item: String, products: [String])
+    func showRecommendations(item: String, products: [String], cell: ProductDelegate)
 }
 
 class GroceryViewController: UIViewController {
@@ -196,10 +196,11 @@ extension GroceryViewController: GroceryDelegate {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func showRecommendations(item: String, products: [String]) {
+    func showRecommendations(item: String, products: [String], cell: ProductDelegate) {
         let recommendVC = RecommendViewController()
         recommendVC.item = item
         recommendVC.products = products
+        recommendVC.delegate = cell
         recommendVC.modalPresentationStyle = .fullScreen
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {

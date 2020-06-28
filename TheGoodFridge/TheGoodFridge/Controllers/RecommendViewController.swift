@@ -43,6 +43,7 @@ class RecommendViewController: UIViewController {
     var backingImage: UIImage?
     var item = ""
     var products = [String]()
+    var delegate: ProductDelegate?
     
     //lazy var cardViewTop = cardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30)
     lazy var cardViewHeight = cardView.heightAnchor.constraint(equalToConstant: 0.0)
@@ -64,6 +65,7 @@ class RecommendViewController: UIViewController {
         viewPan.delaysTouchesEnded = false
         self.view.addGestureRecognizer(viewPan)
         
+        cardView.delegate = delegate
         view.addSubview(backingImageView)
         view.addSubview(dimmerView)
         view.addSubview(cardView)

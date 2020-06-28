@@ -12,6 +12,7 @@
 		EB14DD9E24450A2400CA2E0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */; };
 		EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D77092462978F003E1A84 /* ValuesView.swift */; };
 		EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */; };
+		EB297BFD24A6D2A600BA0471 /* RecommendProductButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB297BFC24A6D2A600BA0471 /* RecommendProductButton.swift */; };
 		EB2EB193246A727C00C7F523 /* IssueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2EB192246A727C00C7F523 /* IssueData.swift */; };
 		EB355574245E4DBD00FF23CB /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB355573245E4DBD00FF23CB /* credentials.plist */; };
 		EB514D9B247AF3EF00450E60 /* GroceryListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */; };
@@ -76,6 +77,7 @@
 		EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB1D77092462978F003E1A84 /* ValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuesView.swift; sourceTree = "<group>"; };
 		EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGoalButton.swift; sourceTree = "<group>"; };
+		EB297BFC24A6D2A600BA0471 /* RecommendProductButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendProductButton.swift; sourceTree = "<group>"; };
 		EB2EB192246A727C00C7F523 /* IssueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueData.swift; sourceTree = "<group>"; };
 		EB355573245E4DBD00FF23CB /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 		EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListEditView.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				EBF7A741248469A50083C634 /* AddButton.swift */,
 				EB8C9BBB245F4DB800E51E7C /* DividerView.swift */,
 				EBBEA0DB245D526A0038F403 /* InputFieldView.swift */,
+				EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */,
 				EB514D9C247AFCE100450E60 /* GroceryListCell.swift */,
 				EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */,
 				EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */,
@@ -232,12 +235,12 @@
 				EBCE9A1024688A4B00B0266E /* IssuesView.swift */,
 				EBC1313F246A6CCD0047CD2C /* NextBackButton.swift */,
 				EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */,
+				EB96750C24A452340058FAE9 /* RecommendCardView.swift */,
+				EB297BFC24A6D2A600BA0471 /* RecommendProductButton.swift */,
 				EB5B9AC92460E75200494754 /* SignupErrorView.swift */,
 				EB5244BF2471D50500C45C6B /* StartView.swift */,
 				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
 				EB1D77092462978F003E1A84 /* ValuesView.swift */,
-				EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */,
-				EB96750C24A452340058FAE9 /* RecommendCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				EB8292082478BA4C008D96FA /* UserData.swift in Sources */,
 				EBC13144246A6E900047CD2C /* Constants.swift in Sources */,
 				EBF7A742248469A50083C634 /* AddButton.swift in Sources */,
+				EB297BFD24A6D2A600BA0471 /* RecommendProductButton.swift in Sources */,
 				EB5B9AC82460CFA900494754 /* User.swift in Sources */,
 				EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */,
 				EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */,

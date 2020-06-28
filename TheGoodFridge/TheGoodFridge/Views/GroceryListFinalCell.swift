@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ProductDelegate {
+    func selectedRecommendation(name product: String)
+}
+
 class GroceryListFinalCell: UITableViewCell {
 
     let selectedButtonImage = UIImage(named: "GroceryCellSelected")
@@ -82,7 +86,7 @@ class GroceryListFinalCell: UITableViewCell {
     }
     
     @objc func tappedItemButton() {
-        delegate?.showRecommendations(item: item, products: recommended)
+        delegate?.showRecommendations(item: item, products: recommended, cell: self)
     }
     
     private func setupLayout() {
@@ -119,4 +123,12 @@ class GroceryListFinalCell: UITableViewCell {
         }
     }
 
+}
+
+extension GroceryListFinalCell: ProductDelegate {
+    
+    func selectedRecommendation(name product: String) {
+        print("selected \(product)")
+    }
+    
 }

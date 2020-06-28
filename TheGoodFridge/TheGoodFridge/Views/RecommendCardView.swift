@@ -40,6 +40,9 @@ class RecommendCardView: UIView {
     
     var item = ""
     var products = [String]()
+    var selectedProduct: String?
+    var productButtons = [RecommendProductButton]()
+    var delegate: ProductDelegate?
     
     // Constants
     let cardViewMargin: CGFloat = 40.0
@@ -52,9 +55,17 @@ class RecommendCardView: UIView {
         backgroundColor = UIColor(red: 0.941, green: 0.969, blue: 0.929, alpha: 1)
         self.item = item
         self.products = products
-        titleTextView.text = "Here are the recommended products for \(item.lowercased())ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+        
+        titleTextView.text = "Here are the recommended products for \(item.lowercased())"
         
         stackView.addArrangedSubview(titleTextView)
+        for product in self.products {
+            let productButton = RecommendProductButton()
+            productButton.setText(to: product)
+            productButton.addTarget(self, action: #selector(tappedProductButton), for: .touchUpInside)
+            stackView.addArrangedSubview(productButton)
+            productButtons.append(productButton)
+        }
         
         scrollView.addSubview(stackView)
         addSubview(scrollView)
@@ -85,6 +96,22 @@ class RecommendCardView: UIView {
         ]
         
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    @objc func tappedProductButton(_ sender: RecommendProductButton) {
+        if selectedProduct == nil {
+            sender.toggle()
+            selectedProduct = sender.product
+            delegate?.selectedRecommendation(name: selectedProduct ?? "")
+        } else if selectedProduct != sender.product {
+            let oldProduct = productButtons.first(where: { $0.product == selectedProduct })
+            if let old = oldProduct {
+                old.toggle()
+                selectedProduct = sender.product
+            }
+            sender.toggle()
+            delegate?.selectedRecommendation(name: selectedProduct ?? "")
+        }
     }
     
 }
