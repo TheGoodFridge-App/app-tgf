@@ -1,3 +1,6 @@
+Setup:
+- Run `pod install` to install third party libraries
+
 # The Good Fridge App
 
 ## Links
