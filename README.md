@@ -1,6 +1,6 @@
 Setup:
 From the root directory:
-- cd `TheGoodFridge`. You should now be in the directory that contains `Podfile`.
+- `cd TheGoodFridge`. You should now be in the directory that contains `Podfile`.
 - Run `pod install` to install third party libraries
 
 # The Good Fridge App
