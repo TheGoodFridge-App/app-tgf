@@ -8,16 +8,25 @@
 
 import UIKit
 
+var ppage = ProfilePageView()
+var challenges = UIButton()
+var progress = UIButton()
+var stats = UIButton()
+
 class ProfileViewController: UIViewController {
     
-    var ppage = ProfilePageView()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         ppage.translatesAutoresizingMaskIntoConstraints = false
-
         view.backgroundColor = .white
+        
+        declareAllButtons()
+        ppage.tabStack.addArrangedSubview(challenges)
+        ppage.tabStack.addArrangedSubview(progress)
+        ppage.tabStack.addArrangedSubview(stats)
+        
         view.addSubview(ppage)
+        
         setupLayout()
         
         
@@ -34,6 +43,24 @@ class ProfileViewController: UIViewController {
             ppage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func createButtons(_ name: String) -> UIButton {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont(name: "Amiko-Regular", size: 15)
+        button.setTitle(name, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.contentHorizontalAlignment = .center
+        return button
+    }
+    
+    func declareAllButtons() {
+        challenges = createButtons("Challenges")
+        progress = createButtons("Progress")
+        stats = createButtons("Stats")
+        challenges.contentEdgeInsets.left = 5
+        progress.contentEdgeInsets.left = 10
+        stats.contentEdgeInsets.left = -15
     }
 
 }

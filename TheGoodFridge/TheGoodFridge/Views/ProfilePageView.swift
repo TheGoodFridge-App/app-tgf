@@ -10,69 +10,100 @@ import UIKit
 
 class ProfilePageView: UIView {
     
-    let profileStackView: UIStackView = {
-        let psv = UIStackView()
-        psv.translatesAutoresizingMaskIntoConstraints = false
-        psv.axis = .vertical
-        psv.alignment = .center
-        psv.distribution = .fill
-        return psv
-    } ()
+    class stack: UIStackView {
+        var stck = UIStackView()
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            self.translatesAutoresizingMaskIntoConstraints = false
+            self.alignment = .center
+        }
+        
+        required init(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        func changeAxisandDistribution(axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution) {
+            self.axis = axis
+            self.distribution = distribution
+        }
+    }
     
-    //Upper Stack
-    let upperStack: UIStackView = {
-        let uStack = UIStackView()
-        uStack.translatesAutoresizingMaskIntoConstraints = false
-        uStack.axis = .vertical
-        uStack.alignment = .center
-        uStack.distribution = .fill
-        return uStack
-    } ()
+    let profileStackView = stack()
     
+    let upperStack = stack()
+    let nameStack = stack()
+    let tabStack = stack()
     
-    //back button, name, settings
-    let nameStack: UIStackView = {
-        let nStack = UIStackView()
-        nStack.translatesAutoresizingMaskIntoConstraints = false
-        nStack.axis = .horizontal
-        nStack.alignment = .center
-        nStack.distribution = .fill
-        return nStack
-    } ()
+    let lowerStack = stack()
     
     
+//    let profileStackView: UIStackView = {
+//        let psv = UIStackView()
+//        psv.translatesAutoresizingMaskIntoConstraints = false
+//        psv.axis = .vertical
+//        psv.alignment = .center
+//        psv.distribution = .fill
+//        return psv
+//    } ()
+//
+//    //Upper Stack
+//    let upperStack: UIStackView = {
+//        let uStack = UIStackView()
+//        uStack.translatesAutoresizingMaskIntoConstraints = false
+//        uStack.axis = .vertical
+//        uStack.alignment = .center
+//        uStack.distribution = .fill
+//        return uStack
+//    } ()
+//
+//
+//    //back button, name, settings
+//    let nameStack: UIStackView = {
+//        let nStack = UIStackView()
+//        nStack.translatesAutoresizingMaskIntoConstraints = false
+//        nStack.axis = .horizontal
+//        nStack.alignment = .center
+//        nStack.distribution = .fill
+//        return nStack
+//    } ()
+//
+    class CircularImageView: UIImageView {
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            self.layer.cornerRadius = self.frame.size.height/2
+            self.clipsToBounds = true
+        }
+    }
     //profile picture
     let profilePicture: UIImageView = {
-        let img = UIImageView()
+        let img = CircularImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
+        img.image = UIImage(named: "IssueButtonHighlighted")
         return img
     } ()
-    
-    
-    //Has challenges, progress, stats
-    let tabStack: UIStackView = {
-        let tStack = UIStackView()
-        tStack.translatesAutoresizingMaskIntoConstraints = false
-        tStack.axis = .horizontal
-        tStack.alignment = .center
-        tStack.distribution = .fillEqually
-        return tStack
-    } ()
-    
-    let challenges = UIButton()
-    let progress = UIButton()
-    let stats = UIButton()
-    
-    
-    //Lower Stack
-    let lowerStack: UIStackView = {
-        let lStack = UIStackView()
-        lStack.translatesAutoresizingMaskIntoConstraints = false
-        lStack.axis = .vertical
-        lStack.alignment = .center
-        lStack.distribution = .fill
-        return lStack
-    } ()
+//
+//
+//    //Has challenges, progress, stats
+//    let tabStack: UIStackView = {
+//        let tStack = UIStackView()
+//        tStack.translatesAutoresizingMaskIntoConstraints = false
+//        tStack.axis = .horizontal
+//        tStack.alignment = .center
+//        tStack.distribution = .fillEqually
+//        return tStack
+//    } ()
+//
+//
+//    //Lower Stack
+//    let lowerStack: UIStackView = {
+//        let lStack = UIStackView()
+//        lStack.translatesAutoresizingMaskIntoConstraints = false
+//        lStack.axis = .vertical
+//        lStack.alignment = .center
+//        lStack.distribution = .fill
+//        return lStack
+//    } ()
     
     
     
@@ -80,6 +111,7 @@ class ProfilePageView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setStackAttributes()
         addSubview(profileStackView)
         
         //Divides the page into 2
@@ -94,21 +126,6 @@ class ProfilePageView: UIView {
         
         
         upperStack.addArrangedSubview(tabStack)
-        
-        
-        editButtons(button: challenges, name: "Challenges")
-        editButtons(button: progress, name: "Progress")
-        editButtons(button: stats, name: "Stats")
-        challenges.contentEdgeInsets.left = 5
-        progress.contentEdgeInsets.left = 10
-        stats.contentEdgeInsets.left = -15
-//        challenges.backgroundColor = .red
-//        progress.backgroundColor = .blue
-//        stats.backgroundColor = .green
-
-        tabStack.addArrangedSubview(challenges)
-        tabStack.addArrangedSubview(progress)
-        tabStack.addArrangedSubview(stats)
         
         setupLayoutPsv()
     }
@@ -127,7 +144,7 @@ class ProfilePageView: UIView {
             upperStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/3),
             lowerStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 2/3),
             nameStack.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 7/16),
-            profilePicture.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 7/16),
+            profilePicture.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 6/16),
             tabStack.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 2/16),
             tabStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             tabStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
@@ -136,11 +153,14 @@ class ProfilePageView: UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func editButtons(button: UIButton, name: String) {
-        button.titleLabel?.font = UIFont(name: "Amiko-Regular", size: 15)
-        button.setTitle(name, for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.contentHorizontalAlignment = .center
+    func setStackAttributes() {
+        profileStackView.changeAxisandDistribution(axis: .vertical, distribution: .fill)
+        
+        upperStack.changeAxisandDistribution(axis: .vertical, distribution: .fill)
+        nameStack.changeAxisandDistribution(axis: .horizontal, distribution: .fill)
+        tabStack.changeAxisandDistribution(axis: .horizontal, distribution: .fillEqually)
+        
+        lowerStack.changeAxisandDistribution(axis: .vertical, distribution: .fill)
     }
     
 }
