@@ -17,6 +17,7 @@ class ProfilePageView: UIView {
             super.init(frame: frame)
             self.translatesAutoresizingMaskIntoConstraints = false
             self.alignment = .center
+            self.spacing = 0
         }
         
         required init(coder: NSCoder) {
@@ -71,7 +72,13 @@ class ProfilePageView: UIView {
     class CircularImageView: UIImageView {
         override func layoutSubviews() {
             super.layoutSubviews()
+            //self.frame.size.height /= 1.25
             self.layer.cornerRadius = self.frame.size.height/2
+            self.frame.size.width = self.frame.size.height
+                //self.frame.size.height/2
+//            self.layer.masksToBounds = true
+//            self.layer.borderWidth = 0
+//            self.contentMode = .scaleAspectFill
             self.clipsToBounds = true
         }
     }
@@ -82,7 +89,17 @@ class ProfilePageView: UIView {
         img.image = UIImage(named: "IssueButtonHighlighted")
         return img
     } ()
-//
+    
+    
+    
+    
+    let profilePictureTest: UIImageView = {
+        let img = CircularImageView()
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.image = UIImage(named: "IssueButtonHighlighted")
+        return img
+    } ()
+    
 //
 //    //Has challenges, progress, stats
 //    let tabStack: UIStackView = {
@@ -105,7 +122,7 @@ class ProfilePageView: UIView {
 //        return lStack
 //    } ()
     
-    
+    //Name Stack
     
     
     
@@ -113,17 +130,15 @@ class ProfilePageView: UIView {
         super.init(frame: frame)
         setStackAttributes()
         addSubview(profileStackView)
-        
         //Divides the page into 2
         profileStackView.addArrangedSubview(upperStack)
         profileStackView.addArrangedSubview(lowerStack)
         
         //Dividing the upper stack into 3 sections: person's name, person's image and tabs
         upperStack.addArrangedSubview(nameStack)
-        
+        //upperStack.addArrangedSubview(profilePictureTest)
         
         upperStack.addArrangedSubview(profilePicture)
-        
         
         upperStack.addArrangedSubview(tabStack)
         
@@ -136,19 +151,33 @@ class ProfilePageView: UIView {
     
     private func setupLayoutPsv() {
         let constraints = [
-            profileStackView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            profileStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
             profileStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             profileStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             profileStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             
             upperStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/3),
+            upperStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            upperStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             lowerStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 2/3),
-            nameStack.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 7/16),
-            profilePicture.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 6/16),
-            tabStack.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 2/16),
+            nameStack.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 4/16),
+//            nameStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+//            nameStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            //profilePictureTest.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 7/16),
+            
+            
+            
+//            nameStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+//            nameStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            profilePicture.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 8/16),
+            tabStack.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 4/16),
             tabStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             tabStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
             
+//            nameLabel.leadingAnchor.constraint(equalTo: nameStack.leadingAnchor, constant: 0),
+//            nameLabel.trailingAnchor.constraint(equalTo: nameStack.trailingAnchor, constant: 0)
+//            profilePicture.widthAnchor.constraint(equalToConstant: frame.height/2),
+//            profilePicture.heightAnchor.constraint(equalToConstant: frame.height/2)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -162,5 +191,6 @@ class ProfilePageView: UIView {
         
         lowerStack.changeAxisandDistribution(axis: .vertical, distribution: .fill)
     }
+
     
 }
