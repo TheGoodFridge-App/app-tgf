@@ -55,6 +55,7 @@
 		EBF7A740248453BE0083C634 /* GroceryListFinalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */; };
 		EBF7A742248469A50083C634 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A741248469A50083C634 /* AddButton.swift */; };
 		F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */; };
+		F68583A724CDB779004A0C44 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A624CDB779004A0C44 /* StatsView.swift */; };
 		F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1588224CAC84700AB5648 /* ProfilePageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +125,7 @@
 		EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListFinalCell.swift; sourceTree = "<group>"; };
 		EBF7A741248469A50083C634 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSegmentedControlView.swift; sourceTree = "<group>"; };
+		F68583A624CDB779004A0C44 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		F6F1588224CAC84700AB5648 /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -247,6 +249,7 @@
 				EB1D77092462978F003E1A84 /* ValuesView.swift */,
 				F6F1588224CAC84700AB5648 /* ProfilePageView.swift */,
 				F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */,
+				F68583A624CDB779004A0C44 /* StatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */,
 				EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */,
 				EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */,
+				F68583A724CDB779004A0C44 /* StatsView.swift in Sources */,
 				EBBEF37F2477B82D005B085E /* TabBarController.swift in Sources */,
 				F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */,
 				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,

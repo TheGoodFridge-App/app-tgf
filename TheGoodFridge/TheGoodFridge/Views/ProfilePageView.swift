@@ -111,4 +111,5 @@ class ProfilePageView: UIView {
         nameStack.changeAxisandDistribution(axis: .horizontal, distribution: .fill)
         lowerStack.changeAxisandDistribution(axis: .vertical, distribution: .fill)
     }
+    
 }

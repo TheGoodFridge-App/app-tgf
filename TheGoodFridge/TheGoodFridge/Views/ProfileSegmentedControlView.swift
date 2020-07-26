@@ -72,6 +72,7 @@ class CustomSegmentedControl: UIView {
 
 //Configuration View
 var stack = UIStackView(arrangedSubviews: [UIButton]())
+var lowerStack = UIStackView()
 extension CustomSegmentedControl {
 
     private func updateView() {
@@ -108,7 +109,7 @@ extension CustomSegmentedControl {
         stack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         stack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/9).isActive = true
         
-        let lowerStack = UIStackView()
+//        let lowerStack = UIStackView()
         lowerStack.axis = .vertical
         lowerStack.alignment = .center
         lowerStack.distribution = .fill
@@ -119,15 +120,15 @@ extension CustomSegmentedControl {
         lowerStack.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 0).isActive = true
         lowerStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 8/9).isActive = true
         
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        lowerStack.addArrangedSubview(view)
-        view.leftAnchor.constraint(equalTo: lowerStack.leftAnchor, constant: 0).isActive = true
-        view.rightAnchor.constraint(equalTo: lowerStack.rightAnchor, constant: 0).isActive = true
-//        view.topAnchor.constraint(equalTo: lowerStack.topAnchor, constant: 0).isActive = true
-//        view.bottomAnchor.constraint(equalTo: lowerStack.bottomAnchor, constant: 0).isActive = true
-        view.heightAnchor.constraint(equalTo: lowerStack.heightAnchor, multiplier: 1).isActive = true
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .clear
+//        lowerStack.addArrangedSubview(view)
+//        view.leftAnchor.constraint(equalTo: lowerStack.leftAnchor, constant: 0).isActive = true
+//        view.rightAnchor.constraint(equalTo: lowerStack.rightAnchor, constant: 0).isActive = true
+////        view.topAnchor.constraint(equalTo: lowerStack.topAnchor, constant: 0).isActive = true
+////        view.bottomAnchor.constraint(equalTo: lowerStack.bottomAnchor, constant: 0).isActive = true
+//        view.heightAnchor.constraint(equalTo: lowerStack.heightAnchor, multiplier: 1).isActive = true
     }
     
     private func configSelectorView() {
