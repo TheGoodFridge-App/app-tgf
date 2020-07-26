@@ -54,6 +54,7 @@
 		EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF520922456156100EC0B03 /* RegisterViewController.swift */; };
 		EBF7A740248453BE0083C634 /* GroceryListFinalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */; };
 		EBF7A742248469A50083C634 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A741248469A50083C634 /* AddButton.swift */; };
+		F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */; };
 		F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1588224CAC84700AB5648 /* ProfilePageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,7 @@
 		EBF520922456156100EC0B03 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListFinalCell.swift; sourceTree = "<group>"; };
 		EBF7A741248469A50083C634 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSegmentedControlView.swift; sourceTree = "<group>"; };
 		F6F1588224CAC84700AB5648 /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,6 +246,7 @@
 				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
 				EB1D77092462978F003E1A84 /* ValuesView.swift */,
 				F6F1588224CAC84700AB5648 /* ProfilePageView.swift */,
+				F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */,
 				EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */,
 				EBBEF37F2477B82D005B085E /* TabBarController.swift in Sources */,
+				F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */,
 				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,
 				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
 				EBBD0E0424A177170079F15C /* RecommendViewController.swift in Sources */,

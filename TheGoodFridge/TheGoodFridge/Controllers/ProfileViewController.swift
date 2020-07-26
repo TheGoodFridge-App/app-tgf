@@ -23,23 +23,10 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         ppage.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
-        
         changeName()
         ppage.nameStack.addArrangedSubview(nameLabel)
-        
-        declareAllButtons()
-        ppage.tabStack.addArrangedSubview(challenges)
-        ppage.tabStack.addArrangedSubview(progress)
-        ppage.tabStack.addArrangedSubview(stats)
-        
         view.addSubview(ppage)
-        
         setupLayout()
-        
-        
-//        let psv = UIStackView()
-//        psv.translatesAutoresizingMaskIntoConstraints = false
-//        psv.alignment = .fill
     }
     
     private func setupLayout() {
@@ -48,7 +35,6 @@ class ProfileViewController: UIViewController {
             ppage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             ppage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             ppage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            //nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0)
         ]
         NSLayoutConstraint.activate(constraints)
     }
