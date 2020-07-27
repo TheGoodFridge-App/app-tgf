@@ -43,6 +43,7 @@ class RecommendViewController: UIViewController {
     var backingImage: UIImage?
     var item = ""
     var products = [String]()
+    var selectedProduct: String?
     var delegate: ProductDelegate?
     
     //lazy var cardViewTop = cardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30)
@@ -51,6 +52,7 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         cardView = RecommendCardView(item: item, products: products)
+        cardView.setSelected(product: selectedProduct)
         super.viewDidLoad()
         
         backingImageView.image = backingImage

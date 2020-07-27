@@ -73,7 +73,7 @@ class User {
     
     func fetchData() {
         if let email = getEmail() {
-            let urlString = "\(K.serverURL)/data"
+            let urlString = "\(K.serverURL)/api/data"
             
             let parameters: [String: String] = [
                 "email": email

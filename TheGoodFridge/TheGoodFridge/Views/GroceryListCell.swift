@@ -39,6 +39,7 @@ class GroceryListCell: UITableViewCell {
         let textField = MyTextField()
         textField.font = UIFont(name: "Amiko-Regular", size: 16)
         textField.contentVerticalAlignment = .center
+        textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		667996051EAD6A0501B0B7B0 /* Pods_TheGoodFridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B47454650517C707E2136C /* Pods_TheGoodFridge.framework */; };
 		EB0B6982245E5A550069697F /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB0BC8C224CE4F6200A16424 /* ChallengeIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */; };
 		EB14DD9E24450A2400CA2E0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */; };
 		EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D77092462978F003E1A84 /* ValuesView.swift */; };
 		EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */; };
@@ -19,6 +20,7 @@
 		EB514D9D247AFCE100450E60 /* GroceryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB514D9C247AFCE100450E60 /* GroceryListCell.swift */; };
 		EB514D9F247B1ED700450E60 /* GroceryDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */; };
 		EB5244C02471D50500C45C6B /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5244BF2471D50500C45C6B /* StartView.swift */; };
+		EB55FE0924AD3A17002760F7 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB55FE0824AD3A17002760F7 /* ProductManager.swift */; };
 		EB56EC632442E34C001D48BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC622442E34C001D48BE /* AppDelegate.swift */; };
 		EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC642442E34C001D48BE /* SceneDelegate.swift */; };
 		EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC662442E34C001D48BE /* WelcomeViewController.swift */; };
@@ -74,6 +76,7 @@
 		1990F854B237DEAE969610F0 /* Pods-TheGoodFridge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.debug.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.debug.xcconfig"; sourceTree = "<group>"; };
 		208317CF51033CE27E7D3123 /* Pods-TheGoodFridge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.release.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.release.xcconfig"; sourceTree = "<group>"; };
 		57B47454650517C707E2136C /* Pods_TheGoodFridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheGoodFridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeIntroView.swift; sourceTree = "<group>"; };
 		EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB1D77092462978F003E1A84 /* ValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuesView.swift; sourceTree = "<group>"; };
 		EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGoalButton.swift; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		EB514D9C247AFCE100450E60 /* GroceryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListCell.swift; sourceTree = "<group>"; };
 		EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryDoneView.swift; sourceTree = "<group>"; };
 		EB5244BF2471D50500C45C6B /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		EB55FE0824AD3A17002760F7 /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
 		EB56EC5F2442E34C001D48BE /* TheGoodFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheGoodFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB56EC622442E34C001D48BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB56EC642442E34C001D48BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				EB5B9AC72460CFA900494754 /* User.swift */,
 				EB8292072478BA4C008D96FA /* UserData.swift */,
 				EB8C63992483816500983BE9 /* GroceryData.swift */,
+				EB55FE0824AD3A17002760F7 /* ProductManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				EB5244BF2471D50500C45C6B /* StartView.swift */,
 				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
 				EB1D77092462978F003E1A84 /* ValuesView.swift */,
+				EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -422,6 +428,7 @@
 				EB5B9ACA2460E75200494754 /* SignupErrorView.swift in Sources */,
 				EB56EC632442E34C001D48BE /* AppDelegate.swift in Sources */,
 				EB514D9F247B1ED700450E60 /* GroceryDoneView.swift in Sources */,
+				EB0BC8C224CE4F6200A16424 /* ChallengeIntroView.swift in Sources */,
 				EB8C9BBC245F4DB800E51E7C /* DividerView.swift in Sources */,
 				EB8292082478BA4C008D96FA /* UserData.swift in Sources */,
 				EBC13144246A6E900047CD2C /* Constants.swift in Sources */,
@@ -430,6 +437,7 @@
 				EB5B9AC82460CFA900494754 /* User.swift in Sources */,
 				EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */,
 				EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */,
+				EB55FE0924AD3A17002760F7 /* ProductManager.swift in Sources */,
 				EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +488,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -540,6 +549,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

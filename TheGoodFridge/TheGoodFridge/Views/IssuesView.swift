@@ -95,6 +95,8 @@ class IssuesView: UIView {
         
         collectionView.backgroundColor = .clear
         
+        nextButton.isEnabled = false
+        
         addSubview(introTextView)
         addSubview(collectionView)
         addSubview(nextButton)
@@ -150,13 +152,15 @@ class IssuesView: UIView {
             selectedIssues = selectedIssues.filter({$0 != sender.tag})
         } else {
             selectedIssues.append(sender.tag)
+            delegate?.setIssues(type: type, issues: Set(selectedIssues))
         }
         sender.toggle()
+        nextButton.isEnabled = selectedIssues.count > 0
         print(selectedIssues)
     }
     
     @objc func tappedNextButton() {
-        delegate?.setIssues(type: type, issues: Set(selectedIssues))
+        //delegate?.setIssues(type: type, issues: Set(selectedIssues))
         delegate?.tappedNextButton()
     }
     

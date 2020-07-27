@@ -28,16 +28,16 @@ class TabBarController: UITabBarController {
         groceryItem.selectedImage = UIImage(named: "GroceryIconSelected")
         groceryItem.image = UIImage(named: "GroceryIconUnselected")
         groceryItem.title = "List"
-        let searchItem = UITabBarItem()
-        searchItem.selectedImage = UIImage(named: "SearchIconSelected")
-        searchItem.image = UIImage(named: "SearchIconUnselected")
-        searchItem.title = "Search"
+//        let searchItem = UITabBarItem()
+//        searchItem.selectedImage = UIImage(named: "SearchIconSelected")
+//        searchItem.image = UIImage(named: "SearchIconUnselected")
+//        searchItem.title = "Search"
         let profileItem = UITabBarItem()
         profileItem.selectedImage = UIImage(named: "ProfileconSelected")
         profileItem.image = UIImage(named: "ProfileIconUnselected")
         profileItem.title = "Profile"
         
-        [groceryItem, searchItem, profileItem].forEach { item in
+        [groceryItem, profileItem].forEach { item in
             item.setTitleTextAttributes([
                 NSAttributedString.Key.foregroundColor: selectedColor,
                 NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!
@@ -50,12 +50,12 @@ class TabBarController: UITabBarController {
         
         let groceryVC = GroceryViewController()
         groceryVC.tabBarItem = groceryItem
-        let searchVC = SearchViewController()
-        searchVC.tabBarItem = searchItem
+//        let searchVC = SearchViewController()
+//        searchVC.tabBarItem = searchItem
         let profileVC = ProfileViewController()
         profileVC.tabBarItem = profileItem
         
-        self.viewControllers = [groceryVC, searchVC, profileVC]
+        self.viewControllers = [groceryVC, profileVC]
         self.selectedViewController = groceryVC
     }
 
