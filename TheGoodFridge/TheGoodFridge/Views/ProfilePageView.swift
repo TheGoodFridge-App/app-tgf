@@ -39,6 +39,7 @@ class ProfilePageView: UIView {
     class CircularImageView: UIImageView {
         override func layoutSubviews() {
             super.layoutSubviews()
+            self.frame.size.height /= 1.25
             self.layer.cornerRadius = self.frame.size.height/2
             self.frame.size.width = self.frame.size.height
             self.contentMode = .scaleAspectFill
@@ -52,9 +53,11 @@ class ProfilePageView: UIView {
         img.image = UIImage(named: "IssueButtonHighlighted")
         return img
     } ()
+    
+    
         
     //Segmented Tabs
-    let tabsSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 0, width: 100, height: 50), buttonTitle: ["Challenges","Progress","Stats"])
+    let tabsSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 0, width: 100, height: 50), buttonTitle: ["Challenges","Stats","Archive"])
 
     
     override init(frame: CGRect) {
@@ -73,6 +76,7 @@ class ProfilePageView: UIView {
         upperStack.addArrangedSubview(nameStack)
         
         upperStack.addArrangedSubview(profilePicture)
+        upperStack.alignment = .center
         setupLayoutPsv()
     }
     
@@ -87,18 +91,22 @@ class ProfilePageView: UIView {
             profileStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             profileStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             
-            upperStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/4),
+            upperStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/5),
             upperStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             upperStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             
-            nameStack.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 1/3),
+            nameStack.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 5/12),
+            nameStack.trailingAnchor.constraint(equalTo: profileStackView.trailingAnchor, constant: 0),
+            nameStack.leadingAnchor.constraint(equalTo: profileStackView.leadingAnchor, constant: 0),
 
-            profilePicture.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 2/3),
+            profilePicture.heightAnchor.constraint(equalTo: upperStack.heightAnchor, multiplier: 7/12),
+            profilePicture.leadingAnchor.constraint(equalTo: upperStack.leadingAnchor, constant: 150),
             
             tabsSegmented.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             tabsSegmented.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            tabsSegmented.topAnchor.constraint(equalTo: upperStack.bottomAnchor),
             //tabsSegmented.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/12),
-            tabsSegmented.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 9/12)
+            tabsSegmented.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 4/5)
             
             //lowerStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 2/3)
         ]

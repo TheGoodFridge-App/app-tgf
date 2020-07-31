@@ -18,13 +18,36 @@ let nameLabel = UILabel()
 
 
 class ProfileViewController: UIViewController {
+
+    let settingsSymbol: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "SettingsButton"), for: .normal)
+        return button
+    } ()
+    
+    let blankLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        return label
+    } ()
+    
+    let blankLabelEnd: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        return label
+    } ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ppage.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 1, green: 0.9529411765, blue: 0.9019607843, alpha: 1)
         changeName()
+        ppage.nameStack.addArrangedSubview(blankLabel)
         ppage.nameStack.addArrangedSubview(nameLabel)
+        ppage.nameStack.addArrangedSubview(settingsSymbol)
+        ppage.nameStack.addArrangedSubview(blankLabelEnd)
+        ppage.nameStack.alignment = .center
+        nameLabel.textAlignment = .center
         view.addSubview(ppage)
         setupLayout()
     }
@@ -35,6 +58,24 @@ class ProfileViewController: UIViewController {
             ppage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             ppage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             ppage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            
+            blankLabel.widthAnchor.constraint(equalTo: ppage.nameStack.widthAnchor, multiplier: 2/15),
+            blankLabel.topAnchor.constraint(equalTo: ppage.nameStack.topAnchor, constant: 0),
+            blankLabel.bottomAnchor.constraint(equalTo: ppage.nameStack.bottomAnchor, constant: 0),
+            
+            nameLabel.widthAnchor.constraint(equalTo: ppage.nameStack.widthAnchor, multiplier: 11/15),
+            nameLabel.topAnchor.constraint(equalTo: ppage.nameStack.topAnchor, constant: 0),
+            nameLabel.bottomAnchor.constraint(equalTo: ppage.nameStack.bottomAnchor, constant: 0),
+            
+            //settingsSymbol.trailingAnchor.constraint(equalTo: ppage.nameStack.trailingAnchor, constant: 0),
+            settingsSymbol.topAnchor.constraint(equalTo: ppage.nameStack.topAnchor, constant: 20),
+            settingsSymbol.bottomAnchor.constraint(equalTo: ppage.nameStack.bottomAnchor, constant: -20),
+            settingsSymbol.widthAnchor.constraint(equalTo: ppage.nameStack.widthAnchor, multiplier: 1/15),
+            
+            blankLabelEnd.widthAnchor.constraint(equalTo: ppage.nameStack.widthAnchor, multiplier: 1/15),
+            blankLabelEnd.topAnchor.constraint(equalTo: ppage.nameStack.topAnchor, constant: 0),
+            blankLabelEnd.bottomAnchor.constraint(equalTo: ppage.nameStack.bottomAnchor, constant: 0)
+            
         ]
         NSLayoutConstraint.activate(constraints)
     }

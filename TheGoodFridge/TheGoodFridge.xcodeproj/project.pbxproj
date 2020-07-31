@@ -56,6 +56,8 @@
 		EBF7A742248469A50083C634 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A741248469A50083C634 /* AddButton.swift */; };
 		F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */; };
 		F68583A724CDB779004A0C44 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A624CDB779004A0C44 /* StatsView.swift */; };
+		F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */; };
+		F68583AB24D3F8ED004A0C44 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */; };
 		F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1588224CAC84700AB5648 /* ProfilePageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +128,8 @@
 		EBF7A741248469A50083C634 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSegmentedControlView.swift; sourceTree = "<group>"; };
 		F68583A624CDB779004A0C44 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeBoxes.swift; sourceTree = "<group>"; };
+		F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		F6F1588224CAC84700AB5648 /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,6 +254,8 @@
 				F6F1588224CAC84700AB5648 /* ProfilePageView.swift */,
 				F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */,
 				F68583A624CDB779004A0C44 /* StatsView.swift */,
+				F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */,
+				F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -413,6 +419,7 @@
 				F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */,
 				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,
 				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
+				F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */,
 				EBBD0E0424A177170079F15C /* RecommendViewController.swift in Sources */,
 				F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */,
 				EBBEF3812477B923005B085E /* GroceryViewController.swift in Sources */,
@@ -421,6 +428,7 @@
 				EB8C6398248380A900983BE9 /* GroceryListFinalView.swift in Sources */,
 				EB514D9B247AF3EF00450E60 /* GroceryListEditView.swift in Sources */,
 				EB8292042478A91F008D96FA /* ProfileViewController.swift in Sources */,
+				F68583AB24D3F8ED004A0C44 /* CircularProgressBar.swift in Sources */,
 				EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */,
 				EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */,
 				EB2EB193246A727C00C7F523 /* IssueData.swift in Sources */,

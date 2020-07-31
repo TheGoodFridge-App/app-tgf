@@ -51,6 +51,9 @@ class CustomSegmentedControl: UIView {
         }
     }
     
+    let statsView = StatsView()
+    let challengeView = ChallengeBoxes()
+    
     @objc func buttonAction(sender:UIButton) {
         for (buttonIndex, btn) in buttons.enumerated() {
             btn.setTitleColor(textColor, for: .normal)
@@ -61,7 +64,31 @@ class CustomSegmentedControl: UIView {
                 UIView.animate(withDuration: 0.3) {
                     self.selectorView.frame.origin.x = selectorPosition + self.frame.width/24
                 }
+//                let statsView = StatsView()
+//                let challengeView = ChallengeBoxes()
                 btn.setTitleColor(selectorTextColor, for: .normal)
+                switch selectedIndex {
+                    
+                case 0:
+                    challengeView.translatesAutoresizingMaskIntoConstraints = false
+                    lowerStack.addArrangedSubview(challengeView)
+                    challengeView.topAnchor.constraint(equalTo: lowerStack.topAnchor, constant: 0).isActive = true
+                    challengeView.bottomAnchor.constraint(equalTo: lowerStack.bottomAnchor, constant: 0).isActive = true
+                    challengeView.leadingAnchor.constraint(equalTo: lowerStack.leadingAnchor, constant: 0).isActive = true
+                    challengeView.trailingAnchor.constraint(equalTo: lowerStack.trailingAnchor, constant: 0).isActive = true
+                    
+                case 1:
+                    lowerStack.addArrangedSubview(statsView)
+                    statsView.translatesAutoresizingMaskIntoConstraints = false
+                    statsView.topAnchor.constraint(equalTo: lowerStack.topAnchor, constant: 0).isActive = true
+                    statsView.bottomAnchor.constraint(equalTo: lowerStack.bottomAnchor, constant: 0).isActive = true
+                    statsView.leftAnchor.constraint(equalTo: lowerStack.leftAnchor, constant: 0).isActive = true
+                    statsView.trailingAnchor.constraint(equalTo: lowerStack.trailingAnchor, constant: 0).isActive = true
+                    
+                    
+                default:
+                    print("Default case!")
+                }
 //                print(selectedIndex)
             }
         }
@@ -91,8 +118,9 @@ extension CustomSegmentedControl {
         wrapStack.distribution = .fill
         addSubview(wrapStack)
         wrapStack.translatesAutoresizingMaskIntoConstraints = false
-        wrapStack.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        wrapStack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        wrapStack.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        //wrapStack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        wrapStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         wrapStack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         wrapStack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
@@ -105,9 +133,9 @@ extension CustomSegmentedControl {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         //stack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        stack.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        stack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        stack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/9).isActive = true
+        stack.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        stack.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        stack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/12).isActive = true
         
 //        let lowerStack = UIStackView()
         lowerStack.axis = .vertical
@@ -115,10 +143,10 @@ extension CustomSegmentedControl {
         lowerStack.distribution = .fill
         wrapStack.addArrangedSubview(lowerStack)
         lowerStack.translatesAutoresizingMaskIntoConstraints = false
-        lowerStack.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        lowerStack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        lowerStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
+        lowerStack.trailingAnchor.constraint(equalTo: wrapStack.trailingAnchor, constant: 0).isActive = true
         lowerStack.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 0).isActive = true
-        lowerStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 8/9).isActive = true
+        lowerStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 11/12).isActive = true
         
 //        let view = UIView()
 //        view.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +163,7 @@ extension CustomSegmentedControl {
         let selectorWidth = frame.width / CGFloat(self.buttonTitles.count + 1)
 //        print(frame.height)
 //        print(stack.frame.height)
-        selectorView = UIView(frame: CGRect(x: frame.width/24, y: stack.frame.height + 50, width: selectorWidth, height: 2))
+        selectorView = UIView(frame: CGRect(x: frame.width/24, y: stack.frame.height + 40, width: selectorWidth, height: 2))
         selectorView.backgroundColor = selectorViewColor
         addSubview(selectorView)
     }
