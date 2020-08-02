@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		667996051EAD6A0501B0B7B0 /* Pods_TheGoodFridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B47454650517C707E2136C /* Pods_TheGoodFridge.framework */; };
+		EB05C93424D62A0E00AF51C7 /* ChallengeSetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05C93324D62A0E00AF51C7 /* ChallengeSetupCell.swift */; };
+		EB05C93624D6349D00AF51C7 /* ChallengeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05C93524D6349D00AF51C7 /* ChallengeButton.swift */; };
+		EB05C93824D6677F00AF51C7 /* ChallengePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05C93724D6677F00AF51C7 /* ChallengePopupView.swift */; };
 		EB0B6982245E5A550069697F /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB0BC8C224CE4F6200A16424 /* ChallengeIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */; };
 		EB14DD9E24450A2400CA2E0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */; };
@@ -26,6 +29,7 @@
 		EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56EC662442E34C001D48BE /* WelcomeViewController.swift */; };
 		EB56EC6C2442E34E001D48BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB56EC6B2442E34E001D48BE /* Assets.xcassets */; };
 		EB56EC6F2442E34E001D48BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB56EC6D2442E34E001D48BE /* LaunchScreen.storyboard */; };
+		EB572A4324CFFD0600305FFD /* ChallengeSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB572A4224CFFD0600305FFD /* ChallengeSetupView.swift */; };
 		EB5B9AC82460CFA900494754 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B9AC72460CFA900494754 /* User.swift */; };
 		EB5B9ACA2460E75200494754 /* SignupErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B9AC92460E75200494754 /* SignupErrorView.swift */; };
 		EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7E4C282462252100A6E8FA /* SetupViewController.swift */; };
@@ -76,6 +80,9 @@
 		1990F854B237DEAE969610F0 /* Pods-TheGoodFridge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.debug.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.debug.xcconfig"; sourceTree = "<group>"; };
 		208317CF51033CE27E7D3123 /* Pods-TheGoodFridge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.release.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.release.xcconfig"; sourceTree = "<group>"; };
 		57B47454650517C707E2136C /* Pods_TheGoodFridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheGoodFridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB05C93324D62A0E00AF51C7 /* ChallengeSetupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSetupCell.swift; sourceTree = "<group>"; };
+		EB05C93524D6349D00AF51C7 /* ChallengeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeButton.swift; sourceTree = "<group>"; };
+		EB05C93724D6677F00AF51C7 /* ChallengePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePopupView.swift; sourceTree = "<group>"; };
 		EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeIntroView.swift; sourceTree = "<group>"; };
 		EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB1D77092462978F003E1A84 /* ValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuesView.swift; sourceTree = "<group>"; };
@@ -94,6 +101,7 @@
 		EB56EC662442E34C001D48BE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		EB56EC6B2442E34E001D48BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB56EC6E2442E34E001D48BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EB572A4224CFFD0600305FFD /* ChallengeSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSetupView.swift; sourceTree = "<group>"; };
 		EB5B9AC72460CFA900494754 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EB5B9AC92460E75200494754 /* SignupErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupErrorView.swift; sourceTree = "<group>"; };
 		EB7E4C282462252100A6E8FA /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +237,11 @@
 			isa = PBXGroup;
 			children = (
 				EBF7A741248469A50083C634 /* AddButton.swift */,
+				EB05C93524D6349D00AF51C7 /* ChallengeButton.swift */,
+				EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */,
+				EB05C93724D6677F00AF51C7 /* ChallengePopupView.swift */,
+				EB05C93324D62A0E00AF51C7 /* ChallengeSetupCell.swift */,
+				EB572A4224CFFD0600305FFD /* ChallengeSetupView.swift */,
 				EB8C9BBB245F4DB800E51E7C /* DividerView.swift */,
 				EBBEA0DB245D526A0038F403 /* InputFieldView.swift */,
 				EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */,
@@ -246,7 +259,6 @@
 				EB5244BF2471D50500C45C6B /* StartView.swift */,
 				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
 				EB1D77092462978F003E1A84 /* ValuesView.swift */,
-				EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -400,11 +412,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */,
+				EB05C93824D6677F00AF51C7 /* ChallengePopupView.swift in Sources */,
 				EB8C639A2483816500983BE9 /* GroceryData.swift in Sources */,
 				EB5244C02471D50500C45C6B /* StartView.swift in Sources */,
 				EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */,
 				EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */,
 				EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */,
+				EB05C93624D6349D00AF51C7 /* ChallengeButton.swift in Sources */,
 				EBBEF37F2477B82D005B085E /* TabBarController.swift in Sources */,
 				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,
 				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
@@ -417,10 +431,12 @@
 				EB8292042478A91F008D96FA /* ProfileViewController.swift in Sources */,
 				EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */,
 				EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */,
+				EB572A4324CFFD0600305FFD /* ChallengeSetupView.swift in Sources */,
 				EB2EB193246A727C00C7F523 /* IssueData.swift in Sources */,
 				EB8C9BC0245F5D4200E51E7C /* IntroViewController.swift in Sources */,
 				EBBEA0DC245D526A0038F403 /* InputFieldView.swift in Sources */,
 				EBBD0E0624A190CA0079F15C /* UIView+Snapshot.swift in Sources */,
+				EB05C93424D62A0E00AF51C7 /* ChallengeSetupCell.swift in Sources */,
 				EB8292022478A917008D96FA /* SearchViewController.swift in Sources */,
 				EB514D9D247AFCE100450E60 /* GroceryListCell.swift in Sources */,
 				EBA42CF2244CE4C800185F94 /* LoginManager.swift in Sources */,

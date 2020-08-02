@@ -17,7 +17,11 @@ protocol SlideDelegate {
 }
 
 protocol SetupDelegate {
-    func receivedChallenges(challenges: [String: [String]])
+    func receivedChallenges(challenges: [ValueType: [String]])
+}
+
+protocol ChallengeDelegate {
+    func heldChallenge(challenge: String)
 }
 
 class SetupViewController: UIViewController {
@@ -200,7 +204,7 @@ extension SetupViewController: SlideDelegate {
     
     func tappedNextButton() {
         if index == slides.count - 1 && slides[index] is IssuesView {
-            setupData.postValuesIssues()
+            setupData.getChallenges()
         } else if index < slides.count - 1 {
             index += 1
             scrollView.setContentOffset(CGPoint(x: view.frame.width * CGFloat(index), y: 0), animated: true)
@@ -224,11 +228,15 @@ extension SetupViewController: SlideDelegate {
 
 extension SetupViewController: SetupDelegate {
     
-    func receivedChallenges(challenges: [String: [String]]) {
+    func receivedChallenges(challenges: [ValueType: [String]]) {
         let challengeIntroView = ChallengeIntroView()
         challengeIntroView.delegate = self
         updateContent(with: challengeIntroView)
         
+        let challengeSetupView = ChallengeSetupView(challenges: challenges)
+        challengeSetupView.slideDelegate = self
+        challengeSetupView.challengeDelegate = self
+        updateContent(with: challengeSetupView)
         print(challenges)
         
         tappedNextButton()
@@ -242,6 +250,14 @@ extension SetupViewController: SetupDelegate {
 //        DispatchQueue.main.async {
 //            self.present(navigationVC, animated: true, completion: nil)
 //        }
+    }
+    
+}
+
+extension SetupViewController: ChallengeDelegate {
+    
+    func heldChallenge(challenge: String) {
+        print(challenge)
     }
     
 }

@@ -59,45 +59,17 @@ struct SetupData {
         
     }
     
-    func postValuesIssues() {
-        guard let email = User.shared.getEmail(),
-            let firstName = User.shared.getFirstName(),
-            let lastName = User.shared.getLastName()
-        else { return debugPrint("Can't find email") }
-        
-        var parameters: [String: [String]] = [
-            "email": [email],
-            "first_name": [firstName],
-            "last_name": [lastName],
-            "environment": [(environment ? "true" : "false")],
-            "animal": [(animal ? "true" : "false")],
-            "human": [(human ? "true" : "false")],
-            "environment_issues": environmentIssues,
-            "animal_issues": animalIssues,
-            "human_issues": humanIssues
-        ]
-        
-        var urlString = "\(K.serverURL)/api/values"
-        
-        AF.request(urlString, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
-            .response { response in
-                if let e = response.error {
-                    debugPrint("Error: \(e)")
-                    return
-                }
-                debugPrint(response)
-        }
-        
+    func getChallenges() {
         // Getting challenges
         let issues = [environmentIssues, animalIssues, humanIssues]
-        urlString = "\(K.serverURL)/challenges/from_issues"
+        let urlString = "\(K.serverURL)/challenges/from_issues"
         
         let group = DispatchGroup()
         
-        var challengesDict = [String: [String]]()
+        var challengesDict = [ValueType: [String]]()
         
         for (i, issue) in issues.enumerated() {
-            parameters = [
+            let parameters = [
                 "issues": issue
             ]
             
@@ -112,11 +84,11 @@ struct SetupData {
                     if let data = response.data, let challenges = self.parseChallengeJSON(data: data) {
                         //self.delegate?.receivedChallenges(challenges: challenges)
                         if i == 0 {
-                            challengesDict["environment"] = challenges
+                            challengesDict[.environment] = challenges
                         } else if i == 1 {
-                            challengesDict["animal"] = challenges
+                            challengesDict[.animal] = challenges
                         } else {
-                            challengesDict["human"] = challenges
+                            challengesDict[.human] = challenges
                         }
                     }
                     group.leave()
@@ -126,6 +98,36 @@ struct SetupData {
         group.notify(queue: .main) {
             print(challengesDict)
             self.delegate?.receivedChallenges(challenges: challengesDict)
+        }
+    }
+    
+    func postSetupData() {
+        guard let email = User.shared.getEmail(),
+            let firstName = User.shared.getFirstName(),
+            let lastName = User.shared.getLastName()
+        else { return debugPrint("Can't find email") }
+        
+        let parameters: [String: [String]] = [
+            "email": [email],
+            "first_name": [firstName],
+            "last_name": [lastName],
+            "environment": [(environment ? "true" : "false")],
+            "animal": [(animal ? "true" : "false")],
+            "human": [(human ? "true" : "false")],
+            "environment_issues": environmentIssues,
+            "animal_issues": animalIssues,
+            "human_issues": humanIssues
+        ]
+        
+        let urlString = "\(K.serverURL)/api/values"
+        
+        AF.request(urlString, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
+            .response { response in
+                if let e = response.error {
+                    debugPrint("Error: \(e)")
+                    return
+                }
+                debugPrint(response)
         }
     }
     
