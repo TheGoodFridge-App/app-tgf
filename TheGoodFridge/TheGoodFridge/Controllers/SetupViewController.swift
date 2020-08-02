@@ -205,6 +205,7 @@ extension SetupViewController: SlideDelegate {
     func tappedNextButton() {
         if index == slides.count - 1 && slides[index] is IssuesView {
             setupData.getChallenges()
+            setupData.postSetupData()
         } else if index < slides.count - 1 {
             index += 1
             scrollView.setContentOffset(CGPoint(x: view.frame.width * CGFloat(index), y: 0), animated: true)

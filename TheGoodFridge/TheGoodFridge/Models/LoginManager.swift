@@ -12,7 +12,7 @@ import Firebase
 
 struct LoginManager {
     
-    let urlString = "localhost:3000"
+    let urlString = "\(K.serverURL)"
     static var googleCredential: AuthCredential?
     
     func login(email: String, password: String) {
