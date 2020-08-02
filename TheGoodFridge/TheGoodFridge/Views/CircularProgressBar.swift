@@ -10,7 +10,6 @@ import UIKit
 
 class CircularProgressBar: UIView {
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -39,7 +38,7 @@ class CircularProgressBar: UIView {
             let animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.fromValue = 0
             animation.toValue = progress
-            animation.duration = 2
+            animation.duration = 1.25
             foregroundLayer.add(animation, forKey: "foregroundAnimation")
             
         }

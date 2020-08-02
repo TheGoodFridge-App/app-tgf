@@ -50,7 +50,7 @@ class ProfilePageView: UIView {
     let profilePicture: UIImageView = {
         let img = CircularImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "IssueButtonHighlighted")
+        img.image = UIImage(named: "DefaultProfilePicture") //IssueButtonHighlighted
         return img
     } ()
     

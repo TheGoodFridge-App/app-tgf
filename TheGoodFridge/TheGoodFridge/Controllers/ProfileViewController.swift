@@ -37,11 +37,19 @@ class ProfileViewController: UIViewController {
         return label
     } ()
     
+//    let backgroundImage: UIImageView = {
+//        let img = UIImageView()
+//        img.image = UIImage(named: "ProfileBackgroundImage")
+//
+//        return img
+//    } ()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ppage.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 1, green: 0.9529411765, blue: 0.9019607843, alpha: 1)
         changeName()
+//        view.addSubview(backgroundImage)
         ppage.nameStack.addArrangedSubview(blankLabel)
         ppage.nameStack.addArrangedSubview(nameLabel)
         ppage.nameStack.addArrangedSubview(settingsSymbol)

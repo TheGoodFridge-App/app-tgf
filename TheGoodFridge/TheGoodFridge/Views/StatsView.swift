@@ -54,7 +54,8 @@ class StatsView: UIView {
         return label
     } ()
     
-    let wrapperStack = stack()
+    let wrapperView = UIView()
+    
     let containerStack = stack()
     let tripsLabelStack = stack()
     let numTripsStack = stack()
@@ -65,6 +66,8 @@ class StatsView: UIView {
     let bagImage = UIImageView()
     let fridgeImage = UIImageView()
     
+    let tomatoView = UIView()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,36 +75,32 @@ class StatsView: UIView {
         setLabels()
         setStacks()
         setImageView()
+        wrapperView.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(wrapperStack)
+        addSubview(wrapperView)
         
-        wrapperStack.addArrangedSubview(dateLabel)
-        wrapperStack.addArrangedSubview(blankLabel)
-        wrapperStack.addArrangedSubview(containerStack)
-        
-        wrapperStack.addArrangedSubview(tomatoImage)
-        
-        wrapperStack.addArrangedSubview(view)
-        setView()
-        
-        containerStack.addArrangedSubview(tripsLabelStack)
-        containerStack.addArrangedSubview(numTripsStack)
-        containerStack.addArrangedSubview(productsLabelStack)
-        containerStack.addArrangedSubview(numProductsStack)
-        
-        
+        wrapperView.addSubview(dateLabel)
+
         tripsLabelStack.addArrangedSubview(bagImage)
         tripsLabelStack.addArrangedSubview(susTripsLabel)
-        
+         wrapperView.addSubview(tripsLabelStack)
+
         numTripsStack.addArrangedSubview(numTripsLabel)
         numTripsStack.addArrangedSubview(tripsWordLabel)
-        
+        wrapperView.addSubview(numTripsStack)
         
         productsLabelStack.addArrangedSubview(fridgeImage)
         productsLabelStack.addArrangedSubview(totalProductsLabel)
-        
+        wrapperView.addSubview(productsLabelStack)
+
         numProductsStack.addArrangedSubview(numProductsLabel)
         numProductsStack.addArrangedSubview(productsWordLabel)
+        wrapperView.addSubview(numProductsStack)
+        
+        tomatoView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tomatoView.addSubview(tomatoImage)
+        wrapperView.addSubview(tomatoView)
         
         
         setupLayout()
@@ -110,89 +109,54 @@ class StatsView: UIView {
     private func setupLayout() {
         let constraints = [
             //Wrapper Stack constraints
-            wrapperStack.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            wrapperStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            wrapperStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            wrapperStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
+            wrapperView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            wrapperView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            wrapperView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            wrapperView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             
             //Add Date Label Constraints
-            dateLabel.topAnchor.constraint(equalTo: wrapperStack.topAnchor, constant: 0),
-            dateLabel.leadingAnchor.constraint(equalTo: wrapperStack.leadingAnchor, constant: 0),
-            dateLabel.heightAnchor.constraint(equalTo: wrapperStack.heightAnchor, multiplier: 1/20),
+            dateLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 23),
+            dateLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 50),
             
-            //Blank Label Constraints
-            blankLabel.leadingAnchor.constraint(equalTo: wrapperStack.leadingAnchor),
-            blankLabel.trailingAnchor.constraint(equalTo: wrapperStack.trailingAnchor),
-            blankLabel.heightAnchor.constraint(equalTo: wrapperStack.heightAnchor, multiplier: 1/20),
-            
-            //containerStack constraints
-            containerStack.leadingAnchor.constraint(equalTo: wrapperStack.leadingAnchor, constant: 0),
-            containerStack.heightAnchor.constraint(equalTo: wrapperStack.heightAnchor, multiplier: 10/20),
-            containerStack.widthAnchor.constraint(equalTo: wrapperStack.widthAnchor),
-            
-            //tripsLabel Stack Constraints
-            tripsLabelStack.heightAnchor.constraint(equalTo: containerStack.heightAnchor, multiplier: 1/8),
-            tripsLabelStack.leadingAnchor.constraint(equalTo: containerStack.leadingAnchor, constant: 0),
-            tripsLabelStack.widthAnchor.constraint(equalTo: containerStack.widthAnchor),
-            //bagImage constraints
-            bagImage.widthAnchor.constraint(equalTo: tripsLabelStack.widthAnchor, multiplier: 1/20),
-            bagImage.heightAnchor.constraint(equalTo: tripsLabelStack.heightAnchor, multiplier: 1),
+            //tripsLabelStack
+            tripsLabelStack.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 50),
+            tripsLabelStack.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 35),
+            tripsLabelStack.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 130),
             //susTripsLabel Constraints
-            susTripsLabel.bottomAnchor.constraint(equalTo: tripsLabelStack.bottomAnchor),
-            susTripsLabel.widthAnchor.constraint(equalTo: tripsLabelStack.widthAnchor, multiplier: 19/20),
-            
-            
+            susTripsLabel.topAnchor.constraint(equalTo: tripsLabelStack.topAnchor),
+            susTripsLabel.leadingAnchor.constraint(equalTo: tripsLabelStack.leadingAnchor, constant: 23),
+
             //numTripsStack Constraints
-            numTripsStack.heightAnchor.constraint(equalTo: containerStack.heightAnchor, multiplier: 4/15),
-            numTripsStack.leadingAnchor.constraint(equalTo: containerStack.leadingAnchor, constant: 0),
-            numTripsStack.widthAnchor.constraint(equalTo: containerStack.widthAnchor),
-            numTripsStack.topAnchor.constraint(equalTo: tripsLabelStack.bottomAnchor),
+            numTripsStack.topAnchor.constraint(equalTo: susTripsLabel.bottomAnchor, constant: 5),
+            numTripsStack.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 50),
+            numTripsStack.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
             //numTripsLabel Constraints
-            numTripsLabel.bottomAnchor.constraint(equalTo: numTripsStack.bottomAnchor, constant: -10),
+            numTripsLabel.topAnchor.constraint(equalTo: numTripsStack.topAnchor),
             numTripsLabel.leadingAnchor.constraint(equalTo: numTripsStack.leadingAnchor),
             //tripsWordLabel Constraint
-            tripsWordLabel.bottomAnchor.constraint(equalTo: numTripsStack.bottomAnchor, constant: -7),
-            tripsWordLabel.leadingAnchor.constraint(equalTo: numTripsLabel.trailingAnchor),
-            
-            
+            tripsWordLabel.bottomAnchor.constraint(equalTo: numTripsLabel.bottomAnchor, constant: 10),
+            tripsWordLabel.leadingAnchor.constraint(equalTo: susTripsLabel.leadingAnchor, constant: 5),
+
             //productsLabel Stack Constraints
-            productsLabelStack.heightAnchor.constraint(equalTo: containerStack.heightAnchor, multiplier: 1/8),
-            productsLabelStack.leadingAnchor.constraint(equalTo: containerStack.leadingAnchor, constant: 0),
-            productsLabelStack.widthAnchor.constraint(equalTo: containerStack.widthAnchor),
-            productsLabelStack.topAnchor.constraint(equalTo: numTripsStack.bottomAnchor),
-            //fridgeImage constraints
-            fridgeImage.widthAnchor.constraint(equalTo: productsLabelStack.widthAnchor, multiplier: 1/20),
-            fridgeImage.heightAnchor.constraint(equalTo: productsLabelStack.heightAnchor, multiplier: 1),
+            productsLabelStack.topAnchor.constraint(equalTo: numTripsStack.bottomAnchor, constant: 13),
+            productsLabelStack.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 50),
             //totalProductsLabel Constraints
-            totalProductsLabel.bottomAnchor.constraint(equalTo: productsLabelStack.bottomAnchor),
-            totalProductsLabel.widthAnchor.constraint(equalTo: productsLabelStack.widthAnchor, multiplier: 19/20),
-            
-            
-            
+            totalProductsLabel.topAnchor.constraint(equalTo: productsLabelStack.topAnchor),
+            totalProductsLabel.leadingAnchor.constraint(equalTo: productsLabelStack.leadingAnchor, constant: 27),
+
             //numProductsStack Constraints
-            numProductsStack.heightAnchor.constraint(equalTo: containerStack.heightAnchor, multiplier: 4/15),
-            numProductsStack.leadingAnchor.constraint(equalTo: containerStack.leadingAnchor, constant: 0),
-            numProductsStack.widthAnchor.constraint(equalTo: containerStack.widthAnchor),
-            numProductsStack.topAnchor.constraint(equalTo: productsLabelStack.bottomAnchor),
+            numProductsStack.topAnchor.constraint(equalTo: totalProductsLabel.bottomAnchor, constant: 7),
+            numProductsStack.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 50),
             //numProductsLabel Constraints
-            numProductsLabel.topAnchor.constraint(equalTo: productsLabelStack.bottomAnchor, constant: 7),
+            numProductsLabel.topAnchor.constraint(equalTo: numProductsStack.topAnchor),
             numProductsLabel.leadingAnchor.constraint(equalTo: numProductsStack.leadingAnchor),
             //productsWordLabel Constraint
-            productsWordLabel.topAnchor.constraint(equalTo: productsLabelStack.bottomAnchor, constant: 14.5),
+            productsWordLabel.bottomAnchor.constraint(equalTo: numProductsLabel.bottomAnchor, constant: 10),
             productsWordLabel.leadingAnchor.constraint(equalTo: numProductsLabel.trailingAnchor),
             
-//            //blankLabel2 Constraints
-//            blankLabel2.heightAnchor.constraint(equalTo: containerStack.heightAnchor, multiplier: 5/8),
-//            blankLabel2.widthAnchor.constraint(equalTo: containerStack.widthAnchor),
             
-            //TomatoImage constraints
-            tomatoImage.trailingAnchor.constraint(equalTo: wrapperStack.trailingAnchor, constant: 75),
-            //tomatoImage.leadingAnchor.constraint(equalTo: wrapperStack.leadingAnchor, constant: 300),
-            //tomatoImage.heightAnchor.constraint(equalTo: wrapperStack.heightAnchor, multiplier: 10/20),
-            tomatoImage.bottomAnchor.constraint(equalTo: wrapperStack.bottomAnchor),
-            //tomatoImage.widthAnchor.constraint(equalTo: wrapperStack.widthAnchor, multiplier: 1/2)
-            
-            
+            tomatoView.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor, constant: -20),
+            tomatoView.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -20)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -236,29 +200,28 @@ class StatsView: UIView {
         
         
         numTripsLabel.text = getTrips()
-        numTripsLabel.font = UIFont(name: "Amiko-SemiBold", size: 35)
+        numTripsLabel.font = UIFont(name: "Amiko-Regular", size: 48)
         numTripsLabel.textColor = .black
         numTripsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        tripsWordLabel.text = " trips"
-        tripsWordLabel.font = UIFont(name: "Amiko-SemiBold", size: 25)
+        tripsWordLabel.text = "   trips"
+        tripsWordLabel.font = UIFont(name: "Amiko-Regular", size: 25)
         tripsWordLabel.textColor = .black
         tripsWordLabel.translatesAutoresizingMaskIntoConstraints = false
         
         numProductsLabel.text = getNumProducts()
-        numProductsLabel.font = UIFont(name: "Amiko-SemiBold", size: 35)
+        numProductsLabel.font = UIFont(name: "Amiko-Regular", size: 48)
         numProductsLabel.textColor = .black
         numProductsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        productsWordLabel.text = " products"
-        productsWordLabel.font = UIFont(name: "Amiko-SemiBold", size: 25)
+        productsWordLabel.text = "   products"
+        productsWordLabel.font = UIFont(name: "Amiko-Regular", size: 25)
         productsWordLabel.textColor = .black
         productsWordLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
     func setStacks() {
-        wrapperStack.changeAxisandDistribution(axis: .vertical, distribution: .fill)
         containerStack.changeAxisandDistribution(axis: .vertical, distribution: .fill)
         tripsLabelStack.changeAxisandDistribution(axis: .horizontal, distribution: .fill)
         numTripsStack.changeAxisandDistribution(axis: .horizontal, distribution: .fill)
@@ -267,36 +230,20 @@ class StatsView: UIView {
     }
     
     func setImageView() {
-        tomatoImage.translatesAutoresizingMaskIntoConstraints = false
+        let tomatoFrame = CGRect(x: -200, y: -200, width: 240, height: 200)
         tomatoImage.image = UIImage(named: "ProfileTomatoImage")
+        tomatoImage.frame = tomatoFrame
         tomatoImage.clipsToBounds = true
-        //tomatoImage.backgroundColor = .blue
-        //tomatoImage.contentMode = .bottomRight
         tomatoImage.contentMode = .scaleAspectFit
         
-        
-        
-        
-        bagImage.translatesAutoresizingMaskIntoConstraints = false
+        let bagFrame = CGRect(x: 0, y: 0, width: 18, height: 21)
         bagImage.image = UIImage(named: "LocalMall")
-        //bagImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        bagImage.contentMode = .scaleAspectFit
+        bagImage.frame = bagFrame
+        bagImage.contentMode = .scaleAspectFill
         
-        fridgeImage.translatesAutoresizingMaskIntoConstraints = false
+        let fridgeFrame = CGRect(x: 0, y: 0, width: 16, height: 20)
         fridgeImage.image = UIImage(named: "KitchenFridge")
-        fridgeImage.contentMode = .scaleAspectFit
+        fridgeImage.frame = fridgeFrame
+        fridgeImage.contentMode = .scaleAspectFill
     }
-    
-    
-    func setView() {
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        wrapperStack.addArrangedSubview(view)
-        view.leadingAnchor.constraint(equalTo: wrapperStack.leadingAnchor, constant: 0).isActive = true
-        view.trailingAnchor.constraint(equalTo: wrapperStack.trailingAnchor, constant: 0).isActive = true
-        view.topAnchor.constraint(equalTo: wrapperStack.topAnchor, constant: 0).isActive = true
-        view.bottomAnchor.constraint(equalTo: wrapperStack.bottomAnchor, constant: 0).isActive = true
-        view.heightAnchor.constraint(equalTo: wrapperStack.heightAnchor, multiplier: 1).isActive = true
-    }
-    
 }

@@ -119,6 +119,7 @@ class ChallengeBoxes: UIView {
     func getAndParseData() {
         //sets the necessary variables. Set progressArray, levelArray, challengeNameArray
         print("Hi")
+        
         progressArray = [0.3, 0.6, 0.9]
         levelArray = [1, 2, 3]
         challengeNameArray = ["Preserving Biodiversity", "Preserving Biodiversity", "Preserving Biodiversity"]

@@ -51,8 +51,18 @@ class CustomSegmentedControl: UIView {
         }
     }
     
+    var currIndex = 0
     let statsView = StatsView()
     let challengeView = ChallengeBoxes()
+    
+    func setLowerStackView(view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        lowerStack.addArrangedSubview(view)
+        view.topAnchor.constraint(equalTo: lowerStack.topAnchor, constant: 0).isActive = true
+        view.bottomAnchor.constraint(equalTo: lowerStack.bottomAnchor, constant: 0).isActive = true
+        view.leadingAnchor.constraint(equalTo: lowerStack.leadingAnchor, constant: 0).isActive = true
+        view.trailingAnchor.constraint(equalTo: lowerStack.trailingAnchor, constant: 0).isActive = true
+    }
     
     @objc func buttonAction(sender:UIButton) {
         for (buttonIndex, btn) in buttons.enumerated() {
@@ -67,24 +77,32 @@ class CustomSegmentedControl: UIView {
 //                let statsView = StatsView()
 //                let challengeView = ChallengeBoxes()
                 btn.setTitleColor(selectorTextColor, for: .normal)
+                
+                print(currIndex)
+
+        
+                if selectedIndex != currIndex {
+                    switch currIndex {
+                    case 0:
+                        challengeView.removeFromSuperview()
+                        
+                    case 1:
+                        statsView.removeFromSuperview()
+                        
+                    default:
+                        print("Nothing Removed")
+                    }
+                }
+                
+                
+                currIndex = selectedIndex
                 switch selectedIndex {
                     
                 case 0:
-                    challengeView.translatesAutoresizingMaskIntoConstraints = false
-                    lowerStack.addArrangedSubview(challengeView)
-                    challengeView.topAnchor.constraint(equalTo: lowerStack.topAnchor, constant: 0).isActive = true
-                    challengeView.bottomAnchor.constraint(equalTo: lowerStack.bottomAnchor, constant: 0).isActive = true
-                    challengeView.leadingAnchor.constraint(equalTo: lowerStack.leadingAnchor, constant: 0).isActive = true
-                    challengeView.trailingAnchor.constraint(equalTo: lowerStack.trailingAnchor, constant: 0).isActive = true
+                    setLowerStackView(view: challengeView)
                     
                 case 1:
-                    lowerStack.addArrangedSubview(statsView)
-                    statsView.translatesAutoresizingMaskIntoConstraints = false
-                    statsView.topAnchor.constraint(equalTo: lowerStack.topAnchor, constant: 0).isActive = true
-                    statsView.bottomAnchor.constraint(equalTo: lowerStack.bottomAnchor, constant: 0).isActive = true
-                    statsView.leftAnchor.constraint(equalTo: lowerStack.leftAnchor, constant: 0).isActive = true
-                    statsView.trailingAnchor.constraint(equalTo: lowerStack.trailingAnchor, constant: 0).isActive = true
-                    
+                    setLowerStackView(view: statsView)
                     
                 default:
                     print("Default case!")
@@ -148,15 +166,7 @@ extension CustomSegmentedControl {
         lowerStack.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 0).isActive = true
         lowerStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 11/12).isActive = true
         
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .clear
-//        lowerStack.addArrangedSubview(view)
-//        view.leftAnchor.constraint(equalTo: lowerStack.leftAnchor, constant: 0).isActive = true
-//        view.rightAnchor.constraint(equalTo: lowerStack.rightAnchor, constant: 0).isActive = true
-////        view.topAnchor.constraint(equalTo: lowerStack.topAnchor, constant: 0).isActive = true
-////        view.bottomAnchor.constraint(equalTo: lowerStack.bottomAnchor, constant: 0).isActive = true
-//        view.heightAnchor.constraint(equalTo: lowerStack.heightAnchor, multiplier: 1).isActive = true
+        setLowerStackView(view: challengeView)
     }
     
     private func configSelectorView() {
