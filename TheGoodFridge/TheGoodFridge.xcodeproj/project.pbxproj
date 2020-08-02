@@ -58,6 +58,7 @@
 		F68583A724CDB779004A0C44 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A624CDB779004A0C44 /* StatsView.swift */; };
 		F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */; };
 		F68583AB24D3F8ED004A0C44 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */; };
+		F68583AD24D72F35004A0C44 /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583AC24D72F35004A0C44 /* ArchiveView.swift */; };
 		F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1588224CAC84700AB5648 /* ProfilePageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +131,7 @@
 		F68583A624CDB779004A0C44 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeBoxes.swift; sourceTree = "<group>"; };
 		F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		F68583AC24D72F35004A0C44 /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
 		F6F1588224CAC84700AB5648 /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,6 +258,7 @@
 				F68583A624CDB779004A0C44 /* StatsView.swift */,
 				F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */,
 				F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */,
+				F68583AC24D72F35004A0C44 /* ArchiveView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				EB297BFD24A6D2A600BA0471 /* RecommendProductButton.swift in Sources */,
 				EB5B9AC82460CFA900494754 /* User.swift in Sources */,
 				EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */,
+				F68583AD24D72F35004A0C44 /* ArchiveView.swift in Sources */,
 				EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */,
 				EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */,
 			);
