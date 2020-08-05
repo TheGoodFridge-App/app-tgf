@@ -54,6 +54,8 @@
 		EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF520922456156100EC0B03 /* RegisterViewController.swift */; };
 		EBF7A740248453BE0083C634 /* GroceryListFinalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */; };
 		EBF7A742248469A50083C634 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A741248469A50083C634 /* AddButton.swift */; };
+		F67B12B124D95A490035F801 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B024D95A490035F801 /* SettingsViewController.swift */; };
+		F67B12B324D9CFCA0035F801 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B224D9CFCA0035F801 /* SettingsView.swift */; };
 		F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */; };
 		F68583A724CDB779004A0C44 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A624CDB779004A0C44 /* StatsView.swift */; };
 		F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */; };
@@ -127,6 +129,8 @@
 		EBF520922456156100EC0B03 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListFinalCell.swift; sourceTree = "<group>"; };
 		EBF7A741248469A50083C634 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		F67B12B024D95A490035F801 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F67B12B224D9CFCA0035F801 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSegmentedControlView.swift; sourceTree = "<group>"; };
 		F68583A624CDB779004A0C44 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeBoxes.swift; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				EBBEF37E2477B82D005B085E /* TabBarController.swift */,
 				EBBD0E0524A190CA0079F15C /* UIView+Snapshot.swift */,
 				EB56EC662442E34C001D48BE /* WelcomeViewController.swift */,
+				F67B12B024D95A490035F801 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */,
 				F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */,
 				F68583AC24D72F35004A0C44 /* ArchiveView.swift */,
+				F67B12B224D9CFCA0035F801 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -412,6 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */,
+				F67B12B324D9CFCA0035F801 /* SettingsView.swift in Sources */,
 				EB8C639A2483816500983BE9 /* GroceryData.swift in Sources */,
 				EB5244C02471D50500C45C6B /* StartView.swift in Sources */,
 				EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */,
@@ -419,6 +426,7 @@
 				EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */,
 				F68583A724CDB779004A0C44 /* StatsView.swift in Sources */,
 				EBBEF37F2477B82D005B085E /* TabBarController.swift in Sources */,
+				F67B12B124D95A490035F801 /* SettingsViewController.swift in Sources */,
 				F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */,
 				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,
 				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
