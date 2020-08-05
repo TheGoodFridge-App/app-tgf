@@ -266,6 +266,8 @@ class SettingsView: UIView {
         img.frame = imgFrame
         img.contentMode = .scaleAspectFill
         
+        view.isUserInteractionEnabled = false
+        
         view.addBorders(edges: [.top], color: UIColor(red: 0, green: 0, blue: 0, alpha: 0.37))
         
         button.addSubview(view)
@@ -303,6 +305,8 @@ class SettingsView: UIView {
         changeLabel(label: label, text: "SIGN OUT", font: UIFont(name: "Amiko-Bold", size: 14)!, color: UIColor(red: 0.424, green: 0.683, blue: 0.305, alpha: 1))
         
         view.addBorders(edges: [.top, .bottom], color: UIColor(red: 0, green: 0, blue: 0, alpha: 0.37))
+        
+        view.isUserInteractionEnabled = false
         
         signOutButton.addSubview(view)
         //view.addSubview(lineView)
