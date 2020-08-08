@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     
     var ppage = ProfilePageView()
-    var settingsPage = SettingsView()
-    var accountDetailsPage = AccountDetailsView()
-
+    
     let wrapperView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -33,9 +34,6 @@ class ProfileViewController: UIViewController {
         setButtonsAndViews()
 
         wrapperView.addSubview(ppage)
-        wrapperView.addSubview(settingsPage)
-        wrapperView.addSubview(accountDetailsPage)
-    
         view.addSubview(wrapperView)
         setupLayout()
     }
@@ -53,82 +51,21 @@ class ProfileViewController: UIViewController {
             ppage.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 0),
             ppage.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: 0),
             
-            settingsPage.topAnchor.constraint(equalTo: wrapperView.topAnchor),
-            settingsPage.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor),
-            settingsPage.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            settingsPage.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
-            
-            accountDetailsPage.topAnchor.constraint(equalTo: wrapperView.topAnchor),
-            accountDetailsPage.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor),
-            accountDetailsPage.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            accountDetailsPage.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
-            
         ]
         NSLayoutConstraint.activate(constraints)
-        
-//        settingsPage.topAnchor.constraint(equalTo: wrapperView.topAnchor).isActive = true
-//        settingsPage.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor).isActive = true
-//        settingsPage.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor).isActive = true
-//        settingsPage.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor).isActive = true
     }
     
     
     func setButtonsAndViews() {
         ppage.translatesAutoresizingMaskIntoConstraints = false
-        settingsPage.translatesAutoresizingMaskIntoConstraints = false
-        accountDetailsPage.translatesAutoresizingMaskIntoConstraints = false
-        
-        ppage.isHidden = false
-        settingsPage.isHidden = true
-        accountDetailsPage.isHidden = true
-        
         ppage.settingsSymbol.addTarget(self, action: #selector(tappedSettingsButton), for: .touchUpInside)
-        
-        settingsPage.backButton.addTarget(self, action: #selector(settingsPageTappedBackButton), for: .touchUpInside)
-        settingsPage.accDetailsButton.addTarget(self, action: #selector(tappedAccountDetailsButton), for: .touchUpInside)
-        
-        
-        accountDetailsPage.backButton.addTarget(self, action: #selector(tappedBackToSettingsButton), for: .touchUpInside)
     }
     
     
     @objc func tappedSettingsButton() {
-        ppage.isHidden = true
-        accountDetailsPage.isHidden = true
-        
-        settingsPage.isHidden = false
-    }
-    
-    @objc func settingsPageTappedBackButton() {
-        settingsPage.isHidden = true
-        accountDetailsPage.isHidden = true
-        
-        ppage.isHidden = false
-    }
-    
-    @objc func tappedAccountDetailsButton() {
-        settingsPage.isHidden = true
-        ppage.isHidden = true
-        
-        accountDetailsPage.isHidden = false
-    }
-    
-    @objc func tappedBackToSettingsButton() {
-        ppage.isHidden = true
-        accountDetailsPage.isHidden = true
-        
-        settingsPage.isHidden = false
-    }
-    
-    
-    func setView(view: UIView) {
-        settingsPage.translatesAutoresizingMaskIntoConstraints = false
-        settingsPage = SettingsView()
-        wrapperView.addSubview(settingsPage)
-        settingsPage.topAnchor.constraint(equalTo: wrapperView.topAnchor).isActive = true
-        settingsPage.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor).isActive = true
-        settingsPage.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor).isActive = true
-        settingsPage.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor).isActive = true
+        let settingsVC = SettingsViewController()
+        settingsVC.modalPresentationStyle = .fullScreen
+        self.present(settingsVC, animated: true, completion: nil)
     }
 
 }

@@ -82,12 +82,6 @@ class ProfilePageView: UIView {
         nameLabel.textColor = UIColor.black
         nameLabel.text = "Maddie Boesen"
     }
-    
-            
-    
-    
-    
-    
 
     class CircularImageView: UIImageView {
         override func layoutSubviews() {
@@ -134,7 +128,7 @@ class ProfilePageView: UIView {
         //Divides the page into 2
         profileStackView.addArrangedSubview(upperStack)
         
-        tabsSegmented.backgroundColor = .clear
+        tabsSegmented.backgroundColor = #colorLiteral(red: 1, green: 0.9529411765, blue: 0.9019607843, alpha: 1)
         profileStackView.addArrangedSubview(tabsSegmented)
         
         //profileStackView.addArrangedSubview(lowerStack)
