@@ -287,7 +287,6 @@ extension SetupViewController: SetupDelegate {
         let challengeSetupView = ChallengeSetupView(challenges: challenges)
         challengeSetupView.slideDelegate = self
         updateContent(with: challengeSetupView)
-        print(challenges)
         
         let challengeCompleteView = ChallengeCompleteView()
         challengeCompleteView.delegate = self

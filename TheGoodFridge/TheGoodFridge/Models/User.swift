@@ -82,6 +82,7 @@ class User {
             
             AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
                 .response { response in
+                    debugPrint("received email")
                     if let responseData = response.data {
                         self.userData = self.parseJSON(data: responseData)
                         self.updateData()

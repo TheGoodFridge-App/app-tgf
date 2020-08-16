@@ -25,7 +25,7 @@ struct LoginManager {
         AF.request("\(urlString)/api/login", parameters: parameters)
             .validate()
             .responseJSON { response in
-                debugPrint(response)
+                debugPrint("logged in")
         }
     }
     

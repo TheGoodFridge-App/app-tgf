@@ -27,7 +27,10 @@ struct ProductManager {
             .response { response in
                 if let error = response.error {
                     debugPrint("Error updating grocery list with new purchase: \(error)")
+                    return
                 }
+                
+                debugPrint("updated grocery list")
         }
     }
 }

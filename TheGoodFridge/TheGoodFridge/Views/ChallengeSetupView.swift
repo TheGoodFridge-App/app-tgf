@@ -169,7 +169,6 @@ class ChallengeSetupView: UIView {
     }
     
     @objc func tappedChallengeButton(sender: ChallengeButton) {
-        print("here")
         if sender.isSelected() {
             selectedChallenges = selectedChallenges.filter({$0 != sender.tag})
             sender.setSelected(false)
@@ -179,13 +178,11 @@ class ChallengeSetupView: UIView {
         }
         
         nextButton.isEnabled = selectedChallenges.count > 0
-        print(selectedChallenges)
     }
     
     @objc func tappedNextButton() {
         nextButton.isEnabled = false
         let selected = Set<Int>(selectedChallenges)
-        print(selected)
         var actualChallenges = [String]()
         
         for num in selected {
@@ -225,7 +222,6 @@ class ChallengeSetupView: UIView {
             if let cellView = sender.view {
                 let tag = cellView.tag
                 let originInRootView = collectionView.convert(cellView.frame, to: self)
-                print(originInRootView.origin)
                 
                 // Disable buttons
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
@@ -391,7 +387,6 @@ extension ChallengeSetupView: ChallengeDelegate {
     
     func didGetDescriptions(descriptions: [String: Content]) {
         self.descriptions.merge(descriptions, uniquingKeysWith: { (_, new) in new })
-        print(descriptions)
         if let challenge = challengePopupView.curChallenge, let description = descriptions[challenge] {
             challengePopupView.setDescription(to: description)
         } else {

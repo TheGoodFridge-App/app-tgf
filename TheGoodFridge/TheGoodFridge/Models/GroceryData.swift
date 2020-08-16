@@ -84,6 +84,7 @@ class GroceryData {
             .responseJSON { response in
                 
                 if let responseData = response.data {
+                    debugPrint("received recommendations")
                     self.parseJSON(type: .split, data: responseData)
                     if let rec = self.recommendations, let other = self.otherItems {
                         self.delegate?.didGetGroceryItems(rec: rec, other: other, purchased: self.purchased)

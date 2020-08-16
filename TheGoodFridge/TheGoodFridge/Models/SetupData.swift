@@ -88,6 +88,7 @@ struct SetupData {
                         debugPrint("Error: \(e)")
                         return
                     }
+                    debugPrint("received challenge")
                     if let data = response.data, let challenges = self.parseChallengeJSON(data: data) {
                         //self.delegate?.receivedChallenges(challenges: challenges)
                         if i == 0 {
@@ -142,6 +143,7 @@ struct SetupData {
                     return
                 }
                 
+                debugPrint("posted setup data")
                 self.delegate?.postedSetupData()
         }
     }

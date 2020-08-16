@@ -43,7 +43,7 @@ class ChallengeManager {
                     if let error = response.error {
                         return debugPrint("Error getting descriptions for challenges: \(error)")
                     }
-                    debugPrint(response)
+                    debugPrint("received description for challenge")
                     if let data = response.data {
                         if let content = self.parseDescriptionJSON(data: data) {
                             descriptions[content.name] = content
@@ -59,7 +59,6 @@ class ChallengeManager {
     
     private func parseDescriptionJSON(data: Data) -> Content? {
         do {
-            print(data)
             let decoder = JSONDecoder()
             let descriptionData = try decoder.decode(DescriptionData.self, from: data)
             print(descriptionData)
