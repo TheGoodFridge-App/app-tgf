@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -223,6 +224,7 @@ class LoginViewController: UIViewController {
     @objc func tappedBackButton() {
         self.dismiss(animated: true, completion: nil)
     }
+    
     
 }
 

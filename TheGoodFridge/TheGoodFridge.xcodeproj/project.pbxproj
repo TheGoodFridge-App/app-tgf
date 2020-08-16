@@ -63,6 +63,18 @@
 		EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF520922456156100EC0B03 /* RegisterViewController.swift */; };
 		EBF7A740248453BE0083C634 /* GroceryListFinalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */; };
 		EBF7A742248469A50083C634 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A741248469A50083C634 /* AddButton.swift */; };
+		F67B12B124D95A490035F801 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B024D95A490035F801 /* SettingsViewController.swift */; };
+		F67B12B324D9CFCA0035F801 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B224D9CFCA0035F801 /* SettingsView.swift */; };
+		F67B12B524DAE0C80035F801 /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B424DAE0C80035F801 /* AccountDetailsView.swift */; };
+		F67B12B724DB24E40035F801 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B624DB24E40035F801 /* PrivacyPolicyView.swift */; };
+		F67B12B924DEE1CA0035F801 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B824DEE1CA0035F801 /* AccountDetailsViewController.swift */; };
+		F67B12BB24DEE6760035F801 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12BA24DEE6760035F801 /* PrivacyPolicyViewController.swift */; };
+		F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */; };
+		F68583A724CDB779004A0C44 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A624CDB779004A0C44 /* StatsView.swift */; };
+		F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */; };
+		F68583AB24D3F8ED004A0C44 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */; };
+		F68583AD24D72F35004A0C44 /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583AC24D72F35004A0C44 /* ArchiveView.swift */; };
+		F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1588224CAC84700AB5648 /* ProfilePageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -139,6 +151,18 @@
 		EBF520922456156100EC0B03 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListFinalCell.swift; sourceTree = "<group>"; };
 		EBF7A741248469A50083C634 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		F67B12B024D95A490035F801 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F67B12B224D9CFCA0035F801 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F67B12B424DAE0C80035F801 /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
+		F67B12B624DB24E40035F801 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		F67B12B824DEE1CA0035F801 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
+		F67B12BA24DEE6760035F801 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSegmentedControlView.swift; sourceTree = "<group>"; };
+		F68583A624CDB779004A0C44 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeBoxes.swift; sourceTree = "<group>"; };
+		F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		F68583AC24D72F35004A0C44 /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
+		F6F1588224CAC84700AB5648 /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +245,9 @@
 				EBBEF37E2477B82D005B085E /* TabBarController.swift */,
 				EBBD0E0524A190CA0079F15C /* UIView+Snapshot.swift */,
 				EB56EC662442E34C001D48BE /* WelcomeViewController.swift */,
+				F67B12B024D95A490035F801 /* SettingsViewController.swift */,
+				F67B12B824DEE1CA0035F801 /* AccountDetailsViewController.swift */,
+				F67B12BA24DEE6760035F801 /* PrivacyPolicyViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -268,6 +295,15 @@
 				EB5244BF2471D50500C45C6B /* StartView.swift */,
 				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
 				EB1D77092462978F003E1A84 /* ValuesView.swift */,
+				F6F1588224CAC84700AB5648 /* ProfilePageView.swift */,
+				F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */,
+				F68583A624CDB779004A0C44 /* StatsView.swift */,
+				F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */,
+				F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */,
+				F68583AC24D72F35004A0C44 /* ArchiveView.swift */,
+				F67B12B224D9CFCA0035F801 /* SettingsView.swift */,
+				F67B12B424DAE0C80035F801 /* AccountDetailsView.swift */,
+				F67B12B624DB24E40035F801 /* PrivacyPolicyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -421,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */,
+				F67B12B324D9CFCA0035F801 /* SettingsView.swift in Sources */,
 				EB05C93824D6677F00AF51C7 /* ChallengePopupView.swift in Sources */,
 				EB8C639A2483816500983BE9 /* GroceryData.swift in Sources */,
 				EBC9179824E518010023EF98 /* ChallengeCompleteView.swift in Sources */,
@@ -428,23 +465,32 @@
 				EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */,
 				EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */,
 				EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */,
+				F68583A724CDB779004A0C44 /* StatsView.swift in Sources */,
 				EB05C93624D6349D00AF51C7 /* ChallengeButton.swift in Sources */,
 				EBBEF37F2477B82D005B085E /* TabBarController.swift in Sources */,
 				EBCAB24324E8B83400CF2946 /* ChallengeCompleteCard.swift in Sources */,
+				F67B12B124D95A490035F801 /* SettingsViewController.swift in Sources */,
+				F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */,
 				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,
 				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
+				F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */,
 				EBBD0E0424A177170079F15C /* RecommendViewController.swift in Sources */,
+				F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */,
 				EBBEF3812477B923005B085E /* GroceryViewController.swift in Sources */,
 				EBC13140246A6CCD0047CD2C /* NextBackButton.swift in Sources */,
 				EB96750D24A452340058FAE9 /* RecommendCardView.swift in Sources */,
 				EB8C6398248380A900983BE9 /* GroceryListFinalView.swift in Sources */,
+				F67B12B924DEE1CA0035F801 /* AccountDetailsViewController.swift in Sources */,
 				EB514D9B247AF3EF00450E60 /* GroceryListEditView.swift in Sources */,
 				EB8292042478A91F008D96FA /* ProfileViewController.swift in Sources */,
+				F68583AB24D3F8ED004A0C44 /* CircularProgressBar.swift in Sources */,
 				EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */,
 				EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */,
 				EB572A4324CFFD0600305FFD /* ChallengeSetupView.swift in Sources */,
 				EB2EB193246A727C00C7F523 /* IssueData.swift in Sources */,
+				F67B12BB24DEE6760035F801 /* PrivacyPolicyViewController.swift in Sources */,
 				EB8C9BC0245F5D4200E51E7C /* IntroViewController.swift in Sources */,
+				F67B12B724DB24E40035F801 /* PrivacyPolicyView.swift in Sources */,
 				EBBEA0DC245D526A0038F403 /* InputFieldView.swift in Sources */,
 				EBBD0E0624A190CA0079F15C /* UIView+Snapshot.swift in Sources */,
 				EB05C93424D62A0E00AF51C7 /* ChallengeSetupCell.swift in Sources */,
@@ -455,6 +501,7 @@
 				EB5B9ACA2460E75200494754 /* SignupErrorView.swift in Sources */,
 				EB56EC632442E34C001D48BE /* AppDelegate.swift in Sources */,
 				EB514D9F247B1ED700450E60 /* GroceryDoneView.swift in Sources */,
+				F67B12B524DAE0C80035F801 /* AccountDetailsView.swift in Sources */,
 				EB0BC8C224CE4F6200A16424 /* ChallengeIntroView.swift in Sources */,
 				EB8C9BBC245F4DB800E51E7C /* DividerView.swift in Sources */,
 				EB8292082478BA4C008D96FA /* UserData.swift in Sources */,
@@ -463,6 +510,7 @@
 				EB297BFD24A6D2A600BA0471 /* RecommendProductButton.swift in Sources */,
 				EB5B9AC82460CFA900494754 /* User.swift in Sources */,
 				EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */,
+				F68583AD24D72F35004A0C44 /* ArchiveView.swift in Sources */,
 				EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */,
 				EB55FE0924AD3A17002760F7 /* ProductManager.swift in Sources */,
 				EBACD0FA24D7E5AC00143E47 /* ChallengeManager.swift in Sources */,
