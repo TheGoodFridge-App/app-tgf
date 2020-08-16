@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import GoogleSignIn
 
 protocol SlideDelegate {
     func setValues(values: Set<Int>)
