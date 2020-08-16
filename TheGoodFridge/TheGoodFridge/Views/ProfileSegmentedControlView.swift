@@ -72,7 +72,7 @@ class CustomSegmentedControl: UIView {
                 selectedIndex = buttonIndex
                 delegate?.change(to: selectedIndex)
                 UIView.animate(withDuration: 0.3) {
-                    self.selectorView.frame.origin.x = selectorPosition + self.frame.width/24
+                    self.selectorView.frame.origin.x = selectorPosition + self.frame.width/12
                 }
 //                let statsView = StatsView()
 //                let challengeView = ChallengeBoxes()
@@ -80,7 +80,7 @@ class CustomSegmentedControl: UIView {
                 
                 print(currIndex)
 
-        
+
                 if selectedIndex != currIndex {
                     switch currIndex {
                     case 0:
@@ -173,7 +173,7 @@ extension CustomSegmentedControl {
         let selectorWidth = frame.width / CGFloat(self.buttonTitles.count + 1)
 //        print(frame.height)
 //        print(stack.frame.height)
-        selectorView = UIView(frame: CGRect(x: frame.width/24, y: stack.frame.height + 40, width: selectorWidth, height: 2))
+        selectorView = UIView(frame: CGRect(x: frame.width/12, y: stack.frame.height + 40, width: selectorWidth, height: 2))
         selectorView.backgroundColor = selectorViewColor
         addSubview(selectorView)
     }
@@ -188,6 +188,10 @@ extension CustomSegmentedControl {
             button.addTarget(self, action:#selector(CustomSegmentedControl.buttonAction(sender:)), for: .touchUpInside)
             button.setTitleColor(textColor, for: .normal)
             button.titleLabel?.textAlignment = .center
+            
+//            let lineView = UIView(frame: CGRect(x: 0, y: 0, width: button.frame.size.width, height: 1))
+//            lineView.backgroundColor = .red
+//            button.addSubview(lineView)
             
 //            button.layer.borderWidth = 2
 //            button.layer.borderColor = CGColor.init(srgbRed: 0.8, green: 0.2, blue: 0.3, alpha: 1)

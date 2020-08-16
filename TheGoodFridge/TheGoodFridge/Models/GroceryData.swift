@@ -16,6 +16,7 @@ enum GroceryType {
 
 struct PastGroceryData: Codable {
     let grocery_list: [String]?
+    let purchased: [String: String]?
 }
 
 struct SplitGroceryData: Codable {
@@ -29,6 +30,8 @@ class GroceryData {
     var otherItems: [String]?
     var delegate: GroceryDelegate?
     
+    var purchased = [String: String]()
+    
     init(items: [String]) {
         self.items = items
     }
@@ -39,6 +42,7 @@ class GroceryData {
             debugPrint("Could not get user email.")
             return
         }
+        
         //let email = "test"
         let parameters: [String: String] = [
             "email": email
@@ -47,9 +51,16 @@ class GroceryData {
         AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString))
             .validate()
             .responseJSON { response in
+                print(response)
+                if let e = response.error {
+                    debugPrint("Error: \(e)")
+                    self.delegate?.checkedPrevItems(items: [String](), success: false)
+                    return
+                }
+                
                 if let responseData = response.data {
                     self.parseJSON(type: .past, data: responseData)
-                    self.delegate?.checkedPrevItems(items: self.items)
+                    self.delegate?.checkedPrevItems(items: self.items, success: true)
                 }
                 
         }
@@ -73,7 +84,7 @@ class GroceryData {
                 if let responseData = response.data {
                     self.parseJSON(type: .split, data: responseData)
                     if let rec = self.recommendations, let other = self.otherItems {
-                        self.delegate?.didGetGroceryItems(rec: rec, other: other)
+                        self.delegate?.didGetGroceryItems(rec: rec, other: other, purchased: self.purchased)
                     } else {
                         debugPrint("Items are empty")
                         return
@@ -91,7 +102,10 @@ class GroceryData {
                 otherItems = splitData.other
             } else if type == .past {
                 let pastData = try decoder.decode(PastGroceryData.self, from: data)
-                items = pastData.grocery_list ?? [String]()
+                if let items = pastData.grocery_list, let purchased = pastData.purchased {
+                    self.items = items
+                    self.purchased = purchased
+                }
             }
         }
         catch {

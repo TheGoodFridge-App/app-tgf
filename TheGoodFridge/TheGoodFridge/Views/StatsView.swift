@@ -200,22 +200,22 @@ class StatsView: UIView {
         
         
         numTripsLabel.text = getTrips()
-        numTripsLabel.font = UIFont(name: "Amiko-Regular", size: 48)
+        numTripsLabel.font = UIFont(name: "Amiko-SemiBold", size: 44)
         numTripsLabel.textColor = .black
         numTripsLabel.translatesAutoresizingMaskIntoConstraints = false
         
         tripsWordLabel.text = "   trips"
-        tripsWordLabel.font = UIFont(name: "Amiko-Regular", size: 25)
+        tripsWordLabel.font = UIFont(name: "Amiko-SemiBold", size: 25)
         tripsWordLabel.textColor = .black
         tripsWordLabel.translatesAutoresizingMaskIntoConstraints = false
         
         numProductsLabel.text = getNumProducts()
-        numProductsLabel.font = UIFont(name: "Amiko-Regular", size: 48)
+        numProductsLabel.font = UIFont(name: "Amiko-SemiBold", size: 44)
         numProductsLabel.textColor = .black
         numProductsLabel.translatesAutoresizingMaskIntoConstraints = false
         
         productsWordLabel.text = "   products"
-        productsWordLabel.font = UIFont(name: "Amiko-Regular", size: 25)
+        productsWordLabel.font = UIFont(name: "Amiko-SemiBold", size: 25)
         productsWordLabel.textColor = .black
         productsWordLabel.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -241,7 +241,7 @@ class StatsView: UIView {
         bagImage.frame = bagFrame
         bagImage.contentMode = .scaleAspectFill
         
-        let fridgeFrame = CGRect(x: 0, y: 0, width: 16, height: 20)
+        let fridgeFrame = CGRect(x: 0, y: 0, width: 4, height: 6)
         fridgeImage.image = UIImage(named: "KitchenFridge")
         fridgeImage.frame = fridgeFrame
         fridgeImage.contentMode = .scaleAspectFill

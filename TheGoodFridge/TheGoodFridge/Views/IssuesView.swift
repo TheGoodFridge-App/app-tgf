@@ -10,8 +10,8 @@ import UIKit
 
 class IssuesView: UIView {
     // Constants
-    let buttonWidth: CGFloat = 150
-    let buttonHeight: CGFloat = 150
+    let buttonWidth: CGFloat = 140
+    let buttonHeight: CGFloat = 140
     let buttonSpacing: CGFloat = 25
     let scrollMargin: CGFloat = 5
 
@@ -95,6 +95,8 @@ class IssuesView: UIView {
         
         collectionView.backgroundColor = .clear
         
+        nextButton.isEnabled = false
+        
         addSubview(introTextView)
         addSubview(collectionView)
         addSubview(nextButton)
@@ -150,13 +152,15 @@ class IssuesView: UIView {
             selectedIssues = selectedIssues.filter({$0 != sender.tag})
         } else {
             selectedIssues.append(sender.tag)
+            delegate?.setIssues(type: type, issues: Set(selectedIssues))
         }
         sender.toggle()
-        print(selectedIssues)
+        nextButton.isEnabled = selectedIssues.count > 0
     }
     
     @objc func tappedNextButton() {
-        delegate?.setIssues(type: type, issues: Set(selectedIssues))
+        //delegate?.setIssues(type: type, issues: Set(selectedIssues))
+        nextButton.isEnabled = false
         delegate?.tappedNextButton()
     }
     
