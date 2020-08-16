@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import Alamofire
+import FirebaseAuth
 
 protocol UserDelegate: class {
     func didGetUserData()
