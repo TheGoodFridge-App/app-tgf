@@ -185,6 +185,7 @@ extension CustomSegmentedControl {
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Amiko-Bold", size: 14)
             button.addTarget(self, action:#selector(CustomSegmentedControl.buttonAction(sender:)), for: .touchUpInside)
             button.setTitleColor(textColor, for: .normal)
             button.titleLabel?.textAlignment = .center
