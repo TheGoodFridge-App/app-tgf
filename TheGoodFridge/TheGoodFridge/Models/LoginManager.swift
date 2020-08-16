@@ -13,19 +13,20 @@ import FirebaseAuth
 
 struct LoginManager {
     
-    let urlString = "localhost:3000"
+    let urlString = "\(K.serverURL)"
     static var googleCredential: AuthCredential?
     
     func login(email: String, password: String) {
         let parameters: [String: String] = [
             "email": email,
-            "password": password
+            "password": password,
+            "secret": K.secretKey
         ]
         
         AF.request("\(urlString)/api/login", parameters: parameters)
             .validate()
             .responseJSON { response in
-                debugPrint(response)
+                debugPrint("logged in")
         }
     }
     

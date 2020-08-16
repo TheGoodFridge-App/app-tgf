@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import GoogleSignIn
 
 protocol GroceryDelegate {
     func startedEditing()
-    func checkedPrevItems(items: [String])
-    func didGetGroceryItems(rec: [String: [String]], other: [String])
+    func checkedPrevItems(items: [String], success: Bool)
+    func didGetGroceryItems(rec: [String: [String]], other: [String], purchased: [String: String])
     func returnToEdit()
-    func showRecommendations(item: String, products: [String], cell: ProductDelegate)
+    func showRecommendations(item: String, products: [String], purchased: String?, cell: ProductDelegate)
 }
 
 class GroceryViewController: UIViewController {
@@ -55,7 +58,7 @@ class GroceryViewController: UIViewController {
     }()
     
     var groceryListEditView = GroceryListEditView(rows: [GroceryListCell()], isEditing: false)
-    var groceryListFinalView = GroceryListFinalView(rec: [String: [String]](), other: [String]())
+    var groceryListFinalView = GroceryListFinalView(rec: [String: [String]](), other: [String](), purchased: [String: String]())
     let groceryData = GroceryData(items: [String]())
     
     override func viewDidLoad() {
@@ -75,9 +78,7 @@ class GroceryViewController: UIViewController {
     }
     
     private func setupViews() {
-        if let firstName = User.shared.getFirstName() {
-            nameLabel.text = "\(firstName)'s Grocery List"
-        }
+        
         
         // Check if grocery data already exists
         groceryData.getGroceryList()
@@ -133,7 +134,10 @@ extension GroceryViewController: UserDelegate {
     
     func didGetUserData() {
         DispatchQueue.main.async {
-            self.setupViews()
+            if let firstName = User.shared.getFirstName() {
+                self.nameLabel.text = "\(firstName)'s Grocery List"
+                self.setupViews()
+            }
         }
     }
     
@@ -145,16 +149,18 @@ extension GroceryViewController: GroceryDelegate {
         view.bringSubviewToFront(groceryListEditView)
     }
     
-    func checkedPrevItems(items: [String]) {
-        groceryData.getRecommendations()
+    func checkedPrevItems(items: [String], success: Bool) {
+        if success {
+            groceryData.getRecommendations()
+        }
     }
     
-    func didGetGroceryItems(rec: [String: [String]], other: [String]) {
+    func didGetGroceryItems(rec: [String: [String]], other: [String], purchased: [String: String]) {
         // Load GroceryListFinalView
         print(rec, other)
         self.groceryListEditView.removeFromSuperview()
         
-        self.groceryListFinalView = GroceryListFinalView(rec: rec, other: other)
+        self.groceryListFinalView = GroceryListFinalView(rec: rec, other: other, purchased: purchased)
         self.groceryListFinalView.delegate = self
         UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListFinalView) }, completion: nil)
         self.view.bringSubviewToFront(self.groceryListFinalView)
@@ -196,9 +202,10 @@ extension GroceryViewController: GroceryDelegate {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func showRecommendations(item: String, products: [String], cell: ProductDelegate) {
+    func showRecommendations(item: String, products: [String], purchased: String?, cell: ProductDelegate) {
         let recommendVC = RecommendViewController()
         recommendVC.item = item
+        recommendVC.selectedProduct = purchased
         recommendVC.products = products
         recommendVC.delegate = cell
         recommendVC.modalPresentationStyle = .fullScreen

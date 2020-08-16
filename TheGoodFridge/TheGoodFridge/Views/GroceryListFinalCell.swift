@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProductDelegate {
-    func selectedRecommendation(name product: String)
+    func selectedRecommendation(name product: String, item: String)
 }
 
 class GroceryListFinalCell: UITableViewCell {
@@ -20,6 +20,7 @@ class GroceryListFinalCell: UITableViewCell {
     var isRecommended = false
     var recommended = [String]()
     var item = ""
+    var purchased: String?
     var delegate: GroceryDelegate?
     
     lazy var dotImageView: UIImageView = {
@@ -42,10 +43,22 @@ class GroceryListFinalCell: UITableViewCell {
         button.titleLabel?.font = UIFont(name: "Amiko-Regular", size: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.lineBreakMode = .byWordWrapping
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 0.5).cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    let checkmarkIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "CheckmarkIcon")
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -54,8 +67,14 @@ class GroceryListFinalCell: UITableViewCell {
         itemButton.isEnabled = false
         itemButton.addTarget(self, action: #selector(tappedItemButton), for: .touchDown)
         containerView.addSubview(itemButton)
+        
+        checkmarkIcon.isHidden = true
+        containerView.addSubview(checkmarkIcon)
+        containerView.bringSubviewToFront(checkmarkIcon)
+        
         addSubview(dotImageView)
         addSubview(containerView)
+        
         
         setupLayout()
     }
@@ -74,6 +93,11 @@ class GroceryListFinalCell: UITableViewCell {
         itemButton.setTitle(text, for: .normal)
     }
     
+    func setAttributedText(to text: NSAttributedString) {
+        itemButton.setTitle(nil, for: .normal)
+        itemButton.setAttributedTitle(text, for: .normal)
+    }
+    
     func setRecommended() {
         itemButton.isEnabled = true
         
@@ -86,12 +110,13 @@ class GroceryListFinalCell: UITableViewCell {
     }
     
     @objc func tappedItemButton() {
-        delegate?.showRecommendations(item: item, products: recommended, cell: self)
+        delegate?.showRecommendations(item: item, products: recommended, purchased: purchased, cell: self)
     }
     
     private func setupLayout() {
         let margin: CGFloat = 20
         let imageSize: CGFloat = 20
+        let iconWidth: CGFloat = 5
         
         let constraints = [
             dotImageView.widthAnchor.constraint(equalToConstant: imageSize),
@@ -105,7 +130,10 @@ class GroceryListFinalCell: UITableViewCell {
             itemButton.topAnchor.constraint(equalTo: containerView.topAnchor),
             itemButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             itemButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            itemButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            itemButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            checkmarkIcon.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            checkmarkIcon.widthAnchor.constraint(equalToConstant: iconWidth),
+            checkmarkIcon.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -margin)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -127,8 +155,16 @@ class GroceryListFinalCell: UITableViewCell {
 
 extension GroceryListFinalCell: ProductDelegate {
     
-    func selectedRecommendation(name product: String) {
+    func selectedRecommendation(name product: String, item: String) {
         print("selected \(product)")
+        purchased = product
+        
+        checkmarkIcon.isHidden = false
+        
+        let attributedText = NSMutableAttributedString(string: item, attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 16)!])
+        attributedText.append(NSAttributedString(string: "\n\(product)", attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!]))
+        setAttributedText(to: attributedText)
+        ProductManager.postPurchase(purchased: product, item: item.lowercased())
     }
     
 }

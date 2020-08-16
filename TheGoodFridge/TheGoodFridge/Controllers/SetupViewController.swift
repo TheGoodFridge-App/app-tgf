@@ -7,16 +7,21 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import GoogleSignIn
 
 protocol SlideDelegate {
     func setValues(values: Set<Int>)
     func setIssues(type: ValueType, issues: Set<Int>)
+    func setChallenges(challenges: [ValueType: [String]])
     func tappedNextButton()
     func tappedBackButton()
     func tappedStartButton()
 }
 
 protocol SetupDelegate {
+    func receivedChallenges(challenges: [ValueType: [String]])
     func postedSetupData()
 }
 
@@ -27,6 +32,9 @@ class SetupViewController: UIViewController {
     var pageCount: Int = 0
     var selectedValues = Set<Int>()
     var selectedIssues = [ValueType: Set<Int>]()
+    var selectedChallenges = [(ValueType, String)]()
+    var issuesPageCount = 0
+    var curIssuesPageCount = 0
     
     let setupBackground: UIImageView = {
         let imageView = UIImageView()
@@ -51,7 +59,16 @@ class SetupViewController: UIViewController {
         pc.translatesAutoresizingMaskIntoConstraints = false
         pc.pageIndicatorTintColor = UIColor(red: 0.769, green: 0.769, blue: 0.769, alpha: 1)
         pc.currentPageIndicatorTintColor = .black
+        pc.isUserInteractionEnabled = false
         return pc
+    }()
+    
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.style = .medium
+        spinner.color = .darkGray
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
     }()
     
     let valuesView = ValuesView()
@@ -73,6 +90,7 @@ class SetupViewController: UIViewController {
         
         view.addSubview(pageControl)
         view.addSubview(scrollView)
+        view.addSubview(spinner)
         
         view.addSubview(setupBackground)
         
@@ -100,6 +118,8 @@ class SetupViewController: UIViewController {
         let pageControlOffset: CGFloat = 90
         
         let constraints = [
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             setupBackground.topAnchor.constraint(equalTo: view.topAnchor),
             setupBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             setupBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -127,6 +147,7 @@ extension SetupViewController: SlideDelegate {
     func setValues(values: Set<Int>) {
         if selectedValues != values {
             selectedValues = values
+            issuesPageCount = values.count
             let subviews = scrollView.subviews
             for subview in subviews {
                 if subview != valuesView {
@@ -173,10 +194,14 @@ extension SetupViewController: SlideDelegate {
                 issuesView.delegate = self
                 updateContent(with: issuesView)
             }
-            // TODO: add finish view here
-            let startView = StartView()
-            startView.delegate = self
-            updateContent(with: startView)
+            
+//            let challengeIntroView = ChallengeIntroView()
+//            challengeIntroView.delegate = self
+//            updateContent(with: challengeIntroView)
+            
+//            let startView = StartView()
+//            startView.delegate = self
+//            updateContent(with: startView)
         }
         
     }
@@ -184,18 +209,59 @@ extension SetupViewController: SlideDelegate {
     func setIssues(type: ValueType, issues: Set<Int>) {
         let sortedIssues = Array(issues).sorted()
         
+        selectedIssues[type] = issues
         setupData.setIssues(type: type, issues: sortedIssues)
         
         // Create challenge views
         
     }
     
+    func setChallenges(challenges: [ValueType: [String]]) {
+        var formattedChallenges = [(ValueType, String)]()
+        for entry in challenges {
+            for value in entry.value {
+                formattedChallenges.append((entry.key, value))
+            }
+        }
+        
+        self.selectedChallenges = formattedChallenges
+        var challengesStr = [String: [String]]()
+        for entry in challenges {
+            var strKey = "error"
+            switch entry.key {
+            case .environment:
+                strKey = "environment"
+            case .animal:
+                strKey = "animal"
+            case .human:
+                strKey = "human"
+            default:
+                break
+            }
+            
+            challengesStr[strKey] = challenges[entry.key]
+        }
+        setupData.setChallenges(challengesStr)
+    }
+    
     func tappedNextButton() {
-        if index < slides.count - 1 {
+        if index == slides.count - 1 && slides[index] is IssuesView {
+            spinner.startAnimating()
+            setupData.getChallenges()
+            //setupData.postSetupData()
+        } else if index < slides.count - 1 && slides[index] is IssuesView && slides[index + 1] is ChallengeIntroView {
+            slides.removeAll(where: {$0 is ChallengeIntroView || $0 is ChallengeSetupView})
+            spinner.startAnimating()
+            setupData.getChallenges()
+        } else if index < slides.count - 1 {
+            if let challengeCompleteView = slides[index + 1] as? ChallengeCompleteView {
+                challengeCompleteView.setChallenges(challenges: selectedChallenges)
+            }
             index += 1
             scrollView.setContentOffset(CGPoint(x: view.frame.width * CGFloat(index), y: 0), animated: true)
-            pageControl.currentPage = index
         }
+        
+        pageControl.currentPage = index
     }
     
     func tappedBackButton() {
@@ -207,6 +273,7 @@ extension SetupViewController: SlideDelegate {
     }
     
     func tappedStartButton() {
+        spinner.startAnimating()
         setupData.postSetupData()
     }
     
@@ -214,17 +281,33 @@ extension SetupViewController: SlideDelegate {
 
 extension SetupViewController: SetupDelegate {
     
+    func receivedChallenges(challenges: [ValueType: [String]]) {
+        spinner.stopAnimating()
+        let challengeIntroView = ChallengeIntroView()
+        challengeIntroView.delegate = self
+        updateContent(with: challengeIntroView)
+        
+        let challengeSetupView = ChallengeSetupView(challenges: challenges)
+        challengeSetupView.slideDelegate = self
+        updateContent(with: challengeSetupView)
+        
+        let challengeCompleteView = ChallengeCompleteView()
+        challengeCompleteView.delegate = self
+        updateContent(with: challengeCompleteView)
+        
+        index += 1
+        scrollView.setContentOffset(CGPoint(x: view.frame.width * CGFloat(index), y: 0), animated: true)
+        pageControl.currentPage = index
+    }
+    
     func postedSetupData() {
+        spinner.stopAnimating()
         
-        let navigationVC = UINavigationController(rootViewController: TabBarController())
-        navigationVC.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationVC.navigationBar.shadowImage = UIImage()
-        navigationVC.navigationBar.isTranslucent = true
-        navigationVC.view.backgroundColor = UIColor.clear
-        navigationVC.modalPresentationStyle = .fullScreen
-        
+        let tabBarVC = TabBarController()
+        tabBarVC.modalPresentationStyle = .fullScreen
+
         DispatchQueue.main.async {
-            self.present(navigationVC, animated: true, completion: nil)
+            self.present(tabBarVC, animated: true, completion: nil)
         }
     }
     

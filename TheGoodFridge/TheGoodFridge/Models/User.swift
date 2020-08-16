@@ -74,14 +74,16 @@ class User {
     
     func fetchData() {
         if let email = getEmail() {
-            let urlString = "\(K.serverURL)/data"
+            let urlString = "\(K.serverURL)/api/data"
             
             let parameters: [String: String] = [
-                "email": email
+                "email": email,
+                "secret": K.secretKey
             ]
             
             AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
                 .response { response in
+                    debugPrint("received email")
                     if let responseData = response.data {
                         self.userData = self.parseJSON(data: responseData)
                         self.updateData()

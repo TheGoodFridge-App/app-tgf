@@ -14,6 +14,7 @@ class ValueGoalButton: UIButton {
     var unselectedImage = UIImage(named: "ValueButtonNormal")
     
     let valueGoalView = ValueGoalView()
+    var buttonWidth: CGFloat = 0.0
     
     required init() {
         super.init(frame: .zero)
@@ -51,8 +52,11 @@ class ValueGoalButton: UIButton {
     }
     
     func setText(to value: String) {
-        let str = value.count > 20 ? value.replacingOccurrences(of: " ", with: "\n") : value
-        valueGoalView.label.text = str
+        valueGoalView.label.text = value
+    }
+    
+    func setIssueText(to value: String) {
+        valueGoalView.setIssueText(to: value, buttonWidth: buttonWidth)
     }
     
     func setImage(to image: UIImage?) {
@@ -99,6 +103,11 @@ class ValueGoalView: UIView {
         return imageView
     }()
     
+    lazy var labelHeightConstraint = label.heightAnchor.constraint(equalToConstant: label.intrinsicContentSize.height)
+    
+    let issueFont = UIFont(name: "Amiko-Bold", size: 12)
+    let margin: CGFloat = 10
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -113,12 +122,39 @@ class ValueGoalView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func setIssueText(to value: String, buttonWidth: CGFloat) {
+        if label.font != issueFont {
+            label.font = issueFont
+        }
+//        let attrString = value as NSString
+//        let strSize = attrString.size(withAttributes: [NSAttributedString.Key.font: issueFont!])
+//        if value == "Health Management" {
+//            print(strSize.width)
+//            print(buttonWidth - 2 * margin)
+//        }
+        if value.count > Int(buttonWidth * 0.12) {
+            print(value)
+            var str = ""
+            var newline = false
+            for ch in value {
+                if ch == " " && !newline {
+                    newline = true
+                    str += "\n"
+                } else {
+                    str += String(ch)
+                }
+            }
+            label.text = str
+            return
+        }
+        label.text = value
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let margin: CGFloat = 10
-        
         let constraints = [
+            //labelHeightConstraint,
             label.heightAnchor.constraint(equalToConstant: label.intrinsicContentSize.height),
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: margin),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin),

@@ -10,8 +10,8 @@ import UIKit
 
 class IssuesView: UIView {
     // Constants
-    let buttonWidth: CGFloat = 150
-    let buttonHeight: CGFloat = 150
+    let buttonWidth: CGFloat = 140
+    let buttonHeight: CGFloat = 140
     let buttonSpacing: CGFloat = 25
     let scrollMargin: CGFloat = 5
 
@@ -95,6 +95,8 @@ class IssuesView: UIView {
         
         collectionView.backgroundColor = .clear
         
+        nextButton.isEnabled = selectedIssues.count > 0
+        
         addSubview(introTextView)
         addSubview(collectionView)
         addSubview(nextButton)
@@ -150,18 +152,23 @@ class IssuesView: UIView {
             selectedIssues = selectedIssues.filter({$0 != sender.tag})
         } else {
             selectedIssues.append(sender.tag)
+            delegate?.setIssues(type: type, issues: Set(selectedIssues))
         }
         sender.toggle()
-        print(selectedIssues)
+        nextButton.isEnabled = selectedIssues.count > 0
     }
     
     @objc func tappedNextButton() {
-        delegate?.setIssues(type: type, issues: Set(selectedIssues))
+        //delegate?.setIssues(type: type, issues: Set(selectedIssues))
+        nextButton.isEnabled = false
         delegate?.tappedNextButton()
+        nextButton.isEnabled = true
     }
     
     @objc func tappedBackButton() {
+        backButton.isEnabled = false
         delegate?.tappedBackButton()
+        backButton.isEnabled = true
     }
     
     override func layoutSubviews() {
@@ -183,8 +190,9 @@ extension IssuesView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.issueCellID, for: indexPath) as! IssueCell
         //let (text, type) = issues[indexPath.item] ?? ("", .error)
+        cell.buttonWidth = buttonWidth
         let text = issues[indexPath.item]
-        cell.setText(to: text)
+        cell.setIssueText(to: text)
         cell.setImages(to: UIImage(named: icons[indexPath.item]))
         if selectedIssues.contains(indexPath.item) {
             cell.goalButton.setSelected()
