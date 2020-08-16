@@ -1,5 +1,5 @@
 //
-//  IssuesView.swift
+//  ChallengeSetupView.swift
 //  TheGoodFridge
 //
 //  Created by Eugene Lo on 5/10/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class IssuesView: UIView {
+class ChallengeSetupView: UIView {
     // Constants
     let buttonWidth: CGFloat = 140
     let buttonHeight: CGFloat = 140
@@ -16,21 +16,13 @@ class IssuesView: UIView {
     let scrollMargin: CGFloat = 5
 
     // Properties
-    var issues = [String]()
-    var icons = [String]()
-    let type: ValueType
-    let valueStr: String
-    var selectedIssues = [Int]()
-    
+    var challenges: [ValueType: [String]]
+    var challengesArr: [(String, ValueType)]
+    var selectedChallenges = [Int]()
     // Delegate
-    var delegate: SlideDelegate?
-    
-//    let setupBackground: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "SetupBackground2")
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        return imageView
-//    }()
+    var slideDelegate: SlideDelegate?
+    var challengeDelegate: ChallengeDelegate?
+    var heldChallengeIndex: Int?
     
     lazy var introTextView: UITextView = {
         let textView = UITextView()
@@ -39,11 +31,11 @@ class IssuesView: UIView {
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         let bigText = NSMutableAttributedString(
-            string: "You picked \(valueStr).\nWhat are some issues that you care about?",
+            string: "Choose three challenges out of the following:",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-SemiBold", size: 20)!]
         )
         let smallText = NSAttributedString(
-            string: "\n\nPlease feel free to select multiple options.",
+            string: "\n\nTap to select, and tap and hold to learn more!",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!]
         )
         bigText.append(smallText)
@@ -68,27 +60,26 @@ class IssuesView: UIView {
     
     let collectionView: UICollectionView
     
-    required init(type: ValueType) {
-        self.type = type
+    required init(challenges: [ValueType: [String]]) {
+        self.challenges = challenges
+        self.challengesArr = challenges.reduce([]) { cur, dict in
+            return cur + dict.value.map({ ($0, dict.key) })
+        }
+        challengesArr = []
+        if let e = challenges[.environment], let a = challenges[.animal], let h = challenges[.human] {
+            challengesArr = e.map({($0, .environment)}) + a.map({($0, .animal)}) + h.map({($0, .human)})
+        }
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: buttonSpacing - scrollMargin, bottom: buttonSpacing, right: buttonSpacing - scrollMargin)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        if type == .environment {
-            valueStr = "environment"
-        } else if type == .animal {
-            valueStr = "animal rights"
-        } else {
-            valueStr = "human rights"
-        }
         
         //issues = IssueData.getAllIssues(values: values)
         super.init(frame: .zero)
 
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(IssueCell.self, forCellWithReuseIdentifier: K.issueCellID)
+        collectionView.register(ChallengeSetupCell.self, forCellWithReuseIdentifier: K.challengeCellID)
         collectionView.canCancelContentTouches = true
         collectionView.delaysContentTouches = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,9 +92,6 @@ class IssuesView: UIView {
         addSubview(collectionView)
         addSubview(nextButton)
         addSubview(backButton)
-//        addSubview(setupBackground)
-        
-//        sendSubviewToBack(setupBackground)
         
         setupLayout()
     }
@@ -147,25 +135,59 @@ class IssuesView: UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    @objc func tappedGoalButton(sender: ValueGoalButton) {
+    @objc func tappedChallengeButton(sender: ChallengeButton) {
         if sender.isSelected() {
-            selectedIssues = selectedIssues.filter({$0 != sender.tag})
+            selectedChallenges = selectedChallenges.filter({$0 != sender.tag})
         } else {
-            selectedIssues.append(sender.tag)
-            delegate?.setIssues(type: type, issues: Set(selectedIssues))
+            selectedChallenges.append(sender.tag)
         }
-        sender.toggle()
-        nextButton.isEnabled = selectedIssues.count > 0
+        sender.setSelected(!sender.isSelected())
+        nextButton.isEnabled = selectedChallenges.count > 0
+        print(selectedChallenges)
     }
     
     @objc func tappedNextButton() {
         //delegate?.setIssues(type: type, issues: Set(selectedIssues))
-        nextButton.isEnabled = false
-        delegate?.tappedNextButton()
+        slideDelegate?.tappedNextButton()
     }
     
     @objc func tappedBackButton() {
-        delegate?.tappedBackButton()
+        slideDelegate?.tappedBackButton()
+    }
+    
+    @objc func heldChallenge(_ sender: UIGestureRecognizer) {
+        if sender.state == .began {
+            if let cellView = sender.view {
+                let tag = cellView.tag
+                let originInRootView = collectionView.convert(cellView.frame, to: self)
+                print(originInRootView.origin)
+                animatePopup(from: originInRootView)
+                heldChallengeIndex = tag
+                let (challenge, _) = challengesArr[tag]
+                challengeDelegate?.heldChallenge(challenge: challenge)
+            }
+        }
+    }
+    
+    private func animatePopup(from startFrame: CGRect) {
+        let centerOrigin = CGPoint(x: startFrame.origin.x + (buttonWidth / 2), y: startFrame.origin.y + (buttonHeight / 2))
+        let realFrame = CGRect(origin: centerOrigin, size: CGSize(width: 0, height: 0))
+        let challengePopupView = ChallengePopupView(frame: realFrame)
+        addSubview(challengePopupView)
+        
+        self.layoutIfNeeded()
+        
+        // Set new frame
+        let popupWidth: CGFloat = frame.width
+        let popupHeight: CGFloat = 0.5 * frame.height
+        
+        let showPopup = UIViewPropertyAnimator(duration: 0.3, curve: .easeIn, animations: {
+            challengePopupView.frame = CGRect(x: 0, y: (self.frame.height - popupHeight) / 2,
+            width: popupWidth, height: popupHeight)
+            self.layoutIfNeeded()
+        })
+        
+        showPopup.startAnimation()
     }
     
     override func layoutSubviews() {
@@ -178,39 +200,41 @@ class IssuesView: UIView {
 }
 
 // MARK: - UICollectionViewDataSource
-extension IssuesView: UICollectionViewDataSource {
+extension ChallengeSetupView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return issues.count
+        return challengesArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.issueCellID, for: indexPath) as! IssueCell
-        //let (text, type) = issues[indexPath.item] ?? ("", .error)
-        let text = issues[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.challengeCellID, for: indexPath) as! ChallengeSetupCell
+        // Set text according to value in challenges array
+        let (text, type) = challengesArr[indexPath.item]
         cell.setText(to: text)
-        cell.setImages(to: UIImage(named: icons[indexPath.item]))
-        if selectedIssues.contains(indexPath.item) {
-            cell.goalButton.setSelected()
+
+        // Set background image according to ValueType
+        cell.setBackgroundImages(type: type)
+        cell.challengeButton.tag = indexPath.item
+        cell.tag = indexPath.item
+        cell.challengeButton.addTarget(self, action: #selector(tappedChallengeButton), for: .touchUpInside)
+        
+        // Handler for button hold
+        let buttonHold = UILongPressGestureRecognizer(target: self, action: #selector(heldChallenge))
+        buttonHold.minimumPressDuration = 0.5
+        cell.addGestureRecognizer(buttonHold)
+        
+        // Set selected if it exists in selected challenges (necessary because of collection view refresh behavior)
+        if selectedChallenges.contains(indexPath.item) {
+            cell.challengeButton.setSelected(true)
         }
-        cell.goalButton.tag = indexPath.item
-        cell.goalButton.addTarget(self, action: #selector(tappedGoalButton), for: .touchUpInside)
+        
         return cell
     }
     
 }
 
-// MARK: - UICollectionViewDelegate
-extension IssuesView: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
-}
-
 // MARK: - UICollectionViewDelegateFlowLayout
-extension IssuesView: UICollectionViewDelegateFlowLayout {
+extension ChallengeSetupView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: buttonWidth, height: buttonHeight)

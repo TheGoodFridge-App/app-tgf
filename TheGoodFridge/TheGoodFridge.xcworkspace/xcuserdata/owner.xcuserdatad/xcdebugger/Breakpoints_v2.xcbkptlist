@@ -30,8 +30,8 @@
             filePath = "TheGoodFridge/Models/GroceryData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "getRecommendations()"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "TheGoodFridge/Models/GroceryData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "getRecommendations()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "TheGoodFridge/Models/GroceryData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "getGroceryList()"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,9 +78,9 @@
             filePath = "TheGoodFridge/Controllers/GroceryViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "didGetGroceryItems(rec:other:)"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "didGetGroceryItems(rec:other:purchased:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,9 +94,9 @@
             filePath = "TheGoodFridge/Controllers/GroceryViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "didGetGroceryItems(rec:other:)"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "didGetGroceryItems(rec:other:purchased:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -142,8 +142,8 @@
             filePath = "TheGoodFridge/Views/GroceryListFinalCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "setRecommended()"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "TheGoodFridge/Views/GroceryListFinalCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "layoutSubviews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "TheGoodFridge/Views/GroceryListFinalCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "GroceryListFinalCell"
             landmarkType = "3">
          </BreakpointContent>

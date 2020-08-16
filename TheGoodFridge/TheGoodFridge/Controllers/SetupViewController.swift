@@ -17,7 +17,11 @@ protocol SlideDelegate {
 }
 
 protocol SetupDelegate {
-    func postedSetupData()
+    func receivedChallenges(challenges: [ValueType: [String]])
+}
+
+protocol ChallengeDelegate {
+    func heldChallenge(challenge: String)
 }
 
 class SetupViewController: UIViewController {
@@ -27,6 +31,8 @@ class SetupViewController: UIViewController {
     var pageCount: Int = 0
     var selectedValues = Set<Int>()
     var selectedIssues = [ValueType: Set<Int>]()
+    var issuesPageCount = 0
+    var curIssuesPageCount = 0
     
     let setupBackground: UIImageView = {
         let imageView = UIImageView()
@@ -127,6 +133,7 @@ extension SetupViewController: SlideDelegate {
     func setValues(values: Set<Int>) {
         if selectedValues != values {
             selectedValues = values
+            issuesPageCount = values.count
             let subviews = scrollView.subviews
             for subview in subviews {
                 if subview != valuesView {
@@ -173,10 +180,14 @@ extension SetupViewController: SlideDelegate {
                 issuesView.delegate = self
                 updateContent(with: issuesView)
             }
-            // TODO: add finish view here
-            let startView = StartView()
-            startView.delegate = self
-            updateContent(with: startView)
+            
+//            let challengeIntroView = ChallengeIntroView()
+//            challengeIntroView.delegate = self
+//            updateContent(with: challengeIntroView)
+            
+//            let startView = StartView()
+//            startView.delegate = self
+//            updateContent(with: startView)
         }
         
     }
@@ -184,6 +195,7 @@ extension SetupViewController: SlideDelegate {
     func setIssues(type: ValueType, issues: Set<Int>) {
         let sortedIssues = Array(issues).sorted()
         
+        selectedIssues[type] = issues
         setupData.setIssues(type: type, issues: sortedIssues)
         
         // Create challenge views
@@ -191,7 +203,9 @@ extension SetupViewController: SlideDelegate {
     }
     
     func tappedNextButton() {
-        if index < slides.count - 1 {
+        if index == slides.count - 1 && slides[index] is IssuesView {
+            setupData.getChallenges()
+        } else if index < slides.count - 1 {
             index += 1
             scrollView.setContentOffset(CGPoint(x: view.frame.width * CGFloat(index), y: 0), animated: true)
             pageControl.currentPage = index
@@ -207,25 +221,43 @@ extension SetupViewController: SlideDelegate {
     }
     
     func tappedStartButton() {
-        setupData.postSetupData()
+        //setupData.postSetupData()
     }
     
 }
 
 extension SetupViewController: SetupDelegate {
     
-    func postedSetupData() {
+    func receivedChallenges(challenges: [ValueType: [String]]) {
+        let challengeIntroView = ChallengeIntroView()
+        challengeIntroView.delegate = self
+        updateContent(with: challengeIntroView)
         
-        let navigationVC = UINavigationController(rootViewController: TabBarController())
-        navigationVC.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationVC.navigationBar.shadowImage = UIImage()
-        navigationVC.navigationBar.isTranslucent = true
-        navigationVC.view.backgroundColor = UIColor.clear
-        navigationVC.modalPresentationStyle = .fullScreen
+        let challengeSetupView = ChallengeSetupView(challenges: challenges)
+        challengeSetupView.slideDelegate = self
+        challengeSetupView.challengeDelegate = self
+        updateContent(with: challengeSetupView)
+        print(challenges)
         
-        DispatchQueue.main.async {
-            self.present(navigationVC, animated: true, completion: nil)
-        }
+        tappedNextButton()
+//        let navigationVC = UINavigationController(rootViewController: TabBarController())
+//        navigationVC.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationVC.navigationBar.shadowImage = UIImage()
+//        navigationVC.navigationBar.isTranslucent = true
+//        navigationVC.view.backgroundColor = UIColor.clear
+//        navigationVC.modalPresentationStyle = .fullScreen
+//
+//        DispatchQueue.main.async {
+//            self.present(navigationVC, animated: true, completion: nil)
+//        }
+    }
+    
+}
+
+extension SetupViewController: ChallengeDelegate {
+    
+    func heldChallenge(challenge: String) {
+        print(challenge)
     }
     
 }

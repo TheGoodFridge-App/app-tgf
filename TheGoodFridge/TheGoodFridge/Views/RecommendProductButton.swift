@@ -13,6 +13,7 @@ class RecommendProductButton: UIButton {
     let unselectedImage = UIImage(named: "RecommendProductUnselected")
     let selectedImage = UIImage(named: "RecommendProductSelected")
     var product: String?
+    var attributedText: NSAttributedString?
     
 //    lazy var selectButton: UIButton = {
 //        let button = UIButton()
@@ -48,6 +49,10 @@ class RecommendProductButton: UIButton {
     }
     
     func setAttributedText(to text: NSAttributedString) {
+        titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        titleLabel?.numberOfLines = 0
+        titleLabel?.lineBreakMode = .byWordWrapping
+        attributedText = text
         setAttributedTitle(text, for: .normal)
     }
     
@@ -55,13 +60,28 @@ class RecommendProductButton: UIButton {
         return backgroundImage(for: .normal) == selectedImage
     }
     
+    func reset() {
+        setBackgroundImage(unselectedImage, for: .normal)
+    }
+    
     func toggle() {
         if isSelected() {
             setBackgroundImage(unselectedImage, for: .normal)
             setTitleColor(.black, for: .normal)
+            if product == "other" {
+                if let attributedText = attributedText {
+                    setAttributedTitle(attributedText, for: .normal)
+                }
+            }
         } else {
             setBackgroundImage(selectedImage, for: .normal)
             setTitleColor(.white, for: .normal)
+            if product == "other" {
+                if let attributedText = attributedText {
+                    let whiteText = NSAttributedString(string: attributedText.string, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.cgColor, NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!])
+                    setAttributedTitle(whiteText, for: .normal)
+                }
+            }
         }
         
     }

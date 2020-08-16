@@ -17,12 +17,14 @@ class GroceryListFinalView: UIView {
     let tableView: UITableView
     let recommended: [String: [String]]
     let other: [String]
+    var purchased: [String: String]
     
     var delegate: GroceryDelegate?
     
-    required init(rec: [String: [String]], other: [String]) {
+    required init(rec: [String: [String]], other: [String], purchased: [String: String]) {
         self.recommended = rec
         self.other = other
+        self.purchased = purchased
         tableView = UITableView(frame: .zero)
         
         super.init(frame: .zero)
@@ -105,10 +107,13 @@ extension GroceryListFinalView: UITableViewDataSource {
             cell.setText(to: rec[indexPath.row])
             //cell.setRecommended()
             cell.isRecommended = true
-            cell.item = rec[indexPath.row]
+            cell.item = rec[indexPath.row].capitalized
+            if let purchaseName = self.purchased[rec[indexPath.row].lowercased()] {
+                cell.selectedRecommendation(name: purchaseName, item: rec[indexPath.row])
+            }
             cell.recommended = recommended[rec[indexPath.row]] ?? [String]()
         } else {
-            cell.setText(to: other[indexPath.row])
+            cell.setText(to: other[indexPath.row].capitalized)
         }
         return cell
     }
