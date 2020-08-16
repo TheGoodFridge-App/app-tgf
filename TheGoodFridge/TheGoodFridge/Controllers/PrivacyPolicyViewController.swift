@@ -59,4 +59,8 @@ class PrivacyPolicyViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func changeLabel(label: UILabel, text: String) {
+        
+    }
+    
 }
