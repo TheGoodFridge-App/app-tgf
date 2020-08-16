@@ -303,15 +303,11 @@ extension SetupViewController: SetupDelegate {
     func postedSetupData() {
         spinner.stopAnimating()
         
-        let navigationVC = UINavigationController(rootViewController: TabBarController())
-        navigationVC.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationVC.navigationBar.shadowImage = UIImage()
-        navigationVC.navigationBar.isTranslucent = true
-        navigationVC.view.backgroundColor = UIColor.clear
-        navigationVC.modalPresentationStyle = .fullScreen
+        let tabBarVC = TabBarController()
+        tabBarVC.modalPresentationStyle = .fullScreen
 
         DispatchQueue.main.async {
-            self.present(navigationVC, animated: true, completion: nil)
+            self.present(tabBarVC, animated: true, completion: nil)
         }
     }
     
