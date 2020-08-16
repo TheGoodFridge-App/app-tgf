@@ -80,7 +80,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
             endingLineNumber = "155"
-            landmarkName = "didGetGroceryItems(rec:other:purchased:)"
+            landmarkName = "checkedPrevItems(items:success:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -96,7 +96,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
             endingLineNumber = "156"
-            landmarkName = "didGetGroceryItems(rec:other:purchased:)"
+            landmarkName = "checkedPrevItems(items:success:)"
             landmarkType = "7">
             <Locations>
                <Location

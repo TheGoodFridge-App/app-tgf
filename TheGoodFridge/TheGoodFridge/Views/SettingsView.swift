@@ -150,19 +150,19 @@ class SettingsView: UIView {
             wrapperView.bottomAnchor.constraint(equalTo: fullScreenView.bottomAnchor),
 
             
-            backButton.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 62),
-            backButton.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 19),
-            backButton.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 74),
-            backButton.trailingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 26.5),
+            backButton.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 20),
+            backButton.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 20),
+            //backButton.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 74),
+            //backButton.trailingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 26.5),
             
             settingsLabel.centerXAnchor.constraint(equalTo: fullScreenView.centerXAnchor),
-            settingsLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 51),
-            settingsLabel.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 83),
+            settingsLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 20),
+            //settingsLabel.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 83),
             
-            settingsSymbol.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 55),
-            settingsSymbol.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 80),
-            settingsSymbol.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -34),
-            settingsSymbol.leadingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -60),
+            settingsSymbol.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 20),
+            //settingsSymbol.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 80),
+            settingsSymbol.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -20),
+            //settingsSymbol.leadingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -60),
             
             stackView.topAnchor.constraint(equalTo: settingsLabel.bottomAnchor, constant: 50),
             stackView.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
