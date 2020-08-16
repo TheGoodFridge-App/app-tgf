@@ -18,7 +18,8 @@ struct LoginManager {
     func login(email: String, password: String) {
         let parameters: [String: String] = [
             "email": email,
-            "password": password
+            "password": password,
+            "secret": K.secretKey
         ]
         
         AF.request("\(urlString)/api/login", parameters: parameters)

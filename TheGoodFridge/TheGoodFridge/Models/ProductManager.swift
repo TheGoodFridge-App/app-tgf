@@ -19,7 +19,8 @@ struct ProductManager {
         let parameters: [String: String] = [
             "email": email,
             "brand": purchased,
-            "product": item
+            "product": item,
+            "secret": K.secretKey
         ]
         
         AF.request(urlString, method: .put, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()

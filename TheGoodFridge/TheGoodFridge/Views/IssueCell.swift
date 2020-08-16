@@ -18,6 +18,8 @@ class IssueCell: UICollectionViewCell {
     let humanSelectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
     let humanUnselectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
     
+    var buttonWidth: CGFloat = 0.0
+    
     override init(frame: CGRect) {
         goalButton = ValueGoalButton()
         super.init(frame: frame)
@@ -36,9 +38,13 @@ class IssueCell: UICollectionViewCell {
         return goalButton.titleLabel?.text
     }
     
-    func setText(to text: String) {
-        goalButton.valueGoalView.label.font = UIFont(name: "Amiko-Bold", size: 12)
+    func setText(to text: String){
         goalButton.setText(to: text)
+    }
+    
+    func setIssueText(to text: String) {
+        goalButton.buttonWidth = buttonWidth
+        goalButton.setIssueText(to: text)
     }
     
     func setImages(to icon: UIImage?) {

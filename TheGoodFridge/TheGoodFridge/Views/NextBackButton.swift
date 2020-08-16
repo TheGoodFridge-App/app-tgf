@@ -11,6 +11,7 @@ import UIKit
 enum ButtonDirection {
     case next
     case back
+    case start
 }
 
 class NextBackButton: UIButton {
@@ -21,8 +22,10 @@ class NextBackButton: UIButton {
         if type == .next {
             setBackgroundImage(UIImage(named: "NextButtonEnabled"), for: .normal)
             setBackgroundImage(UIImage(named: "NextButtonDisabled"), for: .disabled)
-        } else {
+        } else if type == .back {
             setBackgroundImage(UIImage(named: "BackButtonEnabled"), for: .normal)
+        } else if type == .start {
+            setBackgroundImage(UIImage(named: "StartButtonEnabled"), for: .normal)
         }
         
         translatesAutoresizingMaskIntoConstraints = false

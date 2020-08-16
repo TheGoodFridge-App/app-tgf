@@ -45,7 +45,8 @@ class GroceryData {
         
         //let email = "test"
         let parameters: [String: String] = [
-            "email": email
+            "email": email,
+            "secret": K.secretKey
         ]
         
         AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString))
@@ -75,7 +76,8 @@ class GroceryData {
         }
         let parameters: [String: [String]] = [
             "email": [email],
-            "items": items
+            "items": items,
+            "secret": [K.secretKey]
         ]
         
         AF.request(urlString, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()

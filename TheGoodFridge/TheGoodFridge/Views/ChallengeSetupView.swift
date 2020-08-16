@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ChallengeDelegate {
+    func didGetDescriptions(descriptions: [String: Content])
+    func selectedChallenge(challenge: String?)
+}
+
 class ChallengeSetupView: UIView {
     // Constants
     let buttonWidth: CGFloat = 140
@@ -19,9 +24,9 @@ class ChallengeSetupView: UIView {
     var challenges: [ValueType: [String]]
     var challengesArr: [(String, ValueType)]
     var selectedChallenges = [Int]()
+    var descriptions = [String: Content]()
     // Delegate
     var slideDelegate: SlideDelegate?
-    var challengeDelegate: ChallengeDelegate?
     var heldChallengeIndex: Int?
     
     lazy var introTextView: UITextView = {
@@ -31,7 +36,7 @@ class ChallengeSetupView: UIView {
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         let bigText = NSMutableAttributedString(
-            string: "Choose three challenges out of the following:",
+            string: "Choose up to three challenges out of the following:",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-SemiBold", size: 20)!]
         )
         let smallText = NSAttributedString(
@@ -58,7 +63,23 @@ class ChallengeSetupView: UIView {
         return button
     }()
     
+    let backingImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let dimmerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .darkGray
+        view.alpha = 0.0
+        return view
+    }()
+    
     let collectionView: UICollectionView
+    let challengePopupView = ChallengePopupView()
+    let challengeManager = ChallengeManager()
     
     required init(challenges: [ValueType: [String]]) {
         self.challenges = challenges
@@ -69,6 +90,8 @@ class ChallengeSetupView: UIView {
         if let e = challenges[.environment], let a = challenges[.animal], let h = challenges[.human] {
             challengesArr = e.map({($0, .environment)}) + a.map({($0, .animal)}) + h.map({($0, .human)})
         }
+        
+        // Collection view layout setup
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: buttonSpacing - scrollMargin, bottom: buttonSpacing, right: buttonSpacing - scrollMargin)
@@ -76,6 +99,11 @@ class ChallengeSetupView: UIView {
         
         //issues = IssueData.getAllIssues(values: values)
         super.init(frame: .zero)
+        
+        challengeManager.delegate = self
+        challengeManager.getDescriptions(challenges: challengesArr.map({(challenge, _) in challenge}))
+        
+        challengePopupView.delegate = self
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -87,6 +115,11 @@ class ChallengeSetupView: UIView {
         collectionView.backgroundColor = .clear
         
         nextButton.isEnabled = false
+        
+        //Dimmer view tap setup
+        let dimmerTap = UITapGestureRecognizer(target: self, action: #selector(tappedDimmerView))
+        dimmerView.addGestureRecognizer(dimmerTap)
+        dimmerView.isUserInteractionEnabled = true
         
         addSubview(introTextView)
         addSubview(collectionView)
@@ -136,23 +169,55 @@ class ChallengeSetupView: UIView {
     }
     
     @objc func tappedChallengeButton(sender: ChallengeButton) {
+        print("here")
         if sender.isSelected() {
             selectedChallenges = selectedChallenges.filter({$0 != sender.tag})
-        } else {
+            sender.setSelected(false)
+        } else if selectedChallenges.count < 3 {
             selectedChallenges.append(sender.tag)
+            sender.setSelected(true)
         }
-        sender.setSelected(!sender.isSelected())
+        
         nextButton.isEnabled = selectedChallenges.count > 0
         print(selectedChallenges)
     }
     
     @objc func tappedNextButton() {
-        //delegate?.setIssues(type: type, issues: Set(selectedIssues))
+        nextButton.isEnabled = false
+        let selected = Set<Int>(selectedChallenges)
+        print(selected)
+        var actualChallenges = [String]()
+        
+        for num in selected {
+            actualChallenges.append(challengesArr[num].0)
+        }
+        
+        var formattedChallenges = challenges
+        
+        for value in formattedChallenges {
+            var key = ValueType.error
+            switch value.key {
+            case .environment:
+                key = .environment
+            case .animal:
+                key = .animal
+            case .human:
+                key = .human
+            default:
+                break
+            }
+            
+            formattedChallenges[key] = formattedChallenges[key]?.filter({ actualChallenges.contains($0) }) ?? []
+        }
+        slideDelegate?.setChallenges(challenges: formattedChallenges)
         slideDelegate?.tappedNextButton()
+        nextButton.isEnabled = true
     }
     
     @objc func tappedBackButton() {
+        backButton.isEnabled = false
         slideDelegate?.tappedBackButton()
+        backButton.isEnabled = true
     }
     
     @objc func heldChallenge(_ sender: UIGestureRecognizer) {
@@ -161,33 +226,93 @@ class ChallengeSetupView: UIView {
                 let tag = cellView.tag
                 let originInRootView = collectionView.convert(cellView.frame, to: self)
                 print(originInRootView.origin)
-                animatePopup(from: originInRootView)
-                heldChallengeIndex = tag
-                let (challenge, _) = challengesArr[tag]
-                challengeDelegate?.heldChallenge(challenge: challenge)
+                
+                // Disable buttons
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                    self.backButton.isEnabled = false
+                    self.nextButton.isEnabled = false
+                })
+                
+                // Set backing image
+                backingImageView.image = self.parentContainerViewController()?.view.asImage()
+                backingImageView.isHidden = false
+                
+                addSubview(backingImageView)
+                addSubview(dimmerView)
+                
+                let constraints = [
+                    dimmerView.topAnchor.constraint(equalTo: topAnchor),
+                    dimmerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    dimmerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                    dimmerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                    backingImageView.topAnchor.constraint(equalTo: topAnchor),
+                    backingImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    backingImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                    backingImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
+                ]
+                
+                NSLayoutConstraint.activate(constraints)
+                self.layoutIfNeeded()
+                
+                animatePopup(from: originInRootView, index: tag)
             }
         }
     }
     
-    private func animatePopup(from startFrame: CGRect) {
-        let centerOrigin = CGPoint(x: startFrame.origin.x + (buttonWidth / 2), y: startFrame.origin.y + (buttonHeight / 2))
-        let realFrame = CGRect(origin: centerOrigin, size: CGSize(width: 0, height: 0))
-        let challengePopupView = ChallengePopupView(frame: realFrame)
+    @objc func tappedDimmerView(_ tapRecognizer: UITapGestureRecognizer) {
+        hidePopup()
+    }
+    
+    private func animatePopup(from startFrame: CGRect, index: Int) {
+        // Set popup start position
+        let (challenge, type) = challengesArr[index]
+        //let realFrame = CGRect(origin: centerOrigin, size: CGSize(width: 0, height: 0))
+        challengePopupView.frame = startFrame
+        challengePopupView.layer.cornerRadius = startFrame.height / 2
+        challengePopupView.alpha = 0.0
+        self.challengePopupView.startFrame = startFrame
+        challengePopupView.setInfo(challenge: challenge, type: type)
+        // Set description if it exists in map
+        if let description = descriptions[challenge] {
+            challengePopupView.setDescription(to: description)
+        }
         addSubview(challengePopupView)
         
         self.layoutIfNeeded()
         
         // Set new frame
         let popupWidth: CGFloat = frame.width
-        let popupHeight: CGFloat = 0.5 * frame.height
+        let popupHeight: CGFloat = (7/12) * frame.height
+        let margin: CGFloat = 25
         
-        let showPopup = UIViewPropertyAnimator(duration: 0.3, curve: .easeIn, animations: {
-            challengePopupView.frame = CGRect(x: 0, y: (self.frame.height - popupHeight) / 2,
-            width: popupWidth, height: popupHeight)
+        let showPopup = UIViewPropertyAnimator(duration: 0.20, curve: .easeOut, animations: {
+            self.dimmerView.alpha = 0.2
+            self.challengePopupView.alpha = 1.0
+            self.challengePopupView.frame = CGRect(x: margin, y: (self.frame.height - popupHeight) / 2,
+            width: popupWidth - (2 * margin), height: popupHeight)
+            self.bringSubviewToFront(self.challengePopupView)
             self.layoutIfNeeded()
         })
         
         showPopup.startAnimation()
+    }
+    
+    private func hidePopup() {
+        nextButton.isEnabled = selectedChallenges.count > 0
+        backButton.isEnabled = true
+        
+        // Hide popup first
+        let hideCard = UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
+            self.layoutIfNeeded()
+        }
+        hideCard.addAnimations {
+            self.dimmerView.alpha = 0.0
+            self.challengePopupView.frame = self.challengePopupView.startFrame
+            self.challengePopupView.alpha = 0.0
+            self.backingImageView.isHidden = true
+        }
+        
+        hideCard.startAnimation()
     }
     
     override func layoutSubviews() {
@@ -248,4 +373,29 @@ extension ChallengeSetupView: UICollectionViewDelegateFlowLayout {
         return buttonSpacing
     }
     
+}
+
+extension ChallengeSetupView: ChallengeDelegate {
+    func selectedChallenge(challenge: String?) {
+        if challenge != nil && selectedChallenges.count < 3 {
+            if let index = challengesArr.firstIndex(where: { (c, _) in challenge == c }) {
+                if !selectedChallenges.contains(index) {
+                    selectedChallenges.append(index)
+                    collectionView.reloadData()
+                }
+            }
+        }
+        
+        hidePopup()
+    }
+    
+    func didGetDescriptions(descriptions: [String: Content]) {
+        self.descriptions.merge(descriptions, uniquingKeysWith: { (_, new) in new })
+        print(descriptions)
+        if let challenge = challengePopupView.curChallenge, let description = descriptions[challenge] {
+            challengePopupView.setDescription(to: description)
+        } else {
+            challengePopupView.setDescription(to: Content(name: "", description: "Error: Could not load description", impact: []))
+        }
+    }
 }

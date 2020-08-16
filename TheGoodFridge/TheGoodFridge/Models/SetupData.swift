@@ -22,6 +22,8 @@ struct SetupData {
     var humanIssues = [String]()
     var animalIssues = [String]()
     
+    var challenges = [String: [String]]()
+    
     var delegate: SetupDelegate?
     
     mutating func setEnvironment() {
@@ -59,6 +61,11 @@ struct SetupData {
         
     }
     
+    mutating func setChallenges(_ challenges: [String: [String]]) {
+        self.challenges = challenges
+        print(self.challenges)
+    }
+    
     func getChallenges() {
         // Getting challenges
         let issues = [environmentIssues, animalIssues, humanIssues]
@@ -70,7 +77,8 @@ struct SetupData {
         
         for (i, issue) in issues.enumerated() {
             let parameters = [
-                "issues": issue
+                "issues": issue,
+                "secret": [K.secretKey]
             ]
             
             group.enter()
@@ -80,7 +88,6 @@ struct SetupData {
                         debugPrint("Error: \(e)")
                         return
                     }
-                    debugPrint(response)
                     if let data = response.data, let challenges = self.parseChallengeJSON(data: data) {
                         //self.delegate?.receivedChallenges(challenges: challenges)
                         if i == 0 {
@@ -107,6 +114,11 @@ struct SetupData {
             let lastName = User.shared.getLastName()
         else { return debugPrint("Can't find email") }
         
+        // Format challenges
+        let challengesArr: [String] = challenges.reduce([], { cur, dict in
+            return cur + dict.value
+        })
+        
         let parameters: [String: [String]] = [
             "email": [email],
             "first_name": [firstName],
@@ -116,7 +128,9 @@ struct SetupData {
             "human": [(human ? "true" : "false")],
             "environment_issues": environmentIssues,
             "animal_issues": animalIssues,
-            "human_issues": humanIssues
+            "human_issues": humanIssues,
+            "challenges": challengesArr,
+            "secret": [K.secretKey]
         ]
         
         let urlString = "\(K.serverURL)/api/values"
@@ -127,16 +141,15 @@ struct SetupData {
                     debugPrint("Error: \(e)")
                     return
                 }
-                debugPrint(response)
+                
+                self.delegate?.postedSetupData()
         }
     }
     
     private func parseChallengeJSON(data: Data) -> [String]? {
         do {
-            print(data)
             let decoder = JSONDecoder()
             let challengeData = try decoder.decode(ChallengeData.self, from: data)
-            print(challengeData)
             return challengeData.challenges
         }
         catch {

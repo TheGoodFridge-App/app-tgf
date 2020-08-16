@@ -50,11 +50,15 @@ class ChallengeIntroView: UIView {
     }
     
     @objc func tappedNextButton() {
+        nextButton.isEnabled = false
         delegate?.tappedNextButton()
+        nextButton.isEnabled = true
     }
     
     @objc func tappedBackButton() {
+        backButton.isEnabled = false
         delegate?.tappedBackButton()
+        backButton.isEnabled = true
     }
     
     private func setupLayout() {

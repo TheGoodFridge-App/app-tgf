@@ -43,6 +43,7 @@
 		EB8C9BC0245F5D4200E51E7C /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8C9BBF245F5D4200E51E7C /* IntroViewController.swift */; };
 		EB96750D24A452340058FAE9 /* RecommendCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB96750C24A452340058FAE9 /* RecommendCardView.swift */; };
 		EBA42CF2244CE4C800185F94 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA42CF1244CE4C800185F94 /* LoginManager.swift */; };
+		EBACD0FA24D7E5AC00143E47 /* ChallengeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACD0F924D7E5AC00143E47 /* ChallengeManager.swift */; };
 		EBBD0E0424A177170079F15C /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBD0E0324A177170079F15C /* RecommendViewController.swift */; };
 		EBBD0E0624A190CA0079F15C /* UIView+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBD0E0524A190CA0079F15C /* UIView+Snapshot.swift */; };
 		EBBEA0D8245D51AD0038F403 /* Amiko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBBEA0D6245D518B0038F403 /* Amiko-Bold.ttf */; };
@@ -55,6 +56,8 @@
 		EBC13140246A6CCD0047CD2C /* NextBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC1313F246A6CCD0047CD2C /* NextBackButton.swift */; };
 		EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC13141246A6E640047CD2C /* IssueCell.swift */; };
 		EBC13144246A6E900047CD2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC13143246A6E900047CD2C /* Constants.swift */; };
+		EBC9179824E518010023EF98 /* ChallengeCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC9179724E518010023EF98 /* ChallengeCompleteView.swift */; };
+		EBCAB24324E8B83400CF2946 /* ChallengeCompleteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCAB24224E8B83400CF2946 /* ChallengeCompleteCard.swift */; };
 		EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE9A0E2468885900B0266E /* SetupData.swift */; };
 		EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE9A1024688A4B00B0266E /* IssuesView.swift */; };
 		EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF520922456156100EC0B03 /* RegisterViewController.swift */; };
@@ -115,6 +118,7 @@
 		EB8C9BBF245F5D4200E51E7C /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		EB96750C24A452340058FAE9 /* RecommendCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCardView.swift; sourceTree = "<group>"; };
 		EBA42CF1244CE4C800185F94 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		EBACD0F924D7E5AC00143E47 /* ChallengeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeManager.swift; sourceTree = "<group>"; };
 		EBBD0E0324A177170079F15C /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
 		EBBD0E0524A190CA0079F15C /* UIView+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Snapshot.swift"; sourceTree = "<group>"; };
 		EBBEA0D4245D51880038F403 /* Amiko-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Regular.ttf"; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 		EBC1313F246A6CCD0047CD2C /* NextBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextBackButton.swift; sourceTree = "<group>"; };
 		EBC13141246A6E640047CD2C /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		EBC13143246A6E900047CD2C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EBC9179724E518010023EF98 /* ChallengeCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCompleteView.swift; sourceTree = "<group>"; };
+		EBCAB24224E8B83400CF2946 /* ChallengeCompleteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCompleteCard.swift; sourceTree = "<group>"; };
 		EBCE9A0E2468885900B0266E /* SetupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupData.swift; sourceTree = "<group>"; };
 		EBCE9A1024688A4B00B0266E /* IssuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesView.swift; sourceTree = "<group>"; };
 		EBF5208C2456137800EC0B03 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -229,6 +235,7 @@
 				EB8292072478BA4C008D96FA /* UserData.swift */,
 				EB8C63992483816500983BE9 /* GroceryData.swift */,
 				EB55FE0824AD3A17002760F7 /* ProductManager.swift */,
+				EBACD0F924D7E5AC00143E47 /* ChallengeManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -238,6 +245,8 @@
 			children = (
 				EBF7A741248469A50083C634 /* AddButton.swift */,
 				EB05C93524D6349D00AF51C7 /* ChallengeButton.swift */,
+				EBCAB24224E8B83400CF2946 /* ChallengeCompleteCard.swift */,
+				EBC9179724E518010023EF98 /* ChallengeCompleteView.swift */,
 				EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */,
 				EB05C93724D6677F00AF51C7 /* ChallengePopupView.swift */,
 				EB05C93324D62A0E00AF51C7 /* ChallengeSetupCell.swift */,
@@ -414,12 +423,14 @@
 				EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */,
 				EB05C93824D6677F00AF51C7 /* ChallengePopupView.swift in Sources */,
 				EB8C639A2483816500983BE9 /* GroceryData.swift in Sources */,
+				EBC9179824E518010023EF98 /* ChallengeCompleteView.swift in Sources */,
 				EB5244C02471D50500C45C6B /* StartView.swift in Sources */,
 				EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */,
 				EB56EC672442E34C001D48BE /* WelcomeViewController.swift in Sources */,
 				EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */,
 				EB05C93624D6349D00AF51C7 /* ChallengeButton.swift in Sources */,
 				EBBEF37F2477B82D005B085E /* TabBarController.swift in Sources */,
+				EBCAB24324E8B83400CF2946 /* ChallengeCompleteCard.swift in Sources */,
 				EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */,
 				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
 				EBBD0E0424A177170079F15C /* RecommendViewController.swift in Sources */,
@@ -454,6 +465,7 @@
 				EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */,
 				EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */,
 				EB55FE0924AD3A17002760F7 /* ProductManager.swift in Sources */,
+				EBACD0FA24D7E5AC00143E47 /* ChallengeManager.swift in Sources */,
 				EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -95,7 +95,7 @@ class IssuesView: UIView {
         
         collectionView.backgroundColor = .clear
         
-        nextButton.isEnabled = false
+        nextButton.isEnabled = selectedIssues.count > 0
         
         addSubview(introTextView)
         addSubview(collectionView)
@@ -162,10 +162,13 @@ class IssuesView: UIView {
         //delegate?.setIssues(type: type, issues: Set(selectedIssues))
         nextButton.isEnabled = false
         delegate?.tappedNextButton()
+        nextButton.isEnabled = true
     }
     
     @objc func tappedBackButton() {
+        backButton.isEnabled = false
         delegate?.tappedBackButton()
+        backButton.isEnabled = true
     }
     
     override func layoutSubviews() {
@@ -187,8 +190,9 @@ extension IssuesView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.issueCellID, for: indexPath) as! IssueCell
         //let (text, type) = issues[indexPath.item] ?? ("", .error)
+        cell.buttonWidth = buttonWidth
         let text = issues[indexPath.item]
-        cell.setText(to: text)
+        cell.setIssueText(to: text)
         cell.setImages(to: UIImage(named: icons[indexPath.item]))
         if selectedIssues.contains(indexPath.item) {
             cell.goalButton.setSelected()

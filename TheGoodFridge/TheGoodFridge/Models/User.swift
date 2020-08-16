@@ -76,7 +76,8 @@ class User {
             let urlString = "\(K.serverURL)/api/data"
             
             let parameters: [String: String] = [
-                "email": email
+                "email": email,
+                "secret": K.secretKey
             ]
             
             AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
