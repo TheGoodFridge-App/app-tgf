@@ -60,17 +60,20 @@ class GroceryViewController: UIViewController {
     var groceryListEditView = GroceryListEditView(rows: [GroceryListCell()], isEditing: false)
     var groceryListFinalView = GroceryListFinalView(rec: [String: [String]](), other: [String](), purchased: [String: String]())
     let groceryData = GroceryData(items: [String]())
+    var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        User.shared.delegate = self
+        user.delegate = self
         groceryListEditView.delegate = self
         groceryListFinalView.delegate = self
+        groceryListFinalView.user = user
         groceryData.delegate = self
+        groceryData.user = user
         
-        if let firstName = User.shared.getFirstName() {
-            nameLabel.text = "\(firstName)'s Grocery List"
+        if let userData = user.getUserData() {
+            nameLabel.text = "\(userData.first_name)'s Grocery List"
             setupViews()
         }
         
@@ -132,15 +135,12 @@ class GroceryViewController: UIViewController {
 
 extension GroceryViewController: UserDelegate {
     
-    func didGetUserData() {
+    func didGetUserData(userData: UserData) {
         DispatchQueue.main.async {
-            if let firstName = User.shared.getFirstName() {
-                self.nameLabel.text = "\(firstName)'s Grocery List"
-                self.setupViews()
-            }
+            self.nameLabel.text = "\(userData.first_name)'s Grocery List"
+            self.setupViews()
         }
     }
-    
 }
 
 extension GroceryViewController: GroceryDelegate {

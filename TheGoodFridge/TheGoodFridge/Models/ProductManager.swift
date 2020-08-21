@@ -7,12 +7,15 @@
 //
 
 import Alamofire
+import Firebase
 import Foundation
 
-struct ProductManager {
-    static func postPurchase(purchased: String, item: String) {
+class ProductManager {
+    var user = User()
+    
+    func postPurchase(purchased: String, item: String) {
         let urlString = "\(K.serverURL)/grocery_list/purchased"
-        guard let email = User.shared.getEmail() else {
+        guard let email = user.email else {
             debugPrint("Could not get user email.")
             return
         }

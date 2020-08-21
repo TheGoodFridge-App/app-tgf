@@ -20,6 +20,7 @@ class GroceryListFinalView: UIView {
     var purchased: [String: String]
     
     var delegate: GroceryDelegate?
+    var user = User()
     
     required init(rec: [String: [String]], other: [String], purchased: [String: String]) {
         self.recommended = rec
@@ -102,6 +103,7 @@ extension GroceryListFinalView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.groceryCellFinalID, for: indexPath) as! GroceryListFinalCell
         cell.delegate = delegate
+        cell.user = user
         let rec = Array(recommended.keys)
         if indexPath.section == 0 {
             cell.setText(to: rec[indexPath.row])

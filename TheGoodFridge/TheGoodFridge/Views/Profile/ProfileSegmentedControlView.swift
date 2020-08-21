@@ -24,9 +24,10 @@ class CustomSegmentedControl: UIView {
     
     public private(set) var selectedIndex : Int = 0
     
-    convenience init(frame:CGRect, buttonTitle:[String]) {
-        self.init(frame: frame)
+    convenience init(buttonTitle:[String]) {
+        self.init(frame: .zero)
         self.buttonTitles = buttonTitle
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     override func draw(_ rect: CGRect) {
@@ -54,6 +55,7 @@ class CustomSegmentedControl: UIView {
     var currIndex = 0
     let statsView = StatsView()
     let challengeView = ChallengeBoxes()
+    lazy var selectorLeadingConstraint = selectorView.leadingAnchor.constraint(equalTo: leadingAnchor)
     
     func setLowerStackView(view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -68,19 +70,17 @@ class CustomSegmentedControl: UIView {
         for (buttonIndex, btn) in buttons.enumerated() {
             btn.setTitleColor(textColor, for: .normal)
             if btn == sender {
-                let selectorPosition = frame.width/CGFloat(buttonTitles.count) * CGFloat(buttonIndex)
+                let selectorLeadingConstant: CGFloat = frame.width/CGFloat(buttonTitles.count) * CGFloat(buttonIndex) + frame.width / 12
                 selectedIndex = buttonIndex
                 delegate?.change(to: selectedIndex)
                 UIView.animate(withDuration: 0.3) {
-                    self.selectorView.frame.origin.x = selectorPosition + self.frame.width/12
+                    self.selectorLeadingConstraint.constant = selectorLeadingConstant
+                    self.layoutIfNeeded()
                 }
 //                let statsView = StatsView()
 //                let challengeView = ChallengeBoxes()
                 btn.setTitleColor(selectorTextColor, for: .normal)
                 
-                print(currIndex)
-
-
                 if selectedIndex != currIndex {
                     switch currIndex {
                     case 0:
@@ -113,8 +113,6 @@ class CustomSegmentedControl: UIView {
     }
 }
 
-
-
 //Configuration View
 var stack = UIStackView(arrangedSubviews: [UIButton]())
 var lowerStack = UIStackView()
@@ -124,78 +122,85 @@ extension CustomSegmentedControl {
         createButton()
         configStackView()
         configSelectorView()
-//        configStackView()
     }
   
     // (1/12) for tab and (8/12) for lower: 1/9, 8/9
     private func configStackView() {
         
-        let wrapStack = UIStackView()
-        wrapStack.axis = .vertical
-        wrapStack.alignment = .center
-        wrapStack.distribution = .fill
-        addSubview(wrapStack)
-        wrapStack.translatesAutoresizingMaskIntoConstraints = false
-        wrapStack.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        //wrapStack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        wrapStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
-        wrapStack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        wrapStack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+//        let wrapStack = UIStackView()
+//        wrapStack.axis = .vertical
+//        wrapStack.alignment = .center
+//        wrapStack.distribution = .fill
+//        addSubview(wrapStack)
+//        wrapStack.translatesAutoresizingMaskIntoConstraints = false
+//        wrapStack.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//        //wrapStack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+//        wrapStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+//        wrapStack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//        wrapStack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
         
         stack = UIStackView(arrangedSubviews: buttons)
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        wrapStack.addArrangedSubview(stack)
+        addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        //stack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        stack.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        stack.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        stack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/12).isActive = true
         
 //        let lowerStack = UIStackView()
         lowerStack.axis = .vertical
         lowerStack.alignment = .center
         lowerStack.distribution = .fill
-        wrapStack.addArrangedSubview(lowerStack)
+        addSubview(lowerStack)
         lowerStack.translatesAutoresizingMaskIntoConstraints = false
-        lowerStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-        lowerStack.trailingAnchor.constraint(equalTo: wrapStack.trailingAnchor, constant: 0).isActive = true
-        lowerStack.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 0).isActive = true
-        lowerStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 11/12).isActive = true
+        
+        let constraints = [
+            stack.topAnchor.constraint(equalTo: self.topAnchor),
+            stack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stack.heightAnchor.constraint(equalToConstant: 30),
+            
+            lowerStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            lowerStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            lowerStack.topAnchor.constraint(equalTo: stack.bottomAnchor),
+            lowerStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
         
         setLowerStackView(view: challengeView)
     }
     
     private func configSelectorView() {
         let selectorWidth = frame.width / CGFloat(self.buttonTitles.count + 1)
-//        print(frame.height)
-//        print(stack.frame.height)
-        selectorView = UIView(frame: CGRect(x: frame.width/12, y: stack.frame.height + 40, width: selectorWidth, height: 2))
+        selectorView = UIView()
         selectorView.backgroundColor = selectorViewColor
+        selectorView.translatesAutoresizingMaskIntoConstraints = false
+        
         addSubview(selectorView)
+        selectorLeadingConstraint.constant = frame.width / 12
+        
+        let constraints = [
+            selectorView.topAnchor.constraint(equalTo: buttons[0].bottomAnchor),
+            selectorView.widthAnchor.constraint(equalToConstant: selectorWidth),
+            selectorView.heightAnchor.constraint(equalToConstant: 2),
+            selectorLeadingConstraint
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+        
     }
     
     private func createButton() {
         buttons = [UIButton]()
-        buttons.removeAll()
         subviews.forEach({$0.removeFromSuperview()})
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
-            button.titleLabel?.font = UIFont(name: "Amiko-Bold", size: 14)
-            button.addTarget(self, action:#selector(CustomSegmentedControl.buttonAction(sender:)), for: .touchUpInside)
+            button.titleLabel?.font = UIFont(name: "Amiko-SemiBold", size: 14)
+            button.addTarget(self, action:#selector(buttonAction), for: .touchUpInside)
             button.setTitleColor(textColor, for: .normal)
             button.titleLabel?.textAlignment = .center
-            
-//            let lineView = UIView(frame: CGRect(x: 0, y: 0, width: button.frame.size.width, height: 1))
-//            lineView.backgroundColor = .red
-//            button.addSubview(lineView)
-            
-//            button.layer.borderWidth = 2
-//            button.layer.borderColor = CGColor.init(srgbRed: 0.8, green: 0.2, blue: 0.3, alpha: 1)
             
             buttons.append(button)
         }

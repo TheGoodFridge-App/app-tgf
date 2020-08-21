@@ -16,6 +16,8 @@ class TabBarController: UITabBarController {
     let selectedColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
     let unselectedColor = UIColor(red: 0.855, green: 0.925, blue: 0.824, alpha: 1)
     
+    var user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,10 +54,13 @@ class TabBarController: UITabBarController {
         }
         
         let groceryVC = GroceryViewController()
+        groceryVC.user = user
         groceryVC.tabBarItem = groceryItem
+        
 //        let searchVC = SearchViewController()
 //        searchVC.tabBarItem = searchItem
         let profileVC = ProfileViewController()
+        profileVC.user = user
         profileVC.tabBarItem = profileItem
         
         self.viewControllers = [groceryVC, profileVC]

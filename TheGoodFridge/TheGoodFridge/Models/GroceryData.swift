@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import Firebase
 import Foundation
 
 enum GroceryType {
@@ -31,6 +32,7 @@ class GroceryData {
     var delegate: GroceryDelegate?
     
     var purchased = [String: String]()
+    var user = User()
     
     init(items: [String]) {
         self.items = items
@@ -38,7 +40,7 @@ class GroceryData {
     
     func getGroceryList() {
         let urlString = "\(K.serverURL)/grocery_list/get"
-        guard let email = User.shared.getEmail() else {
+        guard let email = user.email else {
             debugPrint("Could not get user email.")
             return
         }
@@ -70,7 +72,7 @@ class GroceryData {
     func getRecommendations() {
         // Split items into recommendations and products that did not get anything
         let urlString = "\(K.serverURL)/grocery_list"
-        guard let email = User.shared.getEmail() else {
+        guard let email = user.email else {
             debugPrint("Could not get user email.")
             return
         }

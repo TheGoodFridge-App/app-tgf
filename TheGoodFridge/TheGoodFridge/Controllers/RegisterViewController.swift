@@ -204,17 +204,21 @@ class RegisterViewController: UIViewController {
                 return
               } else {
                   // Navigate to the ChatViewController
-                User.shared.setFirstName(to: self.firstNameTextField.text())
-                User.shared.setLastName(to: self.lastNameTextField.text())
-                User.shared.setEmail(to: self.emailTextField.text())
-                self.presentSetup()
+                let firstName = self.firstNameTextField.text() ?? ""
+                let lastName = self.lastNameTextField.text() ?? ""
+                let user = User()
+                user.email = email
+                user.firstName = firstName
+                user.lastName = lastName
+                self.presentSetup(user: user)
               }
             }
         }
     }
     
-    private func presentSetup() {
+    private func presentSetup(user: User) {
         let setupVC = IntroViewController()
+        setupVC.user = user
         setupVC.modalPresentationStyle = .fullScreen
         present(setupVC, animated: true, completion: nil)
     }
@@ -270,10 +274,11 @@ extension RegisterViewController: GIDSignInDelegate {
             let email = user.profile.email
             let firstName = user.profile.givenName
             let lastName = user.profile.familyName
-            User.shared.setEmail(to: email)
-            User.shared.setFirstName(to: firstName)
-            User.shared.setLastName(to: lastName)
-            self.presentSetup()
+            let user = User()
+            user.email = email
+            user.firstName = firstName
+            user.lastName = lastName
+            self.presentSetup(user: user)
         }
         
     }

@@ -6,6 +6,7 @@
 //  Copyright © 2020 Eugene Lo. All rights reserved.
 //
 
+import Firebase
 import Foundation
 import Alamofire
 
@@ -25,6 +26,10 @@ struct SetupData {
     var challenges = [String: [String]]()
     
     var delegate: SetupDelegate?
+    
+    var lastName: String?
+    var firstName: String?
+    var email: String?
     
     mutating func setEnvironment() {
         environment = true
@@ -110,9 +115,9 @@ struct SetupData {
     }
     
     func postSetupData() {
-        guard let email = User.shared.getEmail(),
-            let firstName = User.shared.getFirstName(),
-            let lastName = User.shared.getLastName()
+        guard let email = self.email,
+            let firstName = self.firstName,
+            let lastName = self.lastName
         else { return debugPrint("Can't find email") }
         
         // Format challenges

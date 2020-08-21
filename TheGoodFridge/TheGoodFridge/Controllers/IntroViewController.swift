@@ -13,7 +13,7 @@ import GoogleSignIn
 
 class IntroViewController: UIViewController {
 
-    let firstName = User.shared.getFirstName() ?? ""
+    var user = User()
     
     let introBackground: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "IntroBackgroundImage"))
@@ -26,7 +26,7 @@ class IntroViewController: UIViewController {
         let textView = UITextView()
         textView.backgroundColor = .clear
         var bigText = NSMutableAttributedString(
-            string: "Hello \(firstName),\nWelcome to The Good Fridge.\n\n",
+            string: "Hello \(user.firstName ?? ""),\nWelcome to The Good Fridge.\n\n",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-SemiBold", size: 24)!]
         )
         let smallText = NSAttributedString(
@@ -99,6 +99,10 @@ class IntroViewController: UIViewController {
     
     @objc func tappedStartButton() {
         let setupVC = SetupViewController()
+        setupVC.setupData.lastName = user.lastName
+        setupVC.setupData.firstName = user.firstName
+        setupVC.setupData.email = user.email
+        setupVC.user = user
         setupVC.modalPresentationStyle = .fullScreen
         self.present(setupVC, animated: true, completion: nil)
     }

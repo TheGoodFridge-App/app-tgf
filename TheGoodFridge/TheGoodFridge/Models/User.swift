@@ -12,68 +12,32 @@ import Alamofire
 import FirebaseAuth
 
 protocol UserDelegate: class {
-    func didGetUserData()
+    func didGetUserData(userData: UserData)
 }
 
 class User {
-    static let shared = User()
+    var firstName: String?
+    var lastName: String?
+    var email: String?
     
-    private var firstName: String?
-    private var lastName: String?
-    private var email: String?
-    private var userData: UserData?
+    init() {
+        self.firstName = Auth.auth().currentUser?.displayName
+        self.email = Auth.auth().currentUser?.email
+    }
+    
     weak var delegate: UserDelegate?
     
-    func updateData() {
-        if let userData = userData {
-            firstName = userData.first_name
-            lastName = userData.last_name
-            email = Auth.auth().currentUser?.email
-        }
-    }
-    
-    func getFirstName() -> String? {
-        if firstName == nil {
-            fetchData()
-            return nil
+    func getUserData() -> UserData? {
+        if let first = firstName, let last = lastName {
+            return UserData(first_name: first, last_name: last)
         }
         
-        return firstName
+        fetchUserData()
+        return nil
     }
     
-    func getLastName() -> String? {
-        if lastName == nil {
-            fetchData()
-            return nil
-        } else {
-            delegate?.didGetUserData()
-        }
-        
-        return lastName
-    }
-    
-    func getEmail() -> String? {
-        if email == nil {
-            email = Auth.auth().currentUser?.email
-        }
-        
-        return email
-    }
-    
-    func setFirstName(to firstName: String?) {
-        self.firstName = firstName
-    }
-    
-    func setLastName(to lastName: String?) {
-        self.lastName = lastName
-    }
-    
-    func setEmail(to email: String?) {
-        self.email = email
-    }
-    
-    func fetchData() {
-        if let email = getEmail() {
+    func fetchUserData() {
+        if let email = self.email {
             let urlString = "\(K.serverURL)/api/data"
             
             let parameters: [String: String] = [
@@ -83,11 +47,16 @@ class User {
             
             AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
                 .response { response in
-                    debugPrint("received email")
+                    debugPrint("received user data")
+                    debugPrint(response)
                     if let responseData = response.data {
-                        self.userData = self.parseJSON(data: responseData)
-                        self.updateData()
-                        self.delegate?.didGetUserData()
+                        let userData = self.parseJSON(data: responseData)
+                        if let user = userData {
+                            self.firstName = user.first_name
+                            self.lastName = user.last_name
+                            self.delegate?.didGetUserData(userData: user)
+                        }
+                        
                     }
             }
         }
@@ -96,7 +65,8 @@ class User {
     private func parseJSON(data: Data) -> UserData? {
         do {
             let decoder = JSONDecoder()
-            return try decoder.decode(UserData.self, from: data)
+            let userData =  try decoder.decode(UserData.self, from: data)
+            return userData
         }
         catch {
             debugPrint("Could not decode data")

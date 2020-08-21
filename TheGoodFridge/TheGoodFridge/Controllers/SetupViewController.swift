@@ -29,6 +29,7 @@ class SetupViewController: UIViewController {
 
     var slides = [UIView]()
     var setupData = SetupData()
+    var user = User()
     var pageCount: Int = 0
     var selectedValues = Set<Int>()
     var selectedIssues = [ValueType: Set<Int>]()
@@ -304,6 +305,7 @@ extension SetupViewController: SetupDelegate {
         spinner.stopAnimating()
         
         let tabBarVC = TabBarController()
+        tabBarVC.user = user
         tabBarVC.modalPresentationStyle = .fullScreen
 
         DispatchQueue.main.async {

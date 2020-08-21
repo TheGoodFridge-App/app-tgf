@@ -32,6 +32,7 @@
 		EB572A4324CFFD0600305FFD /* ChallengeSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB572A4224CFFD0600305FFD /* ChallengeSetupView.swift */; };
 		EB5B9AC82460CFA900494754 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B9AC72460CFA900494754 /* User.swift */; };
 		EB5B9ACA2460E75200494754 /* SignupErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B9AC92460E75200494754 /* SignupErrorView.swift */; };
+		EB75251524EE4C1F0071DCB8 /* ProfilePictureImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75251424EE4C1F0071DCB8 /* ProfilePictureImageView.swift */; };
 		EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7E4C282462252100A6E8FA /* SetupViewController.swift */; };
 		EB8292022478A917008D96FA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8292012478A917008D96FA /* SearchViewController.swift */; };
 		EB8292042478A91F008D96FA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8292032478A91F008D96FA /* ProfileViewController.swift */; };
@@ -119,6 +120,7 @@
 		EB572A4224CFFD0600305FFD /* ChallengeSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSetupView.swift; sourceTree = "<group>"; };
 		EB5B9AC72460CFA900494754 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EB5B9AC92460E75200494754 /* SignupErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupErrorView.swift; sourceTree = "<group>"; };
+		EB75251424EE4C1F0071DCB8 /* ProfilePictureImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureImageView.swift; sourceTree = "<group>"; };
 		EB7E4C282462252100A6E8FA /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		EB8292012478A917008D96FA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EB8292032478A91F008D96FA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +233,69 @@
 			path = TheGoodFridge;
 			sourceTree = "<group>";
 		};
+		EB75251624EE4CE10071DCB8 /* Grocery List */ = {
+			isa = PBXGroup;
+			children = (
+				EBF7A741248469A50083C634 /* AddButton.swift */,
+				EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */,
+				EB514D9C247AFCE100450E60 /* GroceryListCell.swift */,
+				EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */,
+				EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */,
+				EB8C6397248380A900983BE9 /* GroceryListFinalView.swift */,
+				EB96750C24A452340058FAE9 /* RecommendCardView.swift */,
+				EB297BFC24A6D2A600BA0471 /* RecommendProductButton.swift */,
+			);
+			path = "Grocery List";
+			sourceTree = "<group>";
+		};
+		EB75251724EE4D510071DCB8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F67B12B424DAE0C80035F801 /* AccountDetailsView.swift */,
+				F68583AC24D72F35004A0C44 /* ArchiveView.swift */,
+				F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */,
+				EB75251424EE4C1F0071DCB8 /* ProfilePictureImageView.swift */,
+				F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */,
+				F67B12B624DB24E40035F801 /* PrivacyPolicyView.swift */,
+				F6F1588224CAC84700AB5648 /* ProfilePageView.swift */,
+				F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */,
+				F67B12B224D9CFCA0035F801 /* SettingsView.swift */,
+				F68583A624CDB779004A0C44 /* StatsView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		EB75251824EE4D9B0071DCB8 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				EB05C93524D6349D00AF51C7 /* ChallengeButton.swift */,
+				EBCAB24224E8B83400CF2946 /* ChallengeCompleteCard.swift */,
+				EBC9179724E518010023EF98 /* ChallengeCompleteView.swift */,
+				EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */,
+				EB05C93724D6677F00AF51C7 /* ChallengePopupView.swift */,
+				EB05C93324D62A0E00AF51C7 /* ChallengeSetupCell.swift */,
+				EB572A4224CFFD0600305FFD /* ChallengeSetupView.swift */,
+				EBC13141246A6E640047CD2C /* IssueCell.swift */,
+				EBCE9A1024688A4B00B0266E /* IssuesView.swift */,
+				EBC1313F246A6CCD0047CD2C /* NextBackButton.swift */,
+				EB5244BF2471D50500C45C6B /* StartView.swift */,
+				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
+				EB1D77092462978F003E1A84 /* ValuesView.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		EB75251924EE4DE40071DCB8 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				EB8C9BBB245F4DB800E51E7C /* DividerView.swift */,
+				EBBEA0DB245D526A0038F403 /* InputFieldView.swift */,
+				EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */,
+				EB5B9AC92460E75200494754 /* SignupErrorView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		EBA42CF0244CE49900185F94 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,40 +335,10 @@
 		EBA42CF4244CE4E900185F94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EBF7A741248469A50083C634 /* AddButton.swift */,
-				EB05C93524D6349D00AF51C7 /* ChallengeButton.swift */,
-				EBCAB24224E8B83400CF2946 /* ChallengeCompleteCard.swift */,
-				EBC9179724E518010023EF98 /* ChallengeCompleteView.swift */,
-				EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */,
-				EB05C93724D6677F00AF51C7 /* ChallengePopupView.swift */,
-				EB05C93324D62A0E00AF51C7 /* ChallengeSetupCell.swift */,
-				EB572A4224CFFD0600305FFD /* ChallengeSetupView.swift */,
-				EB8C9BBB245F4DB800E51E7C /* DividerView.swift */,
-				EBBEA0DB245D526A0038F403 /* InputFieldView.swift */,
-				EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */,
-				EB514D9C247AFCE100450E60 /* GroceryListCell.swift */,
-				EB514D9A247AF3EF00450E60 /* GroceryListEditView.swift */,
-				EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */,
-				EB8C6397248380A900983BE9 /* GroceryListFinalView.swift */,
-				EBC13141246A6E640047CD2C /* IssueCell.swift */,
-				EBCE9A1024688A4B00B0266E /* IssuesView.swift */,
-				EBC1313F246A6CCD0047CD2C /* NextBackButton.swift */,
-				EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */,
-				EB96750C24A452340058FAE9 /* RecommendCardView.swift */,
-				EB297BFC24A6D2A600BA0471 /* RecommendProductButton.swift */,
-				EB5B9AC92460E75200494754 /* SignupErrorView.swift */,
-				EB5244BF2471D50500C45C6B /* StartView.swift */,
-				EB1D770B246298AE003E1A84 /* ValueGoalButton.swift */,
-				EB1D77092462978F003E1A84 /* ValuesView.swift */,
-				F6F1588224CAC84700AB5648 /* ProfilePageView.swift */,
-				F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */,
-				F68583A624CDB779004A0C44 /* StatsView.swift */,
-				F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */,
-				F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */,
-				F68583AC24D72F35004A0C44 /* ArchiveView.swift */,
-				F67B12B224D9CFCA0035F801 /* SettingsView.swift */,
-				F67B12B424DAE0C80035F801 /* AccountDetailsView.swift */,
-				F67B12B624DB24E40035F801 /* PrivacyPolicyView.swift */,
+				EB75251924EE4DE40071DCB8 /* Account */,
+				EB75251824EE4D9B0071DCB8 /* Setup */,
+				EB75251724EE4D510071DCB8 /* Profile */,
+				EB75251624EE4CE10071DCB8 /* Grocery List */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,6 +516,7 @@
 				EB96750D24A452340058FAE9 /* RecommendCardView.swift in Sources */,
 				EB8C6398248380A900983BE9 /* GroceryListFinalView.swift in Sources */,
 				F67B12B924DEE1CA0035F801 /* AccountDetailsViewController.swift in Sources */,
+				EB75251524EE4C1F0071DCB8 /* ProfilePictureImageView.swift in Sources */,
 				EB514D9B247AF3EF00450E60 /* GroceryListEditView.swift in Sources */,
 				EB8292042478A91F008D96FA /* ProfileViewController.swift in Sources */,
 				F68583AB24D3F8ED004A0C44 /* CircularProgressBar.swift in Sources */,

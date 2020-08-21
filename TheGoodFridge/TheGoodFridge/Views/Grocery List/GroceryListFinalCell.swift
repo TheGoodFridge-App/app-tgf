@@ -22,6 +22,7 @@ class GroceryListFinalCell: UITableViewCell {
     var item = ""
     var purchased: String?
     var delegate: GroceryDelegate?
+    var user = User()
     
     lazy var dotImageView: UIImageView = {
         let imageView = UIImageView()
@@ -164,7 +165,9 @@ extension GroceryListFinalCell: ProductDelegate {
         let attributedText = NSMutableAttributedString(string: item, attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 16)!])
         attributedText.append(NSAttributedString(string: "\n\(product)", attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!]))
         setAttributedText(to: attributedText)
-        ProductManager.postPurchase(purchased: product, item: item.lowercased())
+        let productManager = ProductManager()
+        productManager.user = user
+        productManager.postPurchase(purchased: product, item: item.lowercased())
     }
     
 }
