@@ -42,11 +42,12 @@ class ProfilePageView: UIView {
     }()
     
     //Segmented Tabs
-    let tabsSegmented = CustomSegmentedControl(buttonTitle: ["Challenges","Stats"]) //"Archive"
+    let tabsSegmented: CustomSegmentedControl
     
     let user = User()
     
     override init(frame: CGRect) {
+        tabsSegmented = CustomSegmentedControl(buttonTitle: ["Challenges","Stats"]) //"Archive"
         super.init(frame: frame)
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +61,7 @@ class ProfilePageView: UIView {
             nameLabel.text = "\(userData.first_name) \(userData.last_name)"
         }
         
-        backgroundColor = #colorLiteral(red: 1, green: 0.9529411765, blue: 0.9019607843, alpha: 1)
+        backgroundColor = .clear
         
         addSubview(nameLabel)
         addSubview(settingsSymbol)
@@ -94,7 +95,7 @@ class ProfilePageView: UIView {
             profilePicture.centerXAnchor.constraint(equalTo: centerXAnchor),
             profilePicture.widthAnchor.constraint(equalToConstant: profileSize),
             profilePicture.heightAnchor.constraint(equalToConstant: profileSize),
-            
+
             tabsSegmented.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: spacing),
             tabsSegmented.leadingAnchor.constraint(equalTo: leadingAnchor),
             tabsSegmented.trailingAnchor.constraint(equalTo: trailingAnchor),

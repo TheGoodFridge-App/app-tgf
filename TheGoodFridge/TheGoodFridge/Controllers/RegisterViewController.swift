@@ -102,7 +102,6 @@ class RegisterViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(named: "XImage"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
-        button.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -133,6 +132,7 @@ class RegisterViewController: UIViewController {
         signupStackView.addArrangedSubview(createButton)
         
         createButton.addTarget(self, action: #selector(tappedCreateButton), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
         
         fullStackView.addArrangedSubview(signupLabel)
         fullStackView.addArrangedSubview(signupStackView)
@@ -142,7 +142,7 @@ class RegisterViewController: UIViewController {
         
         view.addSubview(fullStackView)
         view.addSubview(signUpBackgroundImage)
-//        view.addSubview(backButton)
+        view.addSubview(backButton)
         
         view.sendSubviewToBack(signUpBackgroundImage)
         
@@ -154,8 +154,8 @@ class RegisterViewController: UIViewController {
         let fieldHeight: CGFloat = 200
         let buttonHeight: CGFloat = 60
         let margin: CGFloat = 15
-//        let backButtonSize: CGFloat = 20
-//        let backButtonMargin: CGFloat = 20
+        let backButtonSize: CGFloat = 20
+        let backButtonMargin: CGFloat = 25
         
         let constraints = [
             signUpBackgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
@@ -180,10 +180,10 @@ class RegisterViewController: UIViewController {
             dividerView.trailingAnchor.constraint(equalTo: fullStackView.trailingAnchor),
             googleSignInButton.widthAnchor.constraint(equalToConstant: buttonWidth),
             googleSignInButton.heightAnchor.constraint(equalToConstant: buttonHeight),
-//            backButton.widthAnchor.constraint(equalToConstant: backButtonSize),
-//            backButton.heightAnchor.constraint(equalToConstant: backButtonSize),
-//            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: backButtonMargin),
-//            backButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -backButtonMargin)
+            backButton.widthAnchor.constraint(equalToConstant: backButtonSize),
+            backButton.heightAnchor.constraint(equalToConstant: backButtonSize),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: backButtonMargin * 2),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: backButtonMargin)
         ]
         
         NSLayoutConstraint.activate(constraints)

@@ -61,6 +61,7 @@
 		EBCAB24324E8B83400CF2946 /* ChallengeCompleteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCAB24224E8B83400CF2946 /* ChallengeCompleteCard.swift */; };
 		EBCE9A0F2468885900B0266E /* SetupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE9A0E2468885900B0266E /* SetupData.swift */; };
 		EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE9A1024688A4B00B0266E /* IssuesView.swift */; };
+		EBDE8C7524F30CAE007DC5AC /* ChallengeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE8C7424F30CAE007DC5AC /* ChallengeBox.swift */; };
 		EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF520922456156100EC0B03 /* RegisterViewController.swift */; };
 		EBF7A740248453BE0083C634 /* GroceryListFinalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */; };
 		EBF7A742248469A50083C634 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF7A741248469A50083C634 /* AddButton.swift */; };
@@ -149,6 +150,7 @@
 		EBCAB24224E8B83400CF2946 /* ChallengeCompleteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCompleteCard.swift; sourceTree = "<group>"; };
 		EBCE9A0E2468885900B0266E /* SetupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupData.swift; sourceTree = "<group>"; };
 		EBCE9A1024688A4B00B0266E /* IssuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesView.swift; sourceTree = "<group>"; };
+		EBDE8C7424F30CAE007DC5AC /* ChallengeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeBox.swift; sourceTree = "<group>"; };
 		EBF5208C2456137800EC0B03 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBF520922456156100EC0B03 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		EBF7A73F248453BE0083C634 /* GroceryListFinalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListFinalCell.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			children = (
 				F67B12B424DAE0C80035F801 /* AccountDetailsView.swift */,
 				F68583AC24D72F35004A0C44 /* ArchiveView.swift */,
+				EBDE8C7424F30CAE007DC5AC /* ChallengeBox.swift */,
 				F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */,
 				EB75251424EE4C1F0071DCB8 /* ProfilePictureImageView.swift */,
 				F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */,
@@ -526,6 +529,7 @@
 				EB2EB193246A727C00C7F523 /* IssueData.swift in Sources */,
 				F67B12BB24DEE6760035F801 /* PrivacyPolicyViewController.swift in Sources */,
 				EB8C9BC0245F5D4200E51E7C /* IntroViewController.swift in Sources */,
+				EBDE8C7524F30CAE007DC5AC /* ChallengeBox.swift in Sources */,
 				F67B12B724DB24E40035F801 /* PrivacyPolicyView.swift in Sources */,
 				EBBEA0DC245D526A0038F403 /* InputFieldView.swift in Sources */,
 				EBBD0E0624A190CA0079F15C /* UIView+Snapshot.swift in Sources */,

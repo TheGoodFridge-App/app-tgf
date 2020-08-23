@@ -13,14 +13,24 @@ import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     
-    var profilePageView = ProfilePageView()
+    let profilePageView = ProfilePageView()
     var user = User()
+    
+    let profileChallengesBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "ProfileChallengesBackground")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtonsAndViews()
-
+        
         view.addSubview(profilePageView)
+        view.addSubview(profileChallengesBackground)
+        view.sendSubviewToBack(profileChallengesBackground)
+        
         setupLayout()
     }
     
@@ -30,6 +40,11 @@ class ProfileViewController: UIViewController {
             profilePageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             profilePageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             profilePageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            profileChallengesBackground.topAnchor.constraint(equalTo: view.topAnchor),
+            profileChallengesBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            profileChallengesBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileChallengesBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }

@@ -111,16 +111,16 @@ class WelcomeViewController: UIViewController {
     
     @objc func tappedSignupButton() {
         let registerVC = RegisterViewController()
-        //registerVC.modalPresentationStyle = .fullScreen
-        //self.present(registerVC, animated: true, completion: nil)
-        navigationController?.pushViewController(registerVC, animated: true)
+        registerVC.modalPresentationStyle = .fullScreen
+        self.present(registerVC, animated: true, completion: nil)
+        //navigationController?.pushViewController(registerVC, animated: true)
     }
     
     @objc func tappedLoginButton() {
         let loginVC = LoginViewController()
-        //loginVC.modalPresentationStyle = .fullScreen
-        //self.present(loginVC, animated: true, completion: nil)
-        navigationController?.pushViewController(loginVC, animated: true)
+        loginVC.modalPresentationStyle = .fullScreen
+        self.present(loginVC, animated: true, completion: nil)
+        //navigationController?.pushViewController(loginVC, animated: true)
     }
     
 }

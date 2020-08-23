@@ -10,9 +10,13 @@ import UIKit
 
 class CircularProgressBar: UIView {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     public var lineWidth:CGFloat = 12 {
@@ -32,13 +36,15 @@ class CircularProgressBar: UIView {
             }
         }
         
-        foregroundLayer.strokeEnd = CGFloat(progress)
+        //foregroundLayer.strokeEnd = CGFloat(progress)
         
         if withAnimation {
             let animation = CABasicAnimation(keyPath: "strokeEnd")
-            animation.fromValue = 0
             animation.toValue = progress
-            animation.duration = 1.25
+            animation.duration = CFTimeInterval(exactly: progress) ?? 0.5
+            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+            animation.fillMode = .forwards
+            animation.isRemovedOnCompletion = false
             foregroundLayer.add(animation, forKey: "foregroundAnimation")
             
         }
@@ -78,8 +84,8 @@ class CircularProgressBar: UIView {
     
     private func drawForegroundLayer(){
         
-        let startAngle = (-CGFloat.pi/2)
-        let endAngle = 2 * CGFloat.pi + startAngle
+        let startAngle: CGFloat = 0
+        let endAngle = 2 * CGFloat.pi
         
         let path = UIBezierPath(arcCenter: pathCenter, radius: self.radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         
@@ -88,8 +94,9 @@ class CircularProgressBar: UIView {
         foregroundLayer.lineWidth = lineWidth - (0.21 * lineWidth)
         foregroundLayer.fillColor = UIColor.clear.cgColor
         foregroundLayer.strokeColor = color
+        foregroundLayer.strokeEnd = 0
         
-        self.layer.addSublayer(foregroundLayer)
+        self.layer.insertSublayer(foregroundLayer, above: backgroundLayer)
         
     }
     

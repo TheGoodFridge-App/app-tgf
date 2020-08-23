@@ -27,7 +27,7 @@ class ChallengeBoxes: UIView {
     var progressArray: [Float]?
     var levelArray: [Int]?
     var challengeNameArray: [String]?
-    var boxViews = [UIView(), UIView(), UIView()]
+    var boxViews = [ChallengeBox(), ChallengeBox(), ChallengeBox()]
     var dateString = ""
     var dateLabels = [UILabel(), UILabel(), UILabel()]
     var currLabels = [UILabel(), UILabel(), UILabel()]
@@ -41,7 +41,7 @@ class ChallengeBoxes: UIView {
         stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.distribution = .fillEqually
-        stack.spacing = 20
+        stack.spacing = 15
         return stack
     } ()
     
@@ -56,10 +56,10 @@ class ChallengeBoxes: UIView {
     
     let viewCompletedChallengesButton: UIButton = {
         let button = UIButton()
-        button.setTitle("    view completed challenges    ", for: .normal)
+        button.setTitle("view completed challenges", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Amiko-Regular", size: 12)
-        button.contentEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 7, right: 0)
+        button.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
         button.layer.cornerRadius = 15
         button.layer.borderColor = #colorLiteral(red: 0.9764705882, green: 0.7411764706, blue: 0.7529411765, alpha: 1)
         button.layer.borderWidth = 1
@@ -71,9 +71,10 @@ class ChallengeBoxes: UIView {
 
         super.init(frame: frame)
         getAndParseData()
-//        initBoxes()
         findAndSetDate()
         setBoxViews()
+        
+        backgroundColor = .clear
         
         addSubview(topLabel)
         addSubview(verticalStack)
@@ -84,26 +85,28 @@ class ChallengeBoxes: UIView {
         }
         
         setupLayout()
+    }
+    
+    private func setupLayout() {
+        let topMargin: CGFloat = 15
+        
         for i in 0...2 {
             boxViews[i].widthAnchor.constraint(equalTo: verticalStack.widthAnchor).isActive = true
             //boxViews[i].heightAnchor.constraint(equalTo: verticalStack.heightAnchor).isActive = true
         }
         
-    }
-    
-    private func setupLayout() {
         let constraints = [
-            topLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            topLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
+            topLabel.topAnchor.constraint(equalTo: topAnchor, constant: topMargin),
+            topLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: topMargin * 2),
             //topLabel.bottomAnchor.constraint(equalTo: topAnchor, constant: 13),
-            topLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            //topLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            verticalStack.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 7),
-            verticalStack.bottomAnchor.constraint(equalTo: viewCompletedChallengesButton.topAnchor, constant: -19),
+            verticalStack.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: topMargin),
+            verticalStack.bottomAnchor.constraint(equalTo: viewCompletedChallengesButton.topAnchor, constant: -topMargin),
             verticalStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
             verticalStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
             
-            viewCompletedChallengesButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -13),
+            viewCompletedChallengesButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -topMargin),
             viewCompletedChallengesButton.centerXAnchor.constraint(equalTo: centerXAnchor)
 //            viewCompletedChallengesButton.leadingAnchor.constraint(equalTo: leadingAnchor),
 //            viewCompletedChallengesButton.trailingAnchor.constraint(equalTo: trailingAnchor)
@@ -136,87 +139,14 @@ class ChallengeBoxes: UIView {
     
     func setBoxViews() {
         
-        progressBars[0].setBarColor(colorName: #colorLiteral(red: 0.9019607843, green: 0.5607843137, blue: 0.3764705882, alpha: 1))
-        progressBars[1].setBarColor(colorName: #colorLiteral(red: 0.9607843137, green: 0.5764705882, blue: 0.5921568627, alpha: 1))
-        progressBars[2].setBarColor(colorName: #colorLiteral(red: 0.4745098039, green: 0.7490196078, blue: 0.8784313725, alpha: 1))
+        boxViews[0].circularProgressBar.setBarColor(colorName: #colorLiteral(red: 0.9019607843, green: 0.5607843137, blue: 0.3764705882, alpha: 1))
+        boxViews[1].circularProgressBar.setBarColor(colorName: #colorLiteral(red: 0.9607843137, green: 0.5764705882, blue: 0.5921568627, alpha: 1))
+        boxViews[2].circularProgressBar.setBarColor(colorName: #colorLiteral(red: 0.4745098039, green: 0.7490196078, blue: 0.8784313725, alpha: 1))
         
-        for i in 0...2 {
-            boxViews[i].layer.cornerRadius = 20
-            boxViews[i].backgroundColor = .white
-            boxViews[i].clipsToBounds = true
-            
-            boxViews[i].dropShadow()
-            
-//            boxViews[i].layer.shadowColor = UIColor.black.cgColor
-//            boxViews[i].layer.shadowOpacity = 1
-//            boxViews[i].layer.shadowOffset = .zero
-//            boxViews[i].layer.shadowRadius = 10
-            //boxViews[i].backgroundColor = .red
-            
-            
-            dateLabels[i].text = dateString
-            dateLabels[i].textColor = #colorLiteral(red: 0.6117647059, green: 0.537254902, blue: 0.7490196078, alpha: 1)
-            dateLabels[i].font = UIFont(name: "Amiko-Regular", size: 9)
-            
-            
-            currLabels[i].text = "CURRENT CHALLENGE:"
-            currLabels[i].textColor = .black
-            currLabels[i].font = UIFont(name: "Amiko-Regular", size: 10)
-            
-            
-            
-            challengeLabels[i].text = challengeNameArray![i]
-            challengeLabels[i].textColor = .black
-            challengeLabels[i].font = UIFont(name: "Amiko-Regular", size: 12)
-            
-            
-            levelLabels[i].text = "Level " + String(levelArray![i])
-            levelLabels[i].textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.68)
-            levelLabels[i].font = UIFont(name: "Amiko-Regular", size: 10)
-            
-            
-            progressBars[i].setProgress(to: progressArray![i], withAnimation: true)
-            
-            boxViews[i].translatesAutoresizingMaskIntoConstraints = false
-            dateLabels[i].translatesAutoresizingMaskIntoConstraints = false
-            currLabels[i].translatesAutoresizingMaskIntoConstraints = false
-            challengeLabels[i].translatesAutoresizingMaskIntoConstraints = false
-            levelLabels[i].translatesAutoresizingMaskIntoConstraints = false
-            progressBars[i].translatesAutoresizingMaskIntoConstraints = false
-//
-            boxViews[i].addSubview(dateLabels[i])
-            boxViews[i].addSubview(currLabels[i])
-            boxViews[i].addSubview(challengeLabels[i])
-            boxViews[i].addSubview(levelLabels[i])
-            boxViews[i].addSubview(progressBars[i])
-            
-            
-            dateLabels[i].topAnchor.constraint(equalTo: boxViews[i].topAnchor, constant: 8).isActive = true
-            dateLabels[i].trailingAnchor.constraint(equalTo: boxViews[i].trailingAnchor, constant: -22).isActive = true
-            
-            
-            currLabels[i].topAnchor.constraint(equalTo: dateLabels[i].topAnchor, constant: 23).isActive = true
-            currLabels[i].trailingAnchor.constraint(equalTo: dateLabels[i].centerXAnchor, constant: -11).isActive = true
-            
-            
-            challengeLabels[i].leadingAnchor.constraint(equalTo: currLabels[i].leadingAnchor).isActive = true
-            challengeLabels[i].topAnchor.constraint(equalTo: currLabels[i].bottomAnchor, constant: 6).isActive = true
-            
-            
-            levelLabels[i].topAnchor.constraint(equalTo: challengeLabels[i].bottomAnchor, constant: 13.42).isActive = true
-            levelLabels[i].leadingAnchor.constraint(equalTo: challengeLabels[i].leadingAnchor, constant: 9.92).isActive = true
-            
-            
-            
-            
-            //progressBars[i].heightAnchor.constraint(equalTo: boxViews[i].heightAnchor).isActive = true
-            progressBars[i].topAnchor.constraint(equalTo: boxViews[i].topAnchor, constant: 10).isActive = true
-            progressBars[i].bottomAnchor.constraint(equalTo: boxViews[i].bottomAnchor, constant: -10).isActive = true
-            
-            progressBars[i].leadingAnchor.constraint(equalTo: boxViews[i].leadingAnchor, constant: 13).isActive = true
-            progressBars[i].widthAnchor.constraint(equalTo: boxViews[i].widthAnchor, multiplier: 1/3).isActive = true
-            
-            
+        for i in 0..<boxViews.count {
+            boxViews[i].challengeNameLabel.text = challengeNameArray![i]
+            boxViews[i].levelLabel.text = "Level " + String(levelArray![i])
+            boxViews[i].circularProgressBar.setProgress(to: progressArray![i], withAnimation: true)
         }
     }
     

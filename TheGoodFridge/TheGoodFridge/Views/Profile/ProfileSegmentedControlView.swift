@@ -16,29 +16,33 @@ class CustomSegmentedControl: UIView {
     private var buttons: [UIButton]!
     private var selectorView: UIView!
     
+    //Configuration View
+    var stack = UIStackView(arrangedSubviews: [UIButton]())
+    var lowerStack = UIStackView()
+    
     var textColor: UIColor = .black
     var selectorViewColor: UIColor = .black
     var selectorTextColor: UIColor = .black
     
     weak var delegate:CustomSegmentedControlDelegate?
     
-    public private(set) var selectedIndex : Int = 0
+    private var selectedIndex : Int = 0
     
-    convenience init(buttonTitle:[String]) {
-        self.init(frame: .zero)
+    required init(buttonTitle:[String]) {
+        super.init(frame: .zero)
         self.buttonTitles = buttonTitle
         translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = .clear
+        selectorView = UIView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.backgroundColor = UIColor.white
         updateView()
-    }
-    
-    func setButtonTitles(buttonTitles:[String]) {
-        self.buttonTitles = buttonTitles
-        self.updateView()
     }
     
     func setIndex(index:Int) {
@@ -56,6 +60,7 @@ class CustomSegmentedControl: UIView {
     let statsView = StatsView()
     let challengeView = ChallengeBoxes()
     lazy var selectorLeadingConstraint = selectorView.leadingAnchor.constraint(equalTo: leadingAnchor)
+    
     
     func setLowerStackView(view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -111,17 +116,11 @@ class CustomSegmentedControl: UIView {
             }
         }
     }
-}
-
-//Configuration View
-var stack = UIStackView(arrangedSubviews: [UIButton]())
-var lowerStack = UIStackView()
-extension CustomSegmentedControl {
 
     private func updateView() {
         createButton()
         configStackView()
-        configSelectorView()
+        setupSelectorView()
     }
   
     // (1/12) for tab and (8/12) for lower: 1/9, 8/9
@@ -171,14 +170,14 @@ extension CustomSegmentedControl {
         setLowerStackView(view: challengeView)
     }
     
-    private func configSelectorView() {
+    private func setupSelectorView(){
         let selectorWidth = frame.width / CGFloat(self.buttonTitles.count + 1)
-        selectorView = UIView()
         selectorView.backgroundColor = selectorViewColor
         selectorView.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(selectorView)
         selectorLeadingConstraint.constant = frame.width / 12
+        self.layoutIfNeeded()
         
         let constraints = [
             selectorView.topAnchor.constraint(equalTo: buttons[0].bottomAnchor),
