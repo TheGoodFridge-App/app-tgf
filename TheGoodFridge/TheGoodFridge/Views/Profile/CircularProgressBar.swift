@@ -10,9 +10,21 @@ import UIKit
 
 class CircularProgressBar: UIView {
     
+    let progressLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Amiko-Regular", size: 20)
+        label.textColor = .black
+        label.text = "0/0"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+         
         setupView()
+        setupLayout()
+        bringSubviewToFront(progressLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -82,10 +94,14 @@ class CircularProgressBar: UIView {
         color = colorName
     }
     
+    func setText(current: Int, total: Int) {
+        progressLabel.text = "\(current)/\(total)"
+    }
+    
     private func drawForegroundLayer(){
         
-        let startAngle: CGFloat = 0
-        let endAngle = 2 * CGFloat.pi
+        let startAngle: CGFloat = -CGFloat.pi / 2
+        let endAngle = 3 * CGFloat.pi / 2
         
         let path = UIBezierPath(arcCenter: pathCenter, radius: self.radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         
@@ -96,20 +112,37 @@ class CircularProgressBar: UIView {
         foregroundLayer.strokeColor = color
         foregroundLayer.strokeEnd = 0
         
-        self.layer.insertSublayer(foregroundLayer, above: backgroundLayer)
+        self.layer.addSublayer(foregroundLayer)
         
     }
     
     private func setupView() {
         makeBar()
     }
+    
+    private func setupLayout() {
+        addSubview(progressLabel)
+        
+        let constraints = [
+            progressLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            progressLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
 
     private var layoutDone = false
-    override func layoutSublayers(of layer: CALayer) {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
         if !layoutDone {
             setupView()
+            setupLayout()
+            bringSubviewToFront(progressLabel)
             layoutDone = true
         }
+        
     }
     
 }

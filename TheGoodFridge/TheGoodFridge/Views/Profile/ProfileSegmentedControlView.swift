@@ -24,6 +24,8 @@ class CustomSegmentedControl: UIView {
     var selectorViewColor: UIColor = .black
     var selectorTextColor: UIColor = .black
     
+    var user = User()
+    
     weak var delegate:CustomSegmentedControlDelegate?
     
     private var selectedIndex : Int = 0
@@ -34,6 +36,7 @@ class CustomSegmentedControl: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .clear
         selectorView = UIView()
+        challengeView.user = user
     }
     
     required init?(coder: NSCoder) {

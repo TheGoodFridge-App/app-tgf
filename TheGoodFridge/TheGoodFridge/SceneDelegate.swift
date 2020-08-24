@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
 //            startVC = WelcomeViewController()
 //            window.rootViewController = startVC
-            
+
             if Auth.auth().currentUser != nil {
                 startVC = TabBarController()
                 window.rootViewController = startVC

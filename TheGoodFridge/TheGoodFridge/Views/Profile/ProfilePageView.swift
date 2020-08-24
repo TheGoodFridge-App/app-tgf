@@ -16,7 +16,6 @@ class ProfilePageView: UIView {
     var settingsButton = UIButton()
     let nameLabel = UILabel()
 
-
     let settingsSymbol: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "SettingsButton"), for: .normal)
@@ -44,10 +43,11 @@ class ProfilePageView: UIView {
     //Segmented Tabs
     let tabsSegmented: CustomSegmentedControl
     
-    let user = User()
+    var user = User()
     
     override init(frame: CGRect) {
         tabsSegmented = CustomSegmentedControl(buttonTitle: ["Challenges","Stats"]) //"Archive"
+        tabsSegmented.user = user
         super.init(frame: frame)
         
         translatesAutoresizingMaskIntoConstraints = false

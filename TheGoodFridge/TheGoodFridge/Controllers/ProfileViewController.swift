@@ -27,6 +27,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setButtonsAndViews()
         
+        profilePageView.user = user
+        
         view.addSubview(profilePageView)
         view.addSubview(profileChallengesBackground)
         view.sendSubviewToBack(profileChallengesBackground)

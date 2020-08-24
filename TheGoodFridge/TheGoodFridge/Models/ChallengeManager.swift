@@ -19,8 +19,22 @@ struct Content: Codable {
     let impact: [String]
 }
 
+struct UserChallengeData: Codable {
+    let challenges: [UserChallenge]
+}
+
+struct UserChallenge: Codable {
+    let name: String
+    let current: Int
+    let level: Int
+    let level_total: Int
+    let value: String
+}
+
 class ChallengeManager {
     var delegate: ChallengeDelegate?
+    var profileDelegate: ProfileChallengeDelegate?
+    var user = User()
     
     func getDescriptions(challenges: [String]) {
         let urlString = "\(K.serverURL)/challenges/descriptions"
@@ -69,4 +83,44 @@ class ChallengeManager {
             return nil
         }
     }
+    
+    func getCurrentChallenges() {
+        guard let email = user.email else {
+            debugPrint("getCurrentChallenges: email not found")
+            return
+        }
+        
+        let parameters = [
+            "email": email,
+            "secret": K.secretKey
+        ]
+        
+        let urlString = "\(K.serverURL)/challenges/get"
+        
+        AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
+            .responseJSON { response in
+                if let error = response.error {
+                    return debugPrint("Error getting user's current challenges: \(error)")
+                }
+                debugPrint("received user challenges")
+                
+                if let data = response.data {
+                    let userChallenges = self.parseJSON(data: data)
+                    self.profileDelegate?.didGetChallenges(challenges: userChallenges)
+                }
+        }
+    }
+    
+    private func parseJSON(data: Data) -> [UserChallenge]? {
+        do {
+            let decoder = JSONDecoder()
+            let userChallengeData = try decoder.decode(UserChallengeData.self, from: data)
+            return userChallengeData.challenges
+        }
+        catch {
+            debugPrint("Could not decode data")
+            return nil
+        }
+    }
+    
 }

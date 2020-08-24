@@ -21,12 +21,17 @@ extension UIView {
     }
 }
 
+protocol ProfileChallengeDelegate {
+    func didGetChallenges(challenges: [UserChallenge]?)
+}
 
 class ChallengeBoxes: UIView {
     
-    var progressArray: [Float]?
-    var levelArray: [Int]?
-    var challengeNameArray: [String]?
+    var currentArray = [Float]()
+    var levelArray = [Int]()
+    var challengeNameArray = [String]()
+    var valueArray = [String]()
+    var totalArray = [Float]()
     var boxViews = [ChallengeBox(), ChallengeBox(), ChallengeBox()]
     var dateString = ""
     var dateLabels = [UILabel(), UILabel(), UILabel()]
@@ -67,12 +72,17 @@ class ChallengeBoxes: UIView {
         return button
     } ()
     
+    let challengeManager = ChallengeManager()
+    var user = User()
+    
     override init(frame: CGRect) {
-
         super.init(frame: frame)
+        
+        challengeManager.profileDelegate = self
+        challengeManager.user = user
+        
         getAndParseData()
         findAndSetDate()
-        setBoxViews()
         
         backgroundColor = .clear
         
@@ -122,9 +132,11 @@ class ChallengeBoxes: UIView {
     func getAndParseData() {
         //sets the necessary variables. Set progressArray, levelArray, challengeNameArray
         
-        progressArray = [0.3, 0.6, 0.9]
-        levelArray = [1, 2, 3]
-        challengeNameArray = ["Preserving Biodiversity", "Preserving Biodiversity", "Preserving Biodiversity"]
+        currentArray = [0.0, 0.0, 0.0]
+        levelArray = [1, 1, 1]
+        challengeNameArray = ["", "", ""]
+        
+        challengeManager.getCurrentChallenges()
     }
     
     func findAndSetDate() {
@@ -138,15 +150,37 @@ class ChallengeBoxes: UIView {
     }
     
     func setBoxViews() {
+        let colorMap = [
+            "environment": #colorLiteral(red: 0.9019607843, green: 0.5607843137, blue: 0.3764705882, alpha: 1),
+            "animal": #colorLiteral(red: 0.9607843137, green: 0.5764705882, blue: 0.5921568627, alpha: 1),
+            "human": #colorLiteral(red: 0.4745098039, green: 0.7490196078, blue: 0.8784313725, alpha: 1)
+        ]
         
-        boxViews[0].circularProgressBar.setBarColor(colorName: #colorLiteral(red: 0.9019607843, green: 0.5607843137, blue: 0.3764705882, alpha: 1))
-        boxViews[1].circularProgressBar.setBarColor(colorName: #colorLiteral(red: 0.9607843137, green: 0.5764705882, blue: 0.5921568627, alpha: 1))
-        boxViews[2].circularProgressBar.setBarColor(colorName: #colorLiteral(red: 0.4745098039, green: 0.7490196078, blue: 0.8784313725, alpha: 1))
+        let colorDefault = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         for i in 0..<boxViews.count {
-            boxViews[i].challengeNameLabel.text = challengeNameArray![i]
-            boxViews[i].levelLabel.text = "Level " + String(levelArray![i])
-            boxViews[i].circularProgressBar.setProgress(to: progressArray![i], withAnimation: true)
+            boxViews[i].circularProgressBar.setBarColor(colorName: (colorMap[valueArray[i]] ?? colorDefault).cgColor)
+            boxViews[i].challengeNameLabel.text = challengeNameArray[i]
+            boxViews[i].levelLabel.text = "Level " + String(levelArray[i])
+            boxViews[i].circularProgressBar.setProgress(to: currentArray[i] / totalArray[i], withAnimation: true)
+            boxViews[i].circularProgressBar.setText(current: Int(currentArray[i]), total: Int(totalArray[i]))
+        }
+    }
+    
+}
+
+extension ChallengeBoxes: ProfileChallengeDelegate {
+    
+    func didGetChallenges(challenges: [UserChallenge]?) {
+        if let userChallenges = challenges {
+            print(userChallenges)
+            challengeNameArray = userChallenges.map({ $0.name })
+            levelArray = userChallenges.map({ $0.level })
+            currentArray = userChallenges.map({ Float($0.current) })
+            totalArray = userChallenges.map({ Float($0.level_total) })
+            valueArray = userChallenges.map({ $0.value })
+            
+            setBoxViews()
         }
     }
     

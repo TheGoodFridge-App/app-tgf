@@ -121,9 +121,15 @@ struct SetupData {
         else { return debugPrint("Can't find email") }
         
         // Format challenges
-        let challengesArr: [String] = challenges.reduce([], { cur, dict in
-            return cur + dict.value
-        })
+        var challengesArr = [String]()
+        var challengeValues = [String]()
+        
+        for challenge in challenges {
+            for value in challenge.value {
+                challengesArr.append(value)
+                challengeValues.append(challenge.key)
+            }
+        }
         
         let parameters: [String: [String]] = [
             "email": [email],
@@ -136,6 +142,7 @@ struct SetupData {
             "animal_issues": animalIssues,
             "human_issues": humanIssues,
             "challenges": challengesArr,
+            "challenge_values": challengeValues,
             "secret": [K.secretKey]
         ]
         
