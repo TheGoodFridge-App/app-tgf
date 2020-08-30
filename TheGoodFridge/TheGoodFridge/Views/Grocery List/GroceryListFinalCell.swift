@@ -56,20 +56,20 @@ class GroceryListFinalCell: UITableViewCell {
     
     let checkmarkIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "CheckmarkIcon")
         imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "EllipsisImage")
+        imageView.alpha = 0.9
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         itemButton.isEnabled = false
+        checkmarkIcon.isHidden = true
         itemButton.addTarget(self, action: #selector(tappedItemButton), for: .touchDown)
         containerView.addSubview(itemButton)
         
-        checkmarkIcon.isHidden = true
         containerView.addSubview(checkmarkIcon)
         containerView.bringSubviewToFront(checkmarkIcon)
         
@@ -101,6 +101,7 @@ class GroceryListFinalCell: UITableViewCell {
     
     func setRecommended() {
         itemButton.isEnabled = true
+        checkmarkIcon.isHidden = false
         
         // Add drop shadow to button
         containerView.layer.shadowColor = UIColor(red: 0.929, green: 0.929, blue: 0.929, alpha: 1).cgColor
@@ -134,7 +135,7 @@ class GroceryListFinalCell: UITableViewCell {
             itemButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             checkmarkIcon.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             checkmarkIcon.widthAnchor.constraint(equalToConstant: iconWidth),
-            checkmarkIcon.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -margin)
+            checkmarkIcon.trailingAnchor.constraint(equalTo: itemButton.trailingAnchor, constant: -margin * 1.25)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -160,7 +161,8 @@ extension GroceryListFinalCell: ProductDelegate {
         print("selected \(product)")
         purchased = product
         
-        checkmarkIcon.isHidden = false
+        checkmarkIcon.image = UIImage(named: "CheckmarkIcon")
+        checkmarkIcon.alpha = 1.0
         
         let attributedText = NSMutableAttributedString(string: item, attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 16)!])
         attributedText.append(NSAttributedString(string: "\n\(product)", attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-Regular", size: 12)!]))

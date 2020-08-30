@@ -105,41 +105,12 @@ class ProfilePageView: UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-//    @objc func tappedSettingsButton() {
-////        profileStackView.removeFromSuperview()
-////        wrapperView.isHidden = true
-////        wrapperView.removeFromSuperview()
-//
-//        //pvc?.ppage.removeFromSuperview()
-//
-//        pvc?.switchToSettingsPage()
-//
-////        pvc?.ppage.isHidden = true
-//
-//
-//        //pvc?.ppage = SettingsView()
-//
-//
-//        pvc?.wrapperView.addSubview(pvc!.settingsPage)
-//        setSettingsView()
-//    }
-    
-
-//    func setView(view: UIView) {
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        pvc!.wrapperView.addSubview(view)
-//        view.topAnchor.constraint(equalTo: pvc!.wrapperView.topAnchor, constant: 0).isActive = true
-//        view.bottomAnchor.constraint(equalTo: pvc!.wrapperView.bottomAnchor, constant: 0).isActive = true
-//        view.leadingAnchor.constraint(equalTo: pvc!.wrapperView.leadingAnchor, constant: 0).isActive = true
-//        view.trailingAnchor.constraint(equalTo: pvc!.wrapperView.trailingAnchor, constant: 0).isActive = true
-//    }
-//
-//    func setSettingsView() {
-//        pvc!.settingsPage.topAnchor.constraint(equalTo: pvc!.wrapperView.topAnchor, constant: 0).isActive = true
-//        pvc!.settingsPage.bottomAnchor.constraint(equalTo: pvc!.wrapperView.bottomAnchor, constant: 0).isActive = true
-//        pvc!.settingsPage.leadingAnchor.constraint(equalTo: pvc!.wrapperView.leadingAnchor, constant: 0).isActive = true
-//        pvc!.settingsPage.trailingAnchor.constraint(equalTo: pvc!.wrapperView.trailingAnchor, constant: 0).isActive = true
-//    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.height / 2
+        profilePicture.clipsToBounds = true
+    }
 
 }
 
