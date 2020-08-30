@@ -71,6 +71,8 @@
 		F67B12B724DB24E40035F801 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B624DB24E40035F801 /* PrivacyPolicyView.swift */; };
 		F67B12B924DEE1CA0035F801 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12B824DEE1CA0035F801 /* AccountDetailsViewController.swift */; };
 		F67B12BB24DEE6760035F801 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12BA24DEE6760035F801 /* PrivacyPolicyViewController.swift */; };
+		F67B12F424FC02690035F801 /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12F324FC02690035F801 /* FAQViewController.swift */; };
+		F67B12F624FC04170035F801 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B12F524FC04170035F801 /* FAQView.swift */; };
 		F68583A524CD5766004A0C44 /* ProfileSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */; };
 		F68583A724CDB779004A0C44 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A624CDB779004A0C44 /* StatsView.swift */; };
 		F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */; };
@@ -161,6 +163,8 @@
 		F67B12B624DB24E40035F801 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		F67B12B824DEE1CA0035F801 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		F67B12BA24DEE6760035F801 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		F67B12F324FC02690035F801 /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
+		F67B12F524FC04170035F801 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSegmentedControlView.swift; sourceTree = "<group>"; };
 		F68583A624CDB779004A0C44 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeBoxes.swift; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 				F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */,
 				F67B12B224D9CFCA0035F801 /* SettingsView.swift */,
 				F68583A624CDB779004A0C44 /* StatsView.swift */,
+				F67B12F524FC04170035F801 /* FAQView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				F67B12B024D95A490035F801 /* SettingsViewController.swift */,
 				F67B12B824DEE1CA0035F801 /* AccountDetailsViewController.swift */,
 				F67B12BA24DEE6760035F801 /* PrivacyPolicyViewController.swift */,
+				F67B12F324FC02690035F801 /* FAQViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -498,6 +504,7 @@
 				F67B12B324D9CFCA0035F801 /* SettingsView.swift in Sources */,
 				EB05C93824D6677F00AF51C7 /* ChallengePopupView.swift in Sources */,
 				EB8C639A2483816500983BE9 /* GroceryData.swift in Sources */,
+				F67B12F624FC04170035F801 /* FAQView.swift in Sources */,
 				EBC9179824E518010023EF98 /* ChallengeCompleteView.swift in Sources */,
 				EB5244C02471D50500C45C6B /* StartView.swift in Sources */,
 				EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */,
@@ -521,6 +528,7 @@
 				F67B12B924DEE1CA0035F801 /* AccountDetailsViewController.swift in Sources */,
 				EB75251524EE4C1F0071DCB8 /* ProfilePictureImageView.swift in Sources */,
 				EB514D9B247AF3EF00450E60 /* GroceryListEditView.swift in Sources */,
+				F67B12F424FC02690035F801 /* FAQViewController.swift in Sources */,
 				EB8292042478A91F008D96FA /* ProfileViewController.swift in Sources */,
 				F68583AB24D3F8ED004A0C44 /* CircularProgressBar.swift in Sources */,
 				EBF520932456156100EC0B03 /* RegisterViewController.swift in Sources */,

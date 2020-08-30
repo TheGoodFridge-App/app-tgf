@@ -56,6 +56,7 @@ class SettingsViewController: UIViewController {
         settingsPage.signOutButton.addTarget(self, action: #selector(tappedSignOutButton), for: .touchUpInside)
         settingsPage.accDetailsButton.addTarget(self, action: #selector(tappedAccountDetailsButton), for: .touchUpInside)
         settingsPage.privacyButton.addTarget(self, action: #selector(tappedPrivacyPageButton), for: .touchUpInside)
+        settingsPage.faqButton.addTarget(self, action: #selector(tappedFAQButton), for: .touchUpInside)
         
     }
     
@@ -84,5 +85,11 @@ class SettingsViewController: UIViewController {
         let privacyVC = PrivacyPolicyViewController()
         privacyVC.modalPresentationStyle = .fullScreen
         self.present(privacyVC, animated: true, completion: nil)
+    }
+    
+    @objc func tappedFAQButton() {
+        let faqVC = FAQViewController()
+        faqVC.modalPresentationStyle = .fullScreen
+        self.present(faqVC, animated: true, completion: nil)
     }
 }

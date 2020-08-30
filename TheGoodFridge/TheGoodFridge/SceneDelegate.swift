@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-//            startVC = WelcomeViewController()
+//            startVC = SettingsViewController()
 //            window.rootViewController = startVC
 
             if Auth.auth().currentUser != nil {

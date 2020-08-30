@@ -16,7 +16,7 @@ class SettingsView: UIView {
     
     let accDetailsButton = UIButton()
     let currChallengesButton = UIButton()
-    let helpButton = UIButton()
+    let faqButton = UIButton()
     let privacyButton = UIButton()
     let signOutButton = UIButton()
     
@@ -115,7 +115,7 @@ class SettingsView: UIView {
         stackView.addArrangedSubview(currChallengesButton)
         stackView.addArrangedSubview(blankViewAboveAppSupport)
         stackView.addArrangedSubview(appSupportLabel)
-        stackView.addArrangedSubview(helpButton)
+        stackView.addArrangedSubview(faqButton)
         stackView.addArrangedSubview(privacyButton)
         stackView.addArrangedSubview(blankViewAboveSignOut)
         stackView.addArrangedSubview(signOutButton)
@@ -175,8 +175,8 @@ class SettingsView: UIView {
             currChallengesButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             currChallengesButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             
-            helpButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            helpButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            faqButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            faqButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             
             privacyButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             privacyButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
@@ -328,7 +328,7 @@ class SettingsView: UIView {
     func setButtonViews() {
         changeButtonView(button: accDetailsButton, text: "             ACCOUNT DETAILS")
         changeButtonView(button: currChallengesButton, text: "             CURRENT CHALLENGES")
-        changeButtonView(button: helpButton, text: "             HELP")
+        changeButtonView(button: faqButton, text: "             FAQ")
         changeButtonView(button: privacyButton, text: "             PRIVACY POLICY")
         
         
