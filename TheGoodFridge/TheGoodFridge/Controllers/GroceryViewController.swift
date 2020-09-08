@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
@@ -41,7 +42,7 @@ class GroceryViewController: UIViewController {
         let label = UILabel()
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        dateFormatter.dateFormat = "MMM. dd, yyyy"
         let dateStr = dateFormatter.string(from: date)
         label.text = dateStr
         label.font = UIFont(name: "Amiko-Bold", size: 24)
@@ -65,7 +66,7 @@ class GroceryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        user.delegate = self
+        user.userDelegate = self
         groceryListEditView.delegate = self
         groceryListFinalView.delegate = self
         groceryListFinalView.user = user
@@ -126,6 +127,31 @@ class GroceryViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
+    
+    private func presentReview() {
+        // If the count has not yet been stored, this will return 0
+        var count = UserDefaults.standard.integer(forKey: K.processCompletedCountKey)
+        count += 1
+        UserDefaults.standard.set(count, forKey: K.processCompletedCountKey)
+
+        print("Process completed \(count) time(s)")
+
+        // Get the current bundle version for the app
+        let infoDictionaryKey = kCFBundleVersionKey as String
+        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String
+            else { fatalError("Expected to find a bundle version in the info dictionary") }
+
+        let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: K.lastVersionPromptedForReviewKey)
+
+        // Has the process been completed several times and the user has not already been prompted for this version?
+        if count >= 4 && currentVersion != lastVersionPromptedForReview {
+            let twoSecondsFromNow = DispatchTime.now() + 2.0
+            DispatchQueue.main.asyncAfter(deadline: twoSecondsFromNow) {
+                SKStoreReviewController.requestReview()
+                UserDefaults.standard.set(currentVersion, forKey: K.lastVersionPromptedForReviewKey)
+            }
+        }
+    }
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -151,8 +177,10 @@ extension GroceryViewController: GroceryDelegate {
     
     func checkedPrevItems(items: [String], success: Bool) {
         if success {
-            groceryData.getRecommendations()
+            groceryData.getRecommendations(type: .get)
         }
+        
+        presentReview()
     }
     
     func didGetGroceryItems(rec: [String: [String]], other: [String], purchased: [String: String]) {

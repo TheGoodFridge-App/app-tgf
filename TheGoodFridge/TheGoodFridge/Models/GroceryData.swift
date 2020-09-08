@@ -10,6 +10,11 @@ import Alamofire
 import Firebase
 import Foundation
 
+enum MethodType {
+    case post
+    case get
+}
+
 enum GroceryType {
     case past
     case split
@@ -69,7 +74,33 @@ class GroceryData {
         }
     }
     
-    func getRecommendations() {
+    func updateGroceryList() {
+        // Split items into recommendations and products that did not get anything
+        let urlString = "\(K.serverURL)/grocery_list/update"
+        guard let email = user.email else {
+            debugPrint("Could not get user email.")
+            return
+        }
+        let parameters: [String: [String]] = [
+            "email": [email],
+            "items": items,
+            "secret": [K.secretKey]
+        ]
+        
+        AF.request(urlString, method: .put, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
+            .responseJSON { response in
+                if let error = response.error {
+                    debugPrint("Error: \(error)")
+                }
+                
+                if let responseData = response.data {
+                    self.parseJSON(type: .split, data: responseData)
+                    self.getGroceryList()
+                }
+        }
+    }
+    
+    func getRecommendations(type: MethodType) {
         // Split items into recommendations and products that did not get anything
         let urlString = "\(K.serverURL)/grocery_list"
         guard let email = user.email else {
@@ -82,7 +113,9 @@ class GroceryData {
             "secret": [K.secretKey]
         ]
         
-        AF.request(urlString, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
+        let method: HTTPMethod = type == MethodType.post ? .post : .get
+        
+        AF.request(urlString, method: method, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
             .responseJSON { response in
                 
                 if let responseData = response.data {

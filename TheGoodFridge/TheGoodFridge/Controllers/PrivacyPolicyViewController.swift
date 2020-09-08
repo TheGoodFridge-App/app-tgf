@@ -13,50 +13,55 @@ import GoogleSignIn
 
 class PrivacyPolicyViewController: UIViewController {
     
-    let wrapperView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    } ()
+    let privacyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Privacy Policy"
+        label.font = UIFont(name: "Amiko-Regular", size: 24)!
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let backButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        button.setImage(UIImage(named: "SettingsBackImage"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     let privacyPage = PrivacyPolicyView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
-        privacyPage.translatesAutoresizingMaskIntoConstraints = false
-        setButtonTargets()
         
-        view.addSubview(wrapperView)
-        wrapperView.addSubview(privacyPage)
+        view.backgroundColor = .white
+        navigationItem.titleView = privacyLabel
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.hidesBackButton = true
+        backButton.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
+        privacyPage.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(privacyPage)
         
         setupLayout()
     }
     
     private func setupLayout() {
         let constraints = [
-            
-            wrapperView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            wrapperView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            wrapperView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            wrapperView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            privacyPage.topAnchor.constraint(equalTo: wrapperView.topAnchor),
-            privacyPage.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor),
-            privacyPage.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            privacyPage.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor)
+            privacyPage.topAnchor.constraint(equalTo: view.topAnchor),
+            privacyPage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            privacyPage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            privacyPage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
 
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
     
-    func setButtonTargets() {
-        privacyPage.backButton.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
-    }
-    
     @objc func tappedBackButton() {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

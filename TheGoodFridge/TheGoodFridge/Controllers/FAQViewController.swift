@@ -13,50 +13,53 @@ import GoogleSignIn
 
 class FAQViewController: UIViewController {
     
-    let wrapperView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    } ()
+    let faqLabel: UILabel = {
+        let label = UILabel()
+        label.text = "FAQ"
+        label.font = UIFont(name: "Amiko-Regular", size: 24)!
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let backButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        button.setImage(UIImage(named: "SettingsBackImage"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     let faqPage = FAQView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
-        faqPage.translatesAutoresizingMaskIntoConstraints = false
-        setButtonTargets()
+        view.backgroundColor = .white
+        navigationItem.titleView = faqLabel
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.hidesBackButton = true
+        backButton.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
         
-        view.addSubview(wrapperView)
-        wrapperView.addSubview(faqPage)
+        view.addSubview(faqPage)
         
         setupLayout()
     }
     
     private func setupLayout() {
         let constraints = [
-            
-            wrapperView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            wrapperView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            wrapperView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            wrapperView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            faqPage.topAnchor.constraint(equalTo: wrapperView.topAnchor),
-            faqPage.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor),
-            faqPage.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            faqPage.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor)
+        
+            faqPage.topAnchor.constraint(equalTo: view.topAnchor),
+            faqPage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            faqPage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            faqPage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
 
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
     
-    func setButtonTargets() {
-        faqPage.backButton.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
-    }
-    
     @objc func tappedBackButton() {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

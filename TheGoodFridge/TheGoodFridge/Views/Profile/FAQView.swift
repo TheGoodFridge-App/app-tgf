@@ -10,7 +10,6 @@ import UIKit
 
 class FAQView: UIView {
     
-    let faqLabel = UILabel()
     let welcomeLabel = UILabel()
     
     let scrollView = UIScrollView()
@@ -26,19 +25,6 @@ class FAQView: UIView {
     let recommendLabel = UILabel()
     let reputableLabel = UILabel()
 
-    let wrapperView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    } ()
-    
-    let backButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setBackgroundImage(UIImage(named: "BackButton"), for: .normal)
-        return button
-    } ()
-    
     let viewInScrollView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -71,28 +57,38 @@ class FAQView: UIView {
         return label
     } ()
     
+    let wrapperView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 0.941, green: 0.969, blue: 0.929, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
+    let spacing: CGFloat = 20
+    let headingHeight: CGFloat = 30
+    let labelMultiplier: CGFloat = 0.9
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupScrollView()
         
-        backgroundColor = #colorLiteral(red: 1, green: 0.9529411765, blue: 0.9019607843, alpha: 1)
+        backgroundColor = .clear
+        translatesAutoresizingMaskIntoConstraints = false
         
         setLabels()
         setHeadings()
         
-        addSubview(wrapperView)
         addSubview(backgroundView)
         sendSubviewToBack(backgroundView)
-        wrapperView.addSubview(backButton)
-        wrapperView.addSubview(faqLabel)
-        wrapperView.addSubview(welcomeLabel)
-        wrapperView.addSubview(furtherQuestionsView)
-        wrapperView.addSubview(scrollView)
+        addSubview(scrollView)
         
         furtherQuestionsView.addSubview(furtherQuestionsLabel)
-        scrollView.addSubview(stackView)
+        
+        scrollView.addSubview(welcomeLabel)
+        scrollView.addSubview(wrapperView)
+        wrapperView.addSubview(stackView)
+        
+        stackView.alignment = .center
         
         stackView.addArrangedSubview(challengesHeading)
         stackView.addArrangedSubview(challengesLabel)
@@ -102,83 +98,63 @@ class FAQView: UIView {
         stackView.addArrangedSubview(recommendLabel)
         stackView.addArrangedSubview(reputableHeading)
         stackView.addArrangedSubview(reputableLabel)
+        stackView.addArrangedSubview(furtherQuestionsView)
         
         setupLayout()
     }
     
     private func setupLayout() {
+        
         let constraints = [
+            welcomeLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: spacing),
+            welcomeLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
-            backgroundView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            backgroundView.topAnchor.constraint(equalTo: topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            wrapperView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            wrapperView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            wrapperView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            wrapperView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            backButton.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 20),
-            backButton.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 32),
-            backButton.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 24),
-            backButton.trailingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 31.5),
-            
-            faqLabel.centerXAnchor.constraint(equalTo: wrapperView.centerXAnchor),
-            faqLabel.topAnchor.constraint(equalTo: backButton.topAnchor, constant: -5),
-            faqLabel.bottomAnchor.constraint(equalTo: backButton.topAnchor, constant: 27),
-            
-            welcomeLabel.centerXAnchor.constraint(equalTo: wrapperView.centerXAnchor),
-            welcomeLabel.topAnchor.constraint(equalTo: faqLabel.bottomAnchor, constant: 25),
-            welcomeLabel.bottomAnchor.constraint(equalTo: faqLabel.bottomAnchor, constant: 45),
-            
             //furtherQuestionsLabel.centerXAnchor.constraint(equalTo: wrapperView.centerXAnchor),
-            furtherQuestionsView.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor),
-            furtherQuestionsView.topAnchor.constraint(equalTo: wrapperView.bottomAnchor, constant: -60),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            wrapperView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: spacing),
+            wrapperView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            wrapperView.widthAnchor.constraint(equalTo: widthAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: wrapperView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor),
+            stackView.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
+            
+            challengesHeading.heightAnchor.constraint(equalToConstant: headingHeight),
+            challengesHeading.widthAnchor.constraint(equalTo: wrapperView.widthAnchor),
+            
+            challengesLabel.widthAnchor.constraint(equalTo: wrapperView.widthAnchor, multiplier: labelMultiplier),
+            
+            impactHeading.heightAnchor.constraint(equalToConstant: headingHeight),
+            impactHeading.widthAnchor.constraint(equalTo: wrapperView.widthAnchor),
+            
+            impactLabel.widthAnchor.constraint(equalTo: wrapperView.widthAnchor, multiplier: labelMultiplier),
+            
+            recommendHeading.heightAnchor.constraint(equalToConstant: headingHeight * 2),
+            recommendHeading.widthAnchor.constraint(equalTo: wrapperView.widthAnchor),
+            
+            recommendLabel.widthAnchor.constraint(equalTo: wrapperView.widthAnchor, multiplier: labelMultiplier),
+            
+            reputableHeading.heightAnchor.constraint(equalToConstant: headingHeight * 2),
+            reputableHeading.widthAnchor.constraint(equalTo: wrapperView.widthAnchor),
+            
+            reputableLabel.widthAnchor.constraint(equalTo: wrapperView.widthAnchor, multiplier: labelMultiplier),
+            
+            furtherQuestionsView.heightAnchor.constraint(equalToConstant: headingHeight * 2.5),
             furtherQuestionsView.widthAnchor.constraint(equalTo: wrapperView.widthAnchor),
             
             furtherQuestionsLabel.centerXAnchor.constraint(equalTo: furtherQuestionsView.centerXAnchor),
-            furtherQuestionsLabel.centerYAnchor.constraint(equalTo: furtherQuestionsView.centerYAnchor, constant: 10),
+            furtherQuestionsLabel.centerYAnchor.constraint(equalTo: furtherQuestionsView.centerYAnchor),
             furtherQuestionsLabel.widthAnchor.constraint(equalTo: furtherQuestionsView.widthAnchor),
-            //furtherQuestionsLabel.centerXAnchor.constraint(equalTo: furtherQuestionsView.centerXAnchor),
-            
-            
-            
-            
-            scrollView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 21),
-            scrollView.bottomAnchor.constraint(equalTo: furtherQuestionsView.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
-            
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: widthAnchor),
-            
-            challengesHeading.heightAnchor.constraint(equalToConstant: 33),
-            challengesHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            challengesLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            challengesLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            impactHeading.heightAnchor.constraint(equalToConstant: 33),
-            impactHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            impactLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            impactLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            recommendHeading.heightAnchor.constraint(equalToConstant: 66),
-            recommendHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            recommendLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            recommendLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            reputableHeading.heightAnchor.constraint(equalToConstant: 66),
-            reputableHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            reputableLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            reputableLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -204,8 +180,6 @@ class FAQView: UIView {
     }
     
     func setLabels() {
-        changeLabel(label: faqLabel, text: "FAQ", font: UIFont(name: "Amiko-Regular", size: 24)!, color: .black, false)
-        
         changeLabel(label: welcomeLabel, text: "Welcome to The Good Fridge Help Center 👋", font: UIFont(name: "Amiko-SemiBold", size: 16)!, color: .black, false)
         
         changeLabel(label: challengesLabel, text: "Challenges are mini milestones that you can opt in to hold yourself accountable on your journey to become an ethical consumer. Each challenge falls under one of the three categories— human rights, environmental sustainability, and animal welfare.\n\nEach level of a challenge is completed when you buy a specified number of ethical products required for that level. You can view your progress towards your current challenge, as well as view the challenges you have completed already under your personal profile tab.", font: UIFont(name: "Amiko-Regular", size: 12)!, color: .black, true)
@@ -230,6 +204,7 @@ class FAQView: UIView {
         let constraints = [
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            label.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: labelMultiplier)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -246,12 +221,12 @@ class FAQView: UIView {
     func setupScrollView() {
         //Add and setup scroll view
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = UIColor(red: 0.941, green: 0.969, blue: 0.929, alpha: 1)
 
         //Add and setup stack view
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 22;
+        stackView.alignment = .center
         stackView.backgroundColor = .clear
 
     }

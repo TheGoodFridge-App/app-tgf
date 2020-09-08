@@ -11,4 +11,5 @@ import Foundation
 struct UserData: Codable {
     let first_name: String
     let last_name: String
+    var image_url: String?
 }

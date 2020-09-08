@@ -1,6 +1,0 @@
-framework module Pods_TheGoodFridge {
-  umbrella header "Pods-TheGoodFridge-umbrella.h"
-
-  export *
-  module * { export * }
-}

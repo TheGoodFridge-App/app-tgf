@@ -213,6 +213,7 @@ class RegisterViewController: UIViewController {
                 self.presentSetup(user: user)
               }
             }
+            UserDefaults.standard.set(true, forKey: "loggedIn")
         }
     }
     
@@ -239,6 +240,7 @@ class RegisterViewController: UIViewController {
     
     @objc func tappedGoogleButton() {
         GIDSignIn.sharedInstance().signIn()
+        UserDefaults.standard.set(true, forKey: "loggedIn")
     }
     
     @objc func tappedBackButton() {

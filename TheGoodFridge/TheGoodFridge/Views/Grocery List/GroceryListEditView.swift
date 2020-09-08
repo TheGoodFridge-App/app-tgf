@@ -12,12 +12,14 @@ class GroceryListEditView: UIView {
     
     let tableView: UITableView
     var rows = [GroceryListCell()]
+    var rowStrings = [String()]
     var groceryItems = [String]()
     var startCell: GroceryListCell?
     var returnTapped = false
     let groceryDoneView = GroceryDoneView()
     var delegate: GroceryDelegate?
     let isEditing: Bool
+    var groceryData = GroceryData(items: [String]())
     
     let placeholderLabel: UILabel = {
         let label = UILabel()
@@ -49,6 +51,7 @@ class GroceryListEditView: UIView {
     required init(rows: [GroceryListCell], isEditing: Bool) {
         tableView = UITableView(frame: .zero)
         self.rows = rows
+        self.rowStrings = rows.map({ $0.inputField.text ?? "" })
         self.isEditing = isEditing
         super.init(frame: .zero)
         
@@ -130,9 +133,9 @@ class GroceryListEditView: UIView {
         
         groceryItems = rows.map({ $0.inputField.text ?? "" })
         
-        let groceryData = GroceryData(items: groceryItems)
+        groceryData.items = groceryItems
         groceryData.delegate = delegate
-        groceryData.getRecommendations()
+        groceryData.updateGroceryList()
     }
 }
 
@@ -143,9 +146,10 @@ extension GroceryListEditView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(rows.map({ $0.inputField.text }))
         let cell = tableView.dequeueReusableCell(withIdentifier: K.groceryCellID, for: indexPath) as! GroceryListCell
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        cell.inputField.text = rows[indexPath.row].inputField.text
+        cell.inputField.text = rowStrings[indexPath.row]
         cell.inputField.delegate = self
         //cell.inputField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         
@@ -197,12 +201,21 @@ extension GroceryListEditView: UITableViewDelegate {
 extension GroceryListEditView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        tableView.beginUpdates()
-        let index = rows.firstIndex(where: { $0.inputField == textField }) ?? 0
-        rows.insert(GroceryListCell(), at: index + 1)
-        tableView.insertRows(at: [IndexPath(row: index + 1, section: 0)], with: .automatic)
-        returnTapped = true
-        tableView.endUpdates()
+        
+        let index = rows.firstIndex(where: { $0.inputField == textField }) ?? -1
+        print(index)
+        if index >= 0 {
+            rowStrings[index] = rows[index].inputField.text ?? rowStrings[index]
+            let groceryCell = GroceryListCell()
+            groceryCell.inputField.text = ""
+            rows.insert(groceryCell, at: index + 1)
+            rowStrings.insert("", at: index + 1)
+            returnTapped = true
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: index + 1, section: 0)], with: .automatic)
+            tableView.endUpdates()
+        }
+        
         return true
     }
     

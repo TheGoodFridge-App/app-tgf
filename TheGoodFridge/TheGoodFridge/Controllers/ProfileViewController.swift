@@ -7,14 +7,52 @@
 //
 
 import UIKit
-import StoreKit
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
 
+protocol ProfileDelegate {
+    func didGetProfilePicture(image: UIImage?)
+}
+
 class ProfileViewController: UIViewController {
     
-    let profilePageView = ProfilePageView()
+    var settingsButton = UIButton()
+    let nameLabel = UILabel()
+
+    let settingsSymbol: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "SettingsButton"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    } ()
+    
+    func changeName() {
+        //get name of user
+        nameLabel.font = UIFont(name: "Amiko-Regular", size: 25)
+        nameLabel.textColor = UIColor.black
+    }
+
+    //profile picture
+    let profilePicture: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "DefaultProfilePicture")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let backButtonImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "SettingsBackImage")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    //Segmented Tabs
+    var tabsSegmented: CustomSegmentedControl = CustomSegmentedControl(buttonTitle: ["Challenges","Stats"]) //"Archive"
+    
     var user = User()
     
     let profileChallengesBackground: UIImageView = {
@@ -25,12 +63,31 @@ class ProfileViewController: UIViewController {
     }()
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        setButtonsAndViews()
+        // Check for profile picture
+        user.profileDelegate = self
+        user.getProfilePicture()
         
-        profilePageView.user = user
+        tabsSegmented.user = user
         
-        view.addSubview(profilePageView)
+        user.userDelegate = self
+        //get name of user
+        nameLabel.font = UIFont(name: "Amiko-Regular", size: 25)
+        nameLabel.textColor = UIColor.black
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        if let userData = user.getUserData() {
+            nameLabel.text = "\(userData.first_name) \(userData.last_name)"
+        }
+        
+        settingsSymbol.addTarget(self, action: #selector(tappedSettingsButton), for: .touchUpInside)
+        
+        view.backgroundColor = .clear
+        
+        view.addSubview(nameLabel)
+        view.addSubview(settingsSymbol)
+        view.addSubview(profilePicture)
+        view.addSubview(tabsSegmented)
         view.addSubview(profileChallengesBackground)
         view.sendSubviewToBack(profileChallengesBackground)
         
@@ -38,57 +95,76 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupLayout() {
+        
+        let topMargin: CGFloat = 60
+        let spacing: CGFloat = 20
+        let settingsSize: CGFloat = 20
+        let profileSize: CGFloat = 100
+        
         let constraints = [
-            profilePageView.topAnchor.constraint(equalTo: view.topAnchor),
-            profilePageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            profilePageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            profilePageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
             profileChallengesBackground.topAnchor.constraint(equalTo: view.topAnchor),
             profileChallengesBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             profileChallengesBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            profileChallengesBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            profileChallengesBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topMargin),
+            
+            settingsSymbol.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor),
+            settingsSymbol.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -spacing),
+            settingsSymbol.widthAnchor.constraint(equalToConstant: settingsSize),
+            settingsSymbol.heightAnchor.constraint(equalToConstant: settingsSize),
+            
+            profilePicture.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: spacing),
+            profilePicture.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            profilePicture.widthAnchor.constraint(equalToConstant: profileSize),
+            profilePicture.heightAnchor.constraint(equalToConstant: profileSize),
+
+            tabsSegmented.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: spacing),
+            tabsSegmented.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabsSegmented.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tabsSegmented.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
+        
         NSLayoutConstraint.activate(constraints)
-    }
-    
-    
-    func setButtonsAndViews() {
-        profilePageView.translatesAutoresizingMaskIntoConstraints = false
-        profilePageView.settingsSymbol.addTarget(self, action: #selector(tappedSettingsButton), for: .touchUpInside)
     }
     
     @objc func tappedSettingsButton() {
         let settingsVC = SettingsViewController()
-        settingsVC.modalPresentationStyle = .fullScreen
-        self.present(settingsVC, animated: true, completion: nil)
-        
-        presentReview()
+        settingsVC.profileDelegate = self
+        settingsVC.user = user
+        settingsVC.profilePicture.image = profilePicture.image
+        let navigationVC = UINavigationController(rootViewController: settingsVC)
+        navigationVC.modalPresentationStyle = .fullScreen
+        navigationVC.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingsSymbol)
+        navigationVC.navigationItem.backBarButtonItem = UIBarButtonItem(customView: backButtonImageView)
+        self.present(navigationVC, animated: true, completion: nil)
     }
     
-    private func presentReview() {
-        // If the count has not yet been stored, this will return 0
-        var count = UserDefaults.standard.integer(forKey: K.processCompletedCountKey)
-        count += 1
-        UserDefaults.standard.set(count, forKey: K.processCompletedCountKey)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.height / 2
+        profilePicture.clipsToBounds = true
+    }
+}
 
-        print("Process completed \(count) time(s)")
-
-        // Get the current bundle version for the app
-        let infoDictionaryKey = kCFBundleVersionKey as String
-        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String
-            else { fatalError("Expected to find a bundle version in the info dictionary") }
-
-        let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: K.lastVersionPromptedForReviewKey)
-
-        // Has the process been completed several times and the user has not already been prompted for this version?
-        if count >= 4 && currentVersion != lastVersionPromptedForReview {
-            let twoSecondsFromNow = DispatchTime.now() + 2.0
-            DispatchQueue.main.asyncAfter(deadline: twoSecondsFromNow) { 
-                SKStoreReviewController.requestReview()
-                UserDefaults.standard.set(currentVersion, forKey: K.lastVersionPromptedForReviewKey)
-            }
+extension ProfileViewController: UserDelegate {
+    
+    func didGetUserData(userData: UserData) {
+        DispatchQueue.main.async {
+            self.nameLabel.text = "\(userData.first_name) \(userData.last_name)"
         }
     }
+    
+}
 
+extension ProfileViewController: ProfileDelegate {
+    
+    func didGetProfilePicture(image: UIImage?) {
+        DispatchQueue.main.async {
+            self.profilePicture.image = image
+        }
+    }
+    
 }

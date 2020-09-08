@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		667996051EAD6A0501B0B7B0 /* Pods_TheGoodFridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B47454650517C707E2136C /* Pods_TheGoodFridge.framework */; };
+		8F7429B8287715203D797A2A /* Pods_TheGoodFridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D38C9EC6E072779141E849 /* Pods_TheGoodFridge.framework */; };
+		EB00972F2500C4EB00244245 /* SettingsItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB00972E2500C4EB00244245 /* SettingsItemCell.swift */; };
 		EB05C93424D62A0E00AF51C7 /* ChallengeSetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05C93324D62A0E00AF51C7 /* ChallengeSetupCell.swift */; };
 		EB05C93624D6349D00AF51C7 /* ChallengeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05C93524D6349D00AF51C7 /* ChallengeButton.swift */; };
 		EB05C93824D6677F00AF51C7 /* ChallengePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05C93724D6677F00AF51C7 /* ChallengePopupView.swift */; };
 		EB0B6982245E5A550069697F /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB0B73C12504C08E008E5A3D /* SettingsSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0B73C02504C08E008E5A3D /* SettingsSectionTitleView.swift */; };
 		EB0BC8C224CE4F6200A16424 /* ChallengeIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */; };
 		EB14DD9E24450A2400CA2E0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */; };
 		EB1D770A2462978F003E1A84 /* ValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D77092462978F003E1A84 /* ValuesView.swift */; };
@@ -54,6 +56,7 @@
 		EBBEA0DE245D5C780038F403 /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */; };
 		EBBEF37F2477B82D005B085E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBEF37E2477B82D005B085E /* TabBarController.swift */; };
 		EBBEF3812477B923005B085E /* GroceryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBEF3802477B923005B085E /* GroceryViewController.swift */; };
+		EBC03B9E250599BA00BBC040 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC03B9D250599BA00BBC040 /* SettingsManager.swift */; };
 		EBC13140246A6CCD0047CD2C /* NextBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC1313F246A6CCD0047CD2C /* NextBackButton.swift */; };
 		EBC13142246A6E640047CD2C /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC13141246A6E640047CD2C /* IssueCell.swift */; };
 		EBC13144246A6E900047CD2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC13143246A6E900047CD2C /* Constants.swift */; };
@@ -78,7 +81,6 @@
 		F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */; };
 		F68583AB24D3F8ED004A0C44 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */; };
 		F68583AD24D72F35004A0C44 /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68583AC24D72F35004A0C44 /* ArchiveView.swift */; };
-		F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1588224CAC84700AB5648 /* ProfilePageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,12 +98,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1990F854B237DEAE969610F0 /* Pods-TheGoodFridge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.debug.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.debug.xcconfig"; sourceTree = "<group>"; };
-		208317CF51033CE27E7D3123 /* Pods-TheGoodFridge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.release.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.release.xcconfig"; sourceTree = "<group>"; };
-		57B47454650517C707E2136C /* Pods_TheGoodFridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheGoodFridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A04B6568C9B6F01EBF6368D /* Pods-TheGoodFridge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.release.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.release.xcconfig"; sourceTree = "<group>"; };
+		3F56849CC83BB378E6712201 /* Pods-TheGoodFridge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheGoodFridge.debug.xcconfig"; path = "Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge.debug.xcconfig"; sourceTree = "<group>"; };
+		D4D38C9EC6E072779141E849 /* Pods_TheGoodFridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheGoodFridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB00972E2500C4EB00244245 /* SettingsItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemCell.swift; sourceTree = "<group>"; };
 		EB05C93324D62A0E00AF51C7 /* ChallengeSetupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSetupCell.swift; sourceTree = "<group>"; };
 		EB05C93524D6349D00AF51C7 /* ChallengeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeButton.swift; sourceTree = "<group>"; };
 		EB05C93724D6677F00AF51C7 /* ChallengePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePopupView.swift; sourceTree = "<group>"; };
+		EB0B73C02504C08E008E5A3D /* SettingsSectionTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionTitleView.swift; sourceTree = "<group>"; };
 		EB0BC8C124CE4F6200A16424 /* ChallengeIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeIntroView.swift; sourceTree = "<group>"; };
 		EB14DD9D24450A2400CA2E0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB1D77092462978F003E1A84 /* ValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuesView.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 		EBBEA0DD245D5C780038F403 /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
 		EBBEF37E2477B82D005B085E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EBBEF3802477B923005B085E /* GroceryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryViewController.swift; sourceTree = "<group>"; };
+		EBC03B9D250599BA00BBC040 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		EBC1313F246A6CCD0047CD2C /* NextBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextBackButton.swift; sourceTree = "<group>"; };
 		EBC13141246A6E640047CD2C /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		EBC13143246A6E900047CD2C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -170,7 +175,6 @@
 		F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeBoxes.swift; sourceTree = "<group>"; };
 		F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		F68583AC24D72F35004A0C44 /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
-		F6F1588224CAC84700AB5648 /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				667996051EAD6A0501B0B7B0 /* Pods_TheGoodFridge.framework in Frameworks */,
+				8F7429B8287715203D797A2A /* Pods_TheGoodFridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,18 +192,10 @@
 		C8B035B8A0AF34FE146EAC99 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1990F854B237DEAE969610F0 /* Pods-TheGoodFridge.debug.xcconfig */,
-				208317CF51033CE27E7D3123 /* Pods-TheGoodFridge.release.xcconfig */,
+				3F56849CC83BB378E6712201 /* Pods-TheGoodFridge.debug.xcconfig */,
+				0A04B6568C9B6F01EBF6368D /* Pods-TheGoodFridge.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		E13242D054CA16010ABFB3CA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				57B47454650517C707E2136C /* Pods_TheGoodFridge.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		EB56EC562442E34C001D48BE = {
@@ -209,7 +205,7 @@
 				EBBEA0D7245D51910038F403 /* Fonts */,
 				EB56EC602442E34C001D48BE /* Products */,
 				C8B035B8A0AF34FE146EAC99 /* Pods */,
-				E13242D054CA16010ABFB3CA /* Frameworks */,
+				FE5BBA7FDF6811DE6339C3B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,11 +257,12 @@
 				F68583AC24D72F35004A0C44 /* ArchiveView.swift */,
 				EBDE8C7424F30CAE007DC5AC /* ChallengeBox.swift */,
 				F68583A824D2E9F0004A0C44 /* ChallengeBoxes.swift */,
-				EB75251424EE4C1F0071DCB8 /* ProfilePictureImageView.swift */,
 				F68583AA24D3F8ED004A0C44 /* CircularProgressBar.swift */,
+				EB75251424EE4C1F0071DCB8 /* ProfilePictureImageView.swift */,
 				F67B12B624DB24E40035F801 /* PrivacyPolicyView.swift */,
-				F6F1588224CAC84700AB5648 /* ProfilePageView.swift */,
 				F68583A424CD5766004A0C44 /* ProfileSegmentedControlView.swift */,
+				EB00972E2500C4EB00244245 /* SettingsItemCell.swift */,
+				EB0B73C02504C08E008E5A3D /* SettingsSectionTitleView.swift */,
 				F67B12B224D9CFCA0035F801 /* SettingsView.swift */,
 				F68583A624CDB779004A0C44 /* StatsView.swift */,
 				F67B12F524FC04170035F801 /* FAQView.swift */,
@@ -314,11 +311,11 @@
 				EBBD0E0324A177170079F15C /* RecommendViewController.swift */,
 				EBF520922456156100EC0B03 /* RegisterViewController.swift */,
 				EB8292012478A917008D96FA /* SearchViewController.swift */,
+				F67B12B024D95A490035F801 /* SettingsViewController.swift */,
 				EB7E4C282462252100A6E8FA /* SetupViewController.swift */,
 				EBBEF37E2477B82D005B085E /* TabBarController.swift */,
 				EBBD0E0524A190CA0079F15C /* UIView+Snapshot.swift */,
 				EB56EC662442E34C001D48BE /* WelcomeViewController.swift */,
-				F67B12B024D95A490035F801 /* SettingsViewController.swift */,
 				F67B12B824DEE1CA0035F801 /* AccountDetailsViewController.swift */,
 				F67B12BA24DEE6760035F801 /* PrivacyPolicyViewController.swift */,
 				F67B12F324FC02690035F801 /* FAQViewController.swift */,
@@ -329,14 +326,15 @@
 		EBA42CF3244CE4CB00185F94 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EBACD0F924D7E5AC00143E47 /* ChallengeManager.swift */,
+				EB8C63992483816500983BE9 /* GroceryData.swift */,
 				EB2EB192246A727C00C7F523 /* IssueData.swift */,
 				EBA42CF1244CE4C800185F94 /* LoginManager.swift */,
+				EB55FE0824AD3A17002760F7 /* ProductManager.swift */,
+				EBC03B9D250599BA00BBC040 /* SettingsManager.swift */,
 				EBCE9A0E2468885900B0266E /* SetupData.swift */,
 				EB5B9AC72460CFA900494754 /* User.swift */,
 				EB8292072478BA4C008D96FA /* UserData.swift */,
-				EB8C63992483816500983BE9 /* GroceryData.swift */,
-				EB55FE0824AD3A17002760F7 /* ProductManager.swift */,
-				EBACD0F924D7E5AC00143E47 /* ChallengeManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -362,6 +360,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		FE5BBA7FDF6811DE6339C3B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4D38C9EC6E072779141E849 /* Pods_TheGoodFridge.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -369,13 +375,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB56EC732442E34E001D48BE /* Build configuration list for PBXNativeTarget "TheGoodFridge" */;
 			buildPhases = (
-				621089E236053E362B2A92C7 /* [CP] Check Pods Manifest.lock */,
+				14284678730306BE2F53EF1F /* [CP] Check Pods Manifest.lock */,
 				EB56EC5B2442E34C001D48BE /* Sources */,
 				EB56EC5C2442E34C001D48BE /* Frameworks */,
 				EB56EC5D2442E34C001D48BE /* Resources */,
 				EB0B6983245E5A560069697F /* Embed Frameworks */,
-				3A660F2FBB38906CBB1412CF /* [CP] Embed Pods Frameworks */,
-				ACEE15DD9F3528807BDFFFE6 /* [CP] Copy Pods Resources */,
+				F088EC9A6FB83263DCCA1C7C /* [CP] Embed Pods Frameworks */,
+				E301FDDB609BD569C5F2C778 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -437,24 +443,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A660F2FBB38906CBB1412CF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		621089E236053E362B2A92C7 /* [CP] Check Pods Manifest.lock */ = {
+		14284678730306BE2F53EF1F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -476,7 +465,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ACEE15DD9F3528807BDFFFE6 /* [CP] Copy Pods Resources */ = {
+		E301FDDB609BD569C5F2C778 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -493,6 +482,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F088EC9A6FB83263DCCA1C7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheGoodFridge/Pods-TheGoodFridge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -501,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8C9BBE245F56CA00E51E7C /* LoginViewController.swift in Sources */,
+				EBC03B9E250599BA00BBC040 /* SettingsManager.swift in Sources */,
 				F67B12B324D9CFCA0035F801 /* SettingsView.swift in Sources */,
 				EB05C93824D6677F00AF51C7 /* ChallengePopupView.swift in Sources */,
 				EB8C639A2483816500983BE9 /* GroceryData.swift in Sources */,
@@ -520,7 +527,6 @@
 				EBCE9A1124688A4B00B0266E /* IssuesView.swift in Sources */,
 				F68583A924D2E9F0004A0C44 /* ChallengeBoxes.swift in Sources */,
 				EBBD0E0424A177170079F15C /* RecommendViewController.swift in Sources */,
-				F6F1588324CAC84700AB5648 /* ProfilePageView.swift in Sources */,
 				EBBEF3812477B923005B085E /* GroceryViewController.swift in Sources */,
 				EBC13140246A6CCD0047CD2C /* NextBackButton.swift in Sources */,
 				EB96750D24A452340058FAE9 /* RecommendCardView.swift in Sources */,
@@ -541,6 +547,7 @@
 				F67B12B724DB24E40035F801 /* PrivacyPolicyView.swift in Sources */,
 				EBBEA0DC245D526A0038F403 /* InputFieldView.swift in Sources */,
 				EBBD0E0624A190CA0079F15C /* UIView+Snapshot.swift in Sources */,
+				EB00972F2500C4EB00244245 /* SettingsItemCell.swift in Sources */,
 				EB05C93424D62A0E00AF51C7 /* ChallengeSetupCell.swift in Sources */,
 				EB8292022478A917008D96FA /* SearchViewController.swift in Sources */,
 				EB514D9D247AFCE100450E60 /* GroceryListCell.swift in Sources */,
@@ -560,6 +567,7 @@
 				EB7E4C292462252100A6E8FA /* SetupViewController.swift in Sources */,
 				F68583AD24D72F35004A0C44 /* ArchiveView.swift in Sources */,
 				EB56EC652442E34C001D48BE /* SceneDelegate.swift in Sources */,
+				EB0B73C12504C08E008E5A3D /* SettingsSectionTitleView.swift in Sources */,
 				EB55FE0924AD3A17002760F7 /* ProductManager.swift in Sources */,
 				EBACD0FA24D7E5AC00143E47 /* ChallengeManager.swift in Sources */,
 				EB1D770C246298AE003E1A84 /* ValueGoalButton.swift in Sources */,
@@ -698,7 +706,7 @@
 		};
 		EB56EC742442E34E001D48BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1990F854B237DEAE969610F0 /* Pods-TheGoodFridge.debug.xcconfig */;
+			baseConfigurationReference = 3F56849CC83BB378E6712201 /* Pods-TheGoodFridge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -733,8 +741,6 @@
 					"\"GTMSessionFetcher\"",
 					"-framework",
 					"\"GoogleDataTransport\"",
-					"-framework",
-					"\"GoogleDataTransportCCTSupport\"",
 					"-framework",
 					"\"GoogleUtilities\"",
 					"-framework",
@@ -757,7 +763,7 @@
 		};
 		EB56EC752442E34E001D48BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 208317CF51033CE27E7D3123 /* Pods-TheGoodFridge.release.xcconfig */;
+			baseConfigurationReference = 0A04B6568C9B6F01EBF6368D /* Pods-TheGoodFridge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -792,8 +798,6 @@
 					"\"GTMSessionFetcher\"",
 					"-framework",
 					"\"GoogleDataTransport\"",
-					"-framework",
-					"\"GoogleDataTransportCCTSupport\"",
 					"-framework",
 					"\"GoogleUtilities\"",
 					"-framework",

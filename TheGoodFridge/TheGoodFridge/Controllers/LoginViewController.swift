@@ -202,6 +202,7 @@ class LoginViewController: UIViewController {
                     self.present(tabBarVC, animated: true, completion: nil)
                 }
             }
+            UserDefaults.standard.set(true, forKey: "loggedIn")
         }
     }
 
@@ -219,6 +220,7 @@ class LoginViewController: UIViewController {
     
     @objc func tappedGoogleButton() {
         GIDSignIn.sharedInstance().signIn()
+        UserDefaults.standard.set(true, forKey: "loggedIn")
     }
     
     @objc func tappedBackButton() {

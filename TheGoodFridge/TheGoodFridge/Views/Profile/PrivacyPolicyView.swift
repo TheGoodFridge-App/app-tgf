@@ -10,8 +10,6 @@ import UIKit
 
 class PrivacyPolicyView: UIView {
     
-    let privacyLabel = UILabel()
-    
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
@@ -30,19 +28,6 @@ class PrivacyPolicyView: UIView {
     let privacyChildrenLabel = UILabel()
     let securityLabel = UILabel()
     let updatesLabel = UILabel()
-
-    let wrapperView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    } ()
-    
-    let backButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setBackgroundImage(UIImage(named: "BackButton"), for: .normal)
-        return button
-    } ()
     
     let viewInScrollView: UIView = {
         let view = UIView()
@@ -50,19 +35,21 @@ class PrivacyPolicyView: UIView {
         return view
     } ()
     
+    let headingHeight: CGFloat = 30
+    let labelMultiplier: CGFloat = 0.9
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupScrollView()
         
-        backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        backgroundColor = .clear
         setLabels()
         setHeadings()
         
-        addSubview(wrapperView)
-        wrapperView.addSubview(backButton)
-        wrapperView.addSubview(privacyLabel)
-        wrapperView.addSubview(scrollView)
+        addSubview(scrollView)
         scrollView.addSubview(stackView)
+        
+        stackView.alignment = .center
         
         stackView.addArrangedSubview(introHeading)
         stackView.addArrangedSubview(introLabel)
@@ -78,78 +65,57 @@ class PrivacyPolicyView: UIView {
         stackView.addArrangedSubview(securityLabel)
         stackView.addArrangedSubview(updatesHeading)
         stackView.addArrangedSubview(updatesLabel)
+        stackView.addArrangedSubview(UIView())
         
         setupLayout()
     }
     
     private func setupLayout() {
+        
         let constraints = [
-            wrapperView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            wrapperView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            wrapperView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            wrapperView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            backButton.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 20),
-            backButton.bottomAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 32),
-            backButton.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 24),
-            backButton.trailingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 31.5),
-            
-            privacyLabel.centerXAnchor.constraint(equalTo: wrapperView.centerXAnchor),
-            privacyLabel.topAnchor.constraint(equalTo: backButton.topAnchor, constant: -5),
-            privacyLabel.bottomAnchor.constraint(equalTo: backButton.topAnchor, constant: 27),
-            
-            scrollView.topAnchor.constraint(equalTo: privacyLabel.bottomAnchor, constant: 21),
-            scrollView.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
-            
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.widthAnchor.constraint(equalTo: widthAnchor),
             
-            introHeading.heightAnchor.constraint(equalToConstant: 33),
+            introHeading.heightAnchor.constraint(equalToConstant: headingHeight),
             introHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            introLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            introLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            infoCollectionHeading.heightAnchor.constraint(equalToConstant: 33),
+
+            introLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: labelMultiplier),
+
+            infoCollectionHeading.heightAnchor.constraint(equalToConstant: headingHeight),
             infoCollectionHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            infoCollectionLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            infoCollectionLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            shareInfoHeading.heightAnchor.constraint(equalToConstant: 33),
+
+            infoCollectionLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: labelMultiplier),
+
+            shareInfoHeading.heightAnchor.constraint(equalToConstant: headingHeight),
             shareInfoHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            shareInfoLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            shareInfoLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            accessInfoHeading.heightAnchor.constraint(equalToConstant: 33),
+
+            shareInfoLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: labelMultiplier),
+
+            accessInfoHeading.heightAnchor.constraint(equalToConstant: headingHeight),
             accessInfoHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            accessInfoLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            accessInfoLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            privacyChildrenHeading.heightAnchor.constraint(equalToConstant: 33),
+
+            accessInfoLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: labelMultiplier),
+
+            privacyChildrenHeading.heightAnchor.constraint(equalToConstant: headingHeight),
             privacyChildrenHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            privacyChildrenLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            privacyChildrenLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            securityHeading.heightAnchor.constraint(equalToConstant: 33),
+
+            privacyChildrenLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: labelMultiplier),
+
+            securityHeading.heightAnchor.constraint(equalToConstant: headingHeight),
             securityHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            securityLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            securityLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-            
-            updatesHeading.heightAnchor.constraint(equalToConstant: 33),
+
+            securityLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: labelMultiplier),
+
+            updatesHeading.heightAnchor.constraint(equalToConstant: headingHeight),
             updatesHeading.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            updatesLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 19),
-            updatesLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
+
+            updatesLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: labelMultiplier)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -172,8 +138,6 @@ class PrivacyPolicyView: UIView {
     }
     
     func setLabels() {
-        changeLabel(label: privacyLabel, text: "Privacy Policy", font: UIFont(name: "Amiko-Regular", size: 24)!, color: .black)
-        
         changeLabel(label: introLabel, text: "When you download the Good Fridge App, you trust us with your personal data. We strive to maintain that trust by helping you understand and keeping you informed of how we process and protect your personal data in compliance with applicable laws. \n\nThis privacy policy (“Privacy Policy”) describes how information and data is collected from you when you use the App, and how we use, share and manage your information and data. By using the App, you consent to the collection, use, processing, and sharing of your information as described in this Privacy Policy.", font: UIFont(name: "Amiko-Regular", size: 12)!, color: .black)
         
         changeLabel(label: infoCollectionLabel, text: "The following data is collected by the App:\n\nData you provide to us. This includes:\n\n- User profile: We collect data when you create or update your account on the App. This may include your name, email, password, profile picture, and your interests and preferences related to the App's features.\n\n- User content: We collect data you provide when you contact customer support with questions about the App. Data created during use of the App. This includes:\n\n- Grocery-related data: We may collect data relating to your grocery-related activities such as grocery list entries and grocery product selections.\n\nWe don't collect any data relating to your app usage, or device data such as device IP address, serial number, or settings.", font: UIFont(name: "Amiko-Regular", size: 12)!, color: .black)
@@ -192,17 +156,17 @@ class PrivacyPolicyView: UIView {
     func changeHeading(view: UIView, text: String) {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(red: 0.855, green: 0.925, blue: 0.824, alpha: 1)
-        view.addBorders(edges: [.bottom], color: UIColor(red: 0, green: 0, blue: 0, alpha: 0.37))
+        //view.addBorders(edges: [.bottom], color: UIColor(red: 0, green: 0, blue: 0, alpha: 0.37))
         
         let label = UILabel()
         
-        changeLabel(label: label, text: ("    " + text), font: UIFont(name: "Amiko-Bold", size: 14)!, color: UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1))
+        changeLabel(label: label, text: text, font: UIFont(name: "Amiko-Bold", size: 14)!, color: UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1))
         view.addSubview(label)
         
-        
         let constraints = [
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            label.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: labelMultiplier),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         
         NSLayoutConstraint.activate(constraints)
