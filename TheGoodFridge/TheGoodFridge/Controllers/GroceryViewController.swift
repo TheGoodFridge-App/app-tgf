@@ -62,6 +62,7 @@ class GroceryViewController: UIViewController {
     var groceryListFinalView = GroceryListFinalView(rec: [String: [String]](), other: [String](), purchased: [String: String]())
     let groceryData = GroceryData(items: [String]())
     var user = User()
+    var hasGroceryList = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,7 +178,9 @@ extension GroceryViewController: GroceryDelegate {
     
     func checkedPrevItems(items: [String], success: Bool) {
         if success {
-            groceryData.getRecommendations(type: .get)
+            hasGroceryList = true
+            groceryListEditView.hasGroceryList = hasGroceryList
+            groceryData.getOrPostRecommendations(type: .get)
         }
         
         presentReview()
@@ -217,6 +220,8 @@ extension GroceryViewController: GroceryDelegate {
         
         groceryListEditView = GroceryListEditView(rows: rows, isEditing: true)
         groceryListEditView.delegate = self
+        hasGroceryList = true
+        groceryListEditView.hasGroceryList = true
         
         UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: { self.view.addSubview(self.groceryListEditView) }, completion: nil)
         
