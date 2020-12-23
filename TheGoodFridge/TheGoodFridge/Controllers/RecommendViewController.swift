@@ -190,6 +190,11 @@ class RecommendViewController: UIViewController {
             }
         })
         
+        // Update purchase
+        if let selectedProduct = cardView.selectedProduct {
+            delegate?.selectedRecommendation(name: selectedProduct, item: item)
+        }
+        
         hideCard.startAnimation()
     }
     

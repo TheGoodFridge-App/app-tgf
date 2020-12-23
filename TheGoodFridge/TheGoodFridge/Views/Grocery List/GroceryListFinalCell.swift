@@ -65,6 +65,7 @@ class GroceryListFinalCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.contentView.isUserInteractionEnabled = false
         itemButton.isEnabled = false
         checkmarkIcon.isHidden = true
         itemButton.addTarget(self, action: #selector(tappedItemButton), for: .touchDown)

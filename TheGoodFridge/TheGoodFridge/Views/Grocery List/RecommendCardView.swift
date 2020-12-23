@@ -121,7 +121,6 @@ class RecommendCardView: UIView {
         if selectedProduct == nil {
             sender.toggle()
             selectedProduct = sender.product
-            delegate?.selectedRecommendation(name: selectedProduct ?? "", item: item)
         } else if selectedProduct != sender.product {
             let oldProduct = productButtons.first(where: { $0.product == selectedProduct })
             if let old = oldProduct {
@@ -129,7 +128,6 @@ class RecommendCardView: UIView {
                 selectedProduct = sender.product
             }
             sender.toggle()
-            delegate?.selectedRecommendation(name: selectedProduct ?? "", item: item)
         }
     }
     

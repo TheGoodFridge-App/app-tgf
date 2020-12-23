@@ -34,6 +34,19 @@ class ProductManager {
                 }
                 
                 debugPrint("updated grocery list")
+                
+                // TODO: Send PUT request to update any challenges. If the result list returned is > 0, then show a challenge
+                // pop up for it
+                let urlString = "\(K.serverURL)/challenges/update"
+                AF.request(urlString, method: .put, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
+                    .response { response in
+                        if let error = response.error {
+                            debugPrint("Error updating challenges: \(error)")
+                            return
+                        }
+                        
+                        debugPrint(response)
+                    }
         }
     }
 }

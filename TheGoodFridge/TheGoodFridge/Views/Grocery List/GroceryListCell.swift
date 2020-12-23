@@ -53,7 +53,7 @@ class GroceryListCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        self.contentView.isUserInteractionEnabled = false
         selectionStyle = .none
         
         addSubview(buttonImageView)
