@@ -158,7 +158,7 @@ class RecommendViewController: UIViewController {
         //cardView.scrollView.heightAnchor.constraint(equalToConstant: cardViewHeight.constant).isActive = true
         cardPanStartingTopHeight = cardViewHeight.constant
         
-        let showCard = UIViewPropertyAnimator(duration: 0.30, curve: .easeIn, animations: {
+        let showCard = UIViewPropertyAnimator(duration: 0.25, curve: .easeOut, animations: {
             self.view.layoutIfNeeded()
         })
         
