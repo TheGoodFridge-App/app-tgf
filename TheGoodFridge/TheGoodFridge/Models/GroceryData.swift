@@ -28,6 +28,7 @@ struct PastGroceryData: Codable {
 struct SplitGroceryData: Codable {
     let recommendations: [String: [String]]
     let other: [String]
+    let purchased: [String: String]
 }
 
 class GroceryData {
@@ -77,6 +78,7 @@ class GroceryData {
     func updateGroceryList() {
         // Split items into recommendations and products that did not get anything
         let urlString = "\(K.serverURL)/grocery_list/update"
+        
         guard let email = user.email else {
             debugPrint("Could not get user email.")
             return
@@ -87,6 +89,8 @@ class GroceryData {
             "secret": [K.secretKey]
         ]
         
+        
+        
         AF.request(urlString, method: .put, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
             .responseJSON { response in
                 if let error = response.error {
@@ -95,12 +99,14 @@ class GroceryData {
                 
                 if let responseData = response.data {
                     self.parseJSON(type: .split, data: responseData)
-                    self.getGroceryList()
+                    if let rec = self.recommendations, let other = self.otherItems {
+                        self.delegate?.didGetGroceryItems(rec: rec, other: other, purchased: self.purchased)
+                    }
                 }
         }
     }
     
-    func getRecommendations(type: MethodType) {
+    func getOrPostRecommendations(type: MethodType) {
         // Split items into recommendations and products that did not get anything
         let urlString = "\(K.serverURL)/grocery_list"
         guard let email = user.email else {
@@ -138,6 +144,7 @@ class GroceryData {
                 let splitData = try decoder.decode(SplitGroceryData.self, from: data)
                 recommendations = splitData.recommendations
                 otherItems = splitData.other
+                purchased = splitData.purchased
             } else if type == .past {
                 let pastData = try decoder.decode(PastGroceryData.self, from: data)
                 if let items = pastData.grocery_list, let purchased = pastData.purchased {

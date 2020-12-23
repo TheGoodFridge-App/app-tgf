@@ -20,6 +20,7 @@ class GroceryListEditView: UIView {
     var delegate: GroceryDelegate?
     let isEditing: Bool
     var groceryData = GroceryData(items: [String]())
+    var hasGroceryList = false
     
     let placeholderLabel: UILabel = {
         let label = UILabel()
@@ -135,7 +136,12 @@ class GroceryListEditView: UIView {
         
         groceryData.items = groceryItems
         groceryData.delegate = delegate
-        groceryData.updateGroceryList()
+        print("uwu: \(hasGroceryList)")
+        if hasGroceryList {
+            groceryData.updateGroceryList()
+        } else {
+            groceryData.getOrPostRecommendations(type: .post)
+        }
     }
 }
 

@@ -20,12 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-//            startVC = SettingsViewController()
+//            startVC = WelcomeViewController()
 //            window.rootViewController = startVC
 
             let loggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
-            print(loggedIn)
-            
+
             if loggedIn && Auth.auth().currentUser != nil {
                 startVC = TabBarController()
                 window.rootViewController = startVC
