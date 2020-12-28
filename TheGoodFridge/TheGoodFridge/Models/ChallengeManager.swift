@@ -90,6 +90,8 @@ class ChallengeManager {
             return
         }
         
+        print(email)
+        
         let parameters = [
             "email": email,
             "secret": K.secretKey

@@ -115,15 +115,17 @@ struct SetupData {
     }
     
     func postSetupData() {
-        guard let email = self.email,
-            let firstName = self.firstName,
-            let lastName = self.lastName
+        guard let email = self.email
         else { return debugPrint("Can't find email") }
+        
+        let firstName = self.firstName ?? ""
+        let lastName = self.lastName ?? ""
         
         // Format challenges
         var challengesArr = [String]()
         var challengeValues = [String]()
         
+        print(challenges)
         for challenge in challenges {
             for value in challenge.value {
                 challengesArr.append(value)

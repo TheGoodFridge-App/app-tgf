@@ -116,7 +116,7 @@ class SetupViewController: UIViewController {
     }
     
     private func setupLayout() {
-        let pageControlOffset: CGFloat = 90
+        let pageControlOffset: CGFloat = 50
         
         let constraints = [
             spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),

@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import FirebaseAuth
+import AuthenticationServices
+import CryptoKit
 
 class LoginViewController: UIViewController {
     
@@ -56,6 +58,17 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    let appleSignInButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "AppleSignInImage"), for: .normal)
+        button.setTitle("Log in with Apple", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Amiko-Regular", size: 15)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let brandLabel: UILabel = {
         let label = UILabel()
         label.text = "The Good Fridge."
@@ -93,6 +106,14 @@ class LoginViewController: UIViewController {
         return stackView
     }()
     
+    let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     let backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "XImage"), for: .normal)
@@ -103,6 +124,9 @@ class LoginViewController: UIViewController {
     
     let signupErrorView = SignupErrorView()
     let dividerView = DividerView()
+    
+    // Unhashed nonce.
+    fileprivate var currentNonce: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +144,8 @@ class LoginViewController: UIViewController {
             $0.textField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         })
         
+        appleSignInButton.addTarget(self, action: #selector(tappedAppleButton), for: .touchUpInside)
+        
         fieldStackView.addArrangedSubview(emailTextField)
         fieldStackView.addArrangedSubview(passwordTextField)
         
@@ -130,10 +156,13 @@ class LoginViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(tappedLoginButton), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
         
+        buttonStackView.addArrangedSubview(googleSignInButton)
+        buttonStackView.addArrangedSubview(appleSignInButton)
+        
         fullStackView.addArrangedSubview(signupLabel)
         fullStackView.addArrangedSubview(signupStackView)
         fullStackView.addArrangedSubview(dividerView)
-        fullStackView.addArrangedSubview(googleSignInButton)
+        fullStackView.addArrangedSubview(buttonStackView)
         fullStackView.addArrangedSubview(brandLabel)
         
         view.addSubview(fullStackView)
@@ -175,6 +204,8 @@ class LoginViewController: UIViewController {
             dividerView.trailingAnchor.constraint(equalTo: fullStackView.trailingAnchor),
             googleSignInButton.widthAnchor.constraint(equalToConstant: buttonWidth),
             googleSignInButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            appleSignInButton.widthAnchor.constraint(equalToConstant: buttonWidth),
+            appleSignInButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             backButton.widthAnchor.constraint(equalToConstant: backButtonSize),
             backButton.heightAnchor.constraint(equalToConstant: backButtonSize),
             backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: backButtonMargin * 2),
@@ -218,9 +249,74 @@ class LoginViewController: UIViewController {
         loginButton.setTitleColor(.white, for: .normal)
     }
     
+    // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
+    private func randomNonceString(length: Int = 32) -> String {
+      precondition(length > 0)
+      let charset: Array<Character> =
+          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+      var result = ""
+      var remainingLength = length
+
+      while remainingLength > 0 {
+        let randoms: [UInt8] = (0 ..< 16).map { _ in
+          var random: UInt8 = 0
+          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+          if errorCode != errSecSuccess {
+            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+          }
+          return random
+        }
+
+        randoms.forEach { random in
+          if remainingLength == 0 {
+            return
+          }
+
+          if random < charset.count {
+            result.append(charset[Int(random)])
+            remainingLength -= 1
+          }
+        }
+      }
+
+      return result
+    }
+    
+    private func startSignInWithAppleFlow() -> ASAuthorizationAppleIDRequest {
+        let nonce = randomNonceString()
+        currentNonce = nonce
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        request.nonce = sha256(nonce)
+        
+        return request
+    }
+    
+    private func sha256(_ input: String) -> String {
+      let inputData = Data(input.utf8)
+      let hashedData = SHA256.hash(data: inputData)
+      let hashString = hashedData.compactMap {
+        return String(format: "%02x", $0)
+      }.joined()
+
+      return hashString
+    }
+    
     @objc func tappedGoogleButton() {
         GIDSignIn.sharedInstance().signIn()
         UserDefaults.standard.set(true, forKey: "loggedIn")
+    }
+    
+    @objc func tappedAppleButton() {
+        let request = startSignInWithAppleFlow()
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        
+        authorizationController.performRequests()
     }
     
     @objc func tappedBackButton() {
@@ -261,6 +357,44 @@ extension LoginViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
         // ...
+    }
+    
+}
+
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            guard let nonce = currentNonce else {
+                fatalError("Invalid state: A login callback was received, but no login request was sent")
+            }
+            guard let appleIDToken = appleIDCredential.identityToken else {
+                print("Unable to fetch identity token")
+                return
+            }
+            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                fatalError("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+            }
+            
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+            
+            Auth.auth().signIn(with: credential) { (authDataResult, error) in
+                if let user = authDataResult?.user {
+                    print("Nice! You're now signed in as \(user.uid), email: \(user.email ?? "unknown")")
+                    
+                    // User is signed in
+                    let tabBarVC = TabBarController()
+                    tabBarVC.modalPresentationStyle = .fullScreen
+                    self.present(tabBarVC, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
     
 }

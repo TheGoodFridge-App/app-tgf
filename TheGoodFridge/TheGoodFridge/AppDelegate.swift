@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Configure firebase
         FirebaseApp.configure()
         
+        // Check current user
+        if let user = Auth.auth().currentUser {
+            print("You're signed in as \(user.uid), email: \(user.email ?? "unknown")")
+        }
+        
         // Configure IQKeyboardManager
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false

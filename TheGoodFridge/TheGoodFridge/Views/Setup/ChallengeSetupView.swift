@@ -134,11 +134,11 @@ class ChallengeSetupView: UIView {
     }
     
     private func setupLayout() {
-        let textMargin: CGFloat = 70
-        let spacing: CGFloat = 15
+        let textMargin: CGFloat = 50
+        let spacing: CGFloat = 10
         let navButtonWidth: CGFloat = 130
         let navButtonHeight: CGFloat = 50
-        let navButtonSpacing: CGFloat = 140
+        let navButtonSpacing: CGFloat = 25
         let navButtonMargin: CGFloat = 50
         
         let constraints = [
@@ -157,11 +157,11 @@ class ChallengeSetupView: UIView {
             introTextView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -spacing),
             backButton.heightAnchor.constraint(equalToConstant: navButtonHeight),
             backButton.widthAnchor.constraint(equalToConstant: navButtonWidth),
-            backButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -navButtonSpacing),
+            backButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: navButtonSpacing),
             backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: navButtonMargin),
             nextButton.heightAnchor.constraint(equalToConstant: navButtonHeight),
             nextButton.widthAnchor.constraint(equalToConstant: navButtonWidth),
-            nextButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -navButtonSpacing),
+            nextButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: navButtonSpacing),
             nextButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -navButtonMargin)
         ]
         

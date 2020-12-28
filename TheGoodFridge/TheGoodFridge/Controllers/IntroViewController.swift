@@ -25,8 +25,12 @@ class IntroViewController: UIViewController {
     lazy var introTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
+        var name = ""
+        if let firstName = user.firstName {
+            name += " \(firstName)"
+        }
         var bigText = NSMutableAttributedString(
-            string: "Hello \(user.firstName ?? ""),\nWelcome to The Good Fridge.\n\n",
+            string: "Hello\(name),\nWelcome to The Good Fridge.\n\n",
             attributes: [NSAttributedString.Key.font: UIFont(name: "Amiko-SemiBold", size: 24)!]
         )
         let smallText = NSAttributedString(

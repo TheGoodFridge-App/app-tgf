@@ -90,9 +90,9 @@ class ChallengeCompleteView: UIView {
     private func setupLayout() {
         let navButtonWidth: CGFloat = 130
         let navButtonHeight: CGFloat = 50
-        let navButtonSpacing: CGFloat = 140
+        let navButtonSpacing: CGFloat = 25
         let navButtonMargin: CGFloat = 50
-        let challengeCardsMargin: CGFloat = 40
+        let topMargin: CGFloat = 100
         
         for card in challengeCards {
             card.leadingAnchor.constraint(equalTo: cardStackView.leadingAnchor).isActive = true
@@ -100,16 +100,16 @@ class ChallengeCompleteView: UIView {
         }
         
         let constraints = [
+            cardStackView.topAnchor.constraint(equalTo: topAnchor, constant: topMargin),
             cardStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             cardStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
-            cardStackView.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -challengeCardsMargin),
             backButton.heightAnchor.constraint(equalToConstant: navButtonHeight),
             backButton.widthAnchor.constraint(equalToConstant: navButtonWidth),
-            backButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -navButtonSpacing),
+            backButton.topAnchor.constraint(equalTo: cardStackView.bottomAnchor, constant: navButtonSpacing),
             backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: navButtonMargin),
             startButton.heightAnchor.constraint(equalToConstant: navButtonHeight),
             startButton.widthAnchor.constraint(equalToConstant: navButtonWidth),
-            startButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -navButtonSpacing),
+            startButton.topAnchor.constraint(equalTo: cardStackView.bottomAnchor, constant: navButtonSpacing),
             startButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -navButtonMargin)
         ]
         

@@ -33,7 +33,8 @@ class SettingsItemCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
+        self.contentView.isUserInteractionEnabled = false
+        
         addSubview(entryLabel)
         addSubview(arrowIndicator)
         addSubview(separatorView)

@@ -118,7 +118,7 @@
 		EB514D9E247B1ED700450E60 /* GroceryDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryDoneView.swift; sourceTree = "<group>"; };
 		EB5244BF2471D50500C45C6B /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		EB55FE0824AD3A17002760F7 /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
-		EB56EC5F2442E34C001D48BE /* TheGoodFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheGoodFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB56EC5F2442E34C001D48BE /* Good Fridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Good Fridge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB56EC622442E34C001D48BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB56EC642442E34C001D48BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EB56EC662442E34C001D48BE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +157,7 @@
 		EBCAB24224E8B83400CF2946 /* ChallengeCompleteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCompleteCard.swift; sourceTree = "<group>"; };
 		EBCE9A0E2468885900B0266E /* SetupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupData.swift; sourceTree = "<group>"; };
 		EBCE9A1024688A4B00B0266E /* IssuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesView.swift; sourceTree = "<group>"; };
+		EBDAF2D52597011900079EC2 /* Good Fridge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Good Fridge.entitlements"; sourceTree = "<group>"; };
 		EBDE8C7424F30CAE007DC5AC /* ChallengeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeBox.swift; sourceTree = "<group>"; };
 		EBF5208C2456137800EC0B03 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBF520922456156100EC0B03 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +202,7 @@
 		EB56EC562442E34C001D48BE = {
 			isa = PBXGroup;
 			children = (
+				EBDAF2D52597011900079EC2 /* Good Fridge.entitlements */,
 				EB56EC612442E34C001D48BE /* TheGoodFridge */,
 				EBBEA0D7245D51910038F403 /* Fonts */,
 				EB56EC602442E34C001D48BE /* Products */,
@@ -212,7 +214,7 @@
 		EB56EC602442E34C001D48BE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EB56EC5F2442E34C001D48BE /* TheGoodFridge.app */,
+				EB56EC5F2442E34C001D48BE /* Good Fridge.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,9 +373,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EB56EC5E2442E34C001D48BE /* TheGoodFridge */ = {
+		EB56EC5E2442E34C001D48BE /* Good Fridge */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB56EC732442E34E001D48BE /* Build configuration list for PBXNativeTarget "TheGoodFridge" */;
+			buildConfigurationList = EB56EC732442E34E001D48BE /* Build configuration list for PBXNativeTarget "Good Fridge" */;
 			buildPhases = (
 				14284678730306BE2F53EF1F /* [CP] Check Pods Manifest.lock */,
 				EB56EC5B2442E34C001D48BE /* Sources */,
@@ -387,9 +389,9 @@
 			);
 			dependencies = (
 			);
-			name = TheGoodFridge;
+			name = "Good Fridge";
 			productName = TheGoodFridge;
-			productReference = EB56EC5F2442E34C001D48BE /* TheGoodFridge.app */;
+			productReference = EB56EC5F2442E34C001D48BE /* Good Fridge.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -407,7 +409,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EB56EC5A2442E34C001D48BE /* Build configuration list for PBXProject "TheGoodFridge" */;
+			buildConfigurationList = EB56EC5A2442E34C001D48BE /* Build configuration list for PBXProject "Good Fridge" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -420,7 +422,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EB56EC5E2442E34C001D48BE /* TheGoodFridge */,
+				EB56EC5E2442E34C001D48BE /* Good Fridge */,
 			);
 		};
 /* End PBXProject section */
@@ -709,6 +711,8 @@
 			baseConfigurationReference = 3F56849CC83BB378E6712201 /* Pods-TheGoodFridge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Good Fridge.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5QDYL7YJ95;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -766,6 +770,8 @@
 			baseConfigurationReference = 0A04B6568C9B6F01EBF6368D /* Pods-TheGoodFridge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Good Fridge.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5QDYL7YJ95;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -821,7 +827,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EB56EC5A2442E34C001D48BE /* Build configuration list for PBXProject "TheGoodFridge" */ = {
+		EB56EC5A2442E34C001D48BE /* Build configuration list for PBXProject "Good Fridge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB56EC712442E34E001D48BE /* Debug */,
@@ -830,7 +836,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB56EC732442E34E001D48BE /* Build configuration list for PBXNativeTarget "TheGoodFridge" */ = {
+		EB56EC732442E34E001D48BE /* Build configuration list for PBXNativeTarget "Good Fridge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB56EC742442E34E001D48BE /* Debug */,

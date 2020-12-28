@@ -85,13 +85,11 @@ class SettingsViewController: UIViewController {
     let tableView = UITableView()
     
     let settingsSections = [
-        "MY ACCOUNT",
         "APP SUPPORT"
     ]
     
     let settingsEntries = [
-        ["ACCOUNT DETAILS", "CHANGE CURRENT CHALLENGES"],
-        ["MEET THE TEAM", "FAQ", "PRIVACY POLICY"]
+        ["FAQ", "PRIVACY POLICY"]
     ]
     
     let entryHeight: CGFloat = 55
@@ -265,11 +263,11 @@ extension SettingsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return section == 1 ? signOutView : nil
+        return section == settingsSections.count - 1 ? signOutView : nil
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 1 ? entryHeight : 0
+        return section == settingsSections.count - 1 ? entryHeight : 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

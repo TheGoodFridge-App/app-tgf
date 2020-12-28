@@ -52,6 +52,7 @@ class GroceryViewController: UIViewController {
     
     let nameLabel: UILabel = {
         let label = UILabel()
+        label.text = "Your Grocery List"
         label.font = UIFont(name: "Amiko-SemiBold", size: 15)
         label.textColor = UIColor(red: 0.518, green: 0.749, blue: 0.412, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +75,7 @@ class GroceryViewController: UIViewController {
         groceryData.delegate = self
         groceryData.user = user
         
-        if let userData = user.getUserData() {
+        if let userData = user.getUserData(), userData.first_name.count > 0 {
             nameLabel.text = "\(userData.first_name)'s Grocery List"
             setupViews()
         }
@@ -164,7 +165,9 @@ extension GroceryViewController: UserDelegate {
     
     func didGetUserData(userData: UserData) {
         DispatchQueue.main.async {
-            self.nameLabel.text = "\(userData.first_name)'s Grocery List"
+            if userData.first_name.count > 0 {
+                self.nameLabel.text = "\(userData.first_name)'s Grocery List"
+            }
             self.setupViews()
         }
     }

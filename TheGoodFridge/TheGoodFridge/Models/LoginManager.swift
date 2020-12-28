@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import Firebase
 import FirebaseAuth
+import CryptoKit
 
 struct LoginManager {
     

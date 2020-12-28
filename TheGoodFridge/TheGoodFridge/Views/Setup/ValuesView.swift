@@ -55,6 +55,7 @@ class ValuesView: UIView {
         )
         bigText.append(smallText)
         textView.attributedText = bigText
+        textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.textAlignment = .center
@@ -114,7 +115,7 @@ class ValuesView: UIView {
         let valueButtonWidth: CGFloat = 150
         let nextButtonHeight: CGFloat = 50
         let nextButtonWidth: CGFloat = 130
-        let buttonSpacing: CGFloat = 140
+        let buttonSpacing: CGFloat = 25
         let textSpacing: CGFloat = 15
         let textMargin: CGFloat = 90
         
@@ -131,7 +132,7 @@ class ValuesView: UIView {
             nextButton.heightAnchor.constraint(equalToConstant: nextButtonHeight),
             nextButton.widthAnchor.constraint(equalToConstant: nextButtonWidth),
             nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            nextButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -buttonSpacing),
+            nextButton.topAnchor.constraint(equalTo: fullStackView.bottomAnchor, constant: buttonSpacing),
             introTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
             introTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: textMargin),
             introTextView.bottomAnchor.constraint(equalTo: fullStackView.topAnchor, constant: -textSpacing),
