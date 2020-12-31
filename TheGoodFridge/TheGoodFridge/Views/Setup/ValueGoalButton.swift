@@ -133,7 +133,6 @@ class ValueGoalView: UIView {
 //            print(buttonWidth - 2 * margin)
 //        }
         if value.count > Int(buttonWidth * 0.12) {
-            print(value)
             var str = ""
             var newline = false
             for ch in value {

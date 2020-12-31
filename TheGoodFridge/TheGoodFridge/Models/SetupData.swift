@@ -68,7 +68,6 @@ struct SetupData {
     
     mutating func setChallenges(_ challenges: [String: [String]]) {
         self.challenges = challenges
-        print(self.challenges)
     }
     
     func getChallenges() {
@@ -109,7 +108,6 @@ struct SetupData {
         }
         
         group.notify(queue: .main) {
-            print(challengesDict)
             self.delegate?.receivedChallenges(challenges: challengesDict)
         }
     }
@@ -125,7 +123,6 @@ struct SetupData {
         var challengesArr = [String]()
         var challengeValues = [String]()
         
-        print(challenges)
         for challenge in challenges {
             for value in challenge.value {
                 challengesArr.append(value)

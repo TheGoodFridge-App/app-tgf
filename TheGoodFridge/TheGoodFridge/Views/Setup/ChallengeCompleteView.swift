@@ -58,7 +58,7 @@ class ChallengeCompleteView: UIView {
     
     var challenges = [(ValueType, String)]()
     var delegate: SlideDelegate?
-    let challengeCards = [ChallengeCompleteCard(), ChallengeCompleteCard(), ChallengeCompleteCard()]
+    var challengeCards = [ChallengeCompleteCard(), ChallengeCompleteCard(), ChallengeCompleteCard()]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,6 +80,10 @@ class ChallengeCompleteView: UIView {
     }
     
     func setChallenges(challenges: [(ValueType, String)]) {
+        // reset challenges
+        for i in 0..<self.challengeCards.count {
+            challengeCards[i].resetChallenge()
+        }
         self.challenges = challenges
         for i in 0..<challenges.count {
             let (type, text) = challenges[i]

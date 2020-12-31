@@ -23,6 +23,7 @@ extension UIView {
 
 protocol ProfileChallengeDelegate {
     func didGetChallenges(challenges: [UserChallenge]?)
+    func didGetCompletedChallenges(challenges: [UserChallenge]?)
 }
 
 class ChallengeBoxes: UIView {
@@ -39,6 +40,7 @@ class ChallengeBoxes: UIView {
     var challengeLabels = [UILabel(), UILabel(), UILabel()]
     var levelLabels = [UILabel(), UILabel(), UILabel()]
     var progressBars = [CircularProgressBar(), CircularProgressBar(), CircularProgressBar()]
+    var completedChallenges = [UserChallenge]()
     
     let verticalStack: UIStackView = {
         let stack = UIStackView()
@@ -83,6 +85,8 @@ class ChallengeBoxes: UIView {
         
         getAndParseData()
         findAndSetDate()
+        
+        viewCompletedChallengesButton.addTarget(self, action: #selector(tappedCompletedChallengesButton), for: .touchUpInside)
         
         backgroundColor = .clear
         
@@ -167,13 +171,31 @@ class ChallengeBoxes: UIView {
         }
     }
     
+    @objc func tappedCompletedChallengesButton() {
+        if completedChallenges.count == 0 {
+            return
+        }
+        
+        viewCompletedChallengesButton.isHidden = true
+        
+        challengeNameArray += completedChallenges.map({ $0.name })
+        levelArray += completedChallenges.map({ $0.level })
+        currentArray += completedChallenges.map({ Float($0.current) })
+        totalArray += completedChallenges.map({ Float($0.level_total) })
+        valueArray += completedChallenges.map({ $0.value })
+        for _ in 0..<completedChallenges.count {
+            boxViews.append(ChallengeBox())
+        }
+        
+        setBoxViews()
+    }
+    
 }
 
 extension ChallengeBoxes: ProfileChallengeDelegate {
     
     func didGetChallenges(challenges: [UserChallenge]?) {
         if let userChallenges = challenges {
-            print(userChallenges)
             challengeNameArray = userChallenges.map({ $0.name })
             levelArray = userChallenges.map({ $0.level })
             currentArray = userChallenges.map({ Float($0.current) })
@@ -181,6 +203,12 @@ extension ChallengeBoxes: ProfileChallengeDelegate {
             valueArray = userChallenges.map({ $0.value })
             
             setBoxViews()
+        }
+    }
+    
+    func didGetCompletedChallenges(challenges: [UserChallenge]?) {
+        if let completedChallenges = challenges {
+            self.completedChallenges = completedChallenges
         }
     }
     

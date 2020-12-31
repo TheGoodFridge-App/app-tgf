@@ -159,7 +159,6 @@ class GroceryListFinalCell: UITableViewCell {
 extension GroceryListFinalCell: ProductDelegate {
     
     func selectedRecommendation(name product: String, item: String) {
-        print("selected \(product)")
         purchased = product
         
         checkmarkIcon.image = UIImage(named: "CheckmarkIcon")

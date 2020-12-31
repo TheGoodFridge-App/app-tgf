@@ -63,6 +63,12 @@ class ChallengeCompleteCard: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func resetChallenge() {
+        challengeLabel.text = nil
+        self.backgroundColor = .clear
+        dotView.backgroundColor = .clear
+    }
+    
     func setChallenge(text: String, type: ValueType) {
         challengeLabel.text = text
         

@@ -31,6 +31,10 @@ struct UserChallenge: Codable {
     let value: String
 }
 
+struct UserHistory: Codable {
+    let history: [UserChallenge]
+}
+
 class ChallengeManager {
     var delegate: ChallengeDelegate?
     var profileDelegate: ProfileChallengeDelegate?
@@ -38,7 +42,6 @@ class ChallengeManager {
     
     func getDescriptions(challenges: [String]) {
         let urlString = "\(K.serverURL)/challenges/descriptions"
-        print(challenges)
         
         let group = DispatchGroup()
         var descriptions = [String: Content]()
@@ -75,7 +78,6 @@ class ChallengeManager {
         do {
             let decoder = JSONDecoder()
             let descriptionData = try decoder.decode(DescriptionData.self, from: data)
-            print(descriptionData)
             return descriptionData.description
         }
         catch {
@@ -89,8 +91,6 @@ class ChallengeManager {
             debugPrint("getCurrentChallenges: email not found")
             return
         }
-        
-        print(email)
         
         let parameters = [
             "email": email,
@@ -107,17 +107,56 @@ class ChallengeManager {
                 debugPrint("received user challenges")
                 
                 if let data = response.data {
-                    let userChallenges = self.parseJSON(data: data)
+                    let userChallenges = self.parseCurrentJSON(data: data)
                     self.profileDelegate?.didGetChallenges(challenges: userChallenges)
                 }
         }
     }
     
-    private func parseJSON(data: Data) -> [UserChallenge]? {
+    func getCompletedChallenges() {
+        guard let email = user.email else {
+            debugPrint("getCompletedChallenges: email not found")
+            return
+        }
+        
+        let parameters = [
+            "email": email,
+            "secret": K.secretKey
+        ]
+        
+        let urlString = "\(K.serverURL)/challenges/completed"
+        
+        AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString)).validate()
+            .responseJSON { response in
+                if let error = response.error {
+                    return debugPrint("Error getting user's completed challenges: \(error)")
+                }
+                debugPrint("received user challenges")
+                
+                if let data = response.data {
+                    let userChallenges = self.parseCompletedJSON(data: data)
+                    self.profileDelegate?.didGetCompletedChallenges(challenges: userChallenges)
+                }
+        }
+    }
+    
+    private func parseCurrentJSON(data: Data) -> [UserChallenge]? {
         do {
             let decoder = JSONDecoder()
             let userChallengeData = try decoder.decode(UserChallengeData.self, from: data)
             return userChallengeData.challenges
+        }
+        catch {
+            debugPrint("Could not decode data")
+            return nil
+        }
+    }
+    
+    private func parseCompletedJSON(data: Data) -> [UserChallenge]? {
+        do {
+            let decoder = JSONDecoder()
+            let userHistory = try decoder.decode(UserHistory.self, from: data)
+            return userHistory.history
         }
         catch {
             debugPrint("Could not decode data")

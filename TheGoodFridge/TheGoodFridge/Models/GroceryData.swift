@@ -60,7 +60,6 @@ class GroceryData {
         AF.request(urlString, parameters: parameters, encoder: URLEncodedFormParameterEncoder(destination: .queryString))
             .validate()
             .responseJSON { response in
-                print(response)
                 if let e = response.error {
                     debugPrint("Error: \(e)")
                     self.delegate?.checkedPrevItems(items: [String](), success: false)

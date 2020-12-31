@@ -251,6 +251,9 @@ extension SetupViewController: SlideDelegate {
             setupData.getChallenges()
             //setupData.postSetupData()
         } else if index < slides.count - 1 && slides[index] is IssuesView && slides[index + 1] is ChallengeIntroView {
+            if let issuesView = slides[index] as? IssuesView {
+                issuesView.nextButton.isEnabled = false
+            }
             slides.removeAll(where: {$0 is ChallengeIntroView || $0 is ChallengeSetupView})
             spinner.startAnimating()
             setupData.getChallenges()
@@ -284,6 +287,11 @@ extension SetupViewController: SetupDelegate {
     
     func receivedChallenges(challenges: [ValueType: [String]]) {
         spinner.stopAnimating()
+        
+        if let issuesView = slides[index] as? IssuesView {
+            issuesView.nextButton.isEnabled = true
+        }
+        
         let challengeIntroView = ChallengeIntroView()
         challengeIntroView.delegate = self
         updateContent(with: challengeIntroView)

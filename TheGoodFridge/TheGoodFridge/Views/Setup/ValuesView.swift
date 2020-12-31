@@ -115,7 +115,7 @@ class ValuesView: UIView {
         let valueButtonWidth: CGFloat = 150
         let nextButtonHeight: CGFloat = 50
         let nextButtonWidth: CGFloat = 130
-        let buttonSpacing: CGFloat = 25
+        let buttonSpacing: CGFloat = 40
         let textSpacing: CGFloat = 15
         let textMargin: CGFloat = 90
         

@@ -136,7 +136,7 @@ class GroceryListEditView: UIView {
         
         groceryData.items = groceryItems
         groceryData.delegate = delegate
-        print("uwu: \(hasGroceryList)")
+        
         if hasGroceryList {
             groceryData.updateGroceryList()
         } else {
@@ -152,7 +152,6 @@ extension GroceryListEditView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(rows.map({ $0.inputField.text }))
         let cell = tableView.dequeueReusableCell(withIdentifier: K.groceryCellID, for: indexPath) as! GroceryListCell
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         cell.inputField.text = rowStrings[indexPath.row]
@@ -209,7 +208,6 @@ extension GroceryListEditView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         let index = rows.firstIndex(where: { $0.inputField == textField }) ?? -1
-        print(index)
         if index >= 0 {
             rowStrings[index] = rows[index].inputField.text ?? rowStrings[index]
             let groceryCell = GroceryListCell()

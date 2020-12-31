@@ -59,6 +59,14 @@ class GroceryViewController: UIViewController {
         return label
     }()
     
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.style = .medium
+        spinner.color = .darkGray
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     var groceryListEditView = GroceryListEditView(rows: [GroceryListCell()], isEditing: false)
     var groceryListFinalView = GroceryListFinalView(rec: [String: [String]](), other: [String](), purchased: [String: String]())
     let groceryData = GroceryData(items: [String]())
@@ -67,6 +75,14 @@ class GroceryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(spinner)
+        view.bringSubviewToFront(spinner)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        // Start loading spinner
+        spinner.startAnimating()
         
         user.userDelegate = self
         groceryListEditView.delegate = self
@@ -77,15 +93,13 @@ class GroceryViewController: UIViewController {
         
         if let userData = user.getUserData(), userData.first_name.count > 0 {
             nameLabel.text = "\(userData.first_name)'s Grocery List"
-            setupViews()
         }
         
-        view.backgroundColor = .white 
+        setupViews()
     }
     
     private func setupViews() {
-        
-        
+        view.backgroundColor = .white
         // Check if grocery data already exists
         groceryData.getGroceryList()
         
@@ -96,6 +110,8 @@ class GroceryViewController: UIViewController {
         view.addSubview(groceryBackground)
         view.sendSubviewToBack(groceryBackground)
         view.bringSubviewToFront(groceryListEditView.groceryDoneView)
+        
+        view.bringSubviewToFront(spinner)
         
         setupLayout()
     }
@@ -124,7 +140,7 @@ class GroceryViewController: UIViewController {
             groceryListEditView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: viewMargin),
             groceryListEditView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewMargin),
             groceryListEditView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewMargin),
-            groceryListEditView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            groceryListEditView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -168,7 +184,6 @@ extension GroceryViewController: UserDelegate {
             if userData.first_name.count > 0 {
                 self.nameLabel.text = "\(userData.first_name)'s Grocery List"
             }
-            self.setupViews()
         }
     }
 }
@@ -190,8 +205,8 @@ extension GroceryViewController: GroceryDelegate {
     }
     
     func didGetGroceryItems(rec: [String: [String]], other: [String], purchased: [String: String]) {
+        spinner.stopAnimating()
         // Load GroceryListFinalView
-        print(rec, other)
         self.groceryListEditView.removeFromSuperview()
         
         self.groceryListFinalView = GroceryListFinalView(rec: rec, other: other, purchased: purchased)
